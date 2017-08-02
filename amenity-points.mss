@@ -577,7 +577,7 @@
   }
 
   [feature = 'shop'] {
-    [zoom >= 17],
+    [shop != 'mall'][zoom >= 17],
     [shop = 'supermarket'][zoom >= 16],
     [shop = 'department_store'][zoom >= 16] {
       marker-placement: interior;
@@ -585,7 +585,7 @@
       marker-fill: @shop-icon;
     }
 
-    [zoom >= 17][zoom < 18][shop != 'supermarket'][shop != 'department_store'] {
+    [zoom >= 17][zoom < 18][shop != 'supermarket'][shop != 'department_store'][shop != 'mall'] {
       marker-placement: interior;
       marker-clip: false;
       marker-fill: @shop-icon;
@@ -836,6 +836,10 @@
       marker-file: url('symbols/shop/tea.svg');
     }
 
+    [shop = 'tyres'][zoom >= 18] {
+      marker-file: url('symbols/shop/tyres.svg');
+    }
+
     [shop = 'variety_store'][zoom >= 18] {
       marker-file: url('symbols/shop/variety_store.svg');
     }
@@ -901,14 +905,12 @@
     marker-fill: @airtransport;
   }
 
-  [feature = 'aeroway_aerodrome'][zoom < 14] {
-    [zoom >= 10][aeroway_class = 'INT-major'], 
-    [zoom >= 13][aeroway_class = 'INT-minor'] {
-      marker-file: url('symbols/aerodrome.12.svg');
-      marker-placement: interior;
-      marker-clip: false;
-      marker-fill: @airtransport;
-    }
+  [feature = 'aeroway_aerodrome']['access' != 'private']['icao' != null]['iata' != null][zoom >= 10][zoom < 14],
+  [feature = 'aeroway_aerodrome'][zoom >= 11][zoom < 14] {
+    marker-file: url('symbols/aerodrome.12.svg');
+    marker-placement: interior;
+    marker-clip: false;
+    marker-fill: @airtransport;
   }
 
   [feature = 'man_made_lighthouse'][zoom >= 15] {
@@ -1878,6 +1880,7 @@
   [feature = 'shop_stationery'],
   [feature = 'shop_tobacco'],
   [feature = 'shop_tea'],
+  [feature = 'shop_tyres'],
   [feature = 'shop_variety_store'],
   [feature = 'shop_wine'],
   [feature = 'shop_other']{

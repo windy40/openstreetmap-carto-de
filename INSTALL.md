@@ -1,9 +1,17 @@
 # Installation
 
+This document describes how to manually configure your system for running openstreetmap-carto. If you prefer quick, platform independent setup for a development environment, without the need to install and configure tools by hand, follow a Docker installation guide in [DOCKER.md](https://github.com/gravitystorm/openstreetmap-carto/blob/master/DOCKER.md).
+
 ## OpenStreetMap data
 You need OpenStreetMap data loaded into a PostGIS database (see below for [dependencies](#dependencies)). These stylesheets expect a database generated with osm2pgsql using the pgsql backend (table names of `planet_osm_point`, etc), the default database name (`gis`), and the [lua transforms](https://github.com/openstreetmap/osm2pgsql/blob/master/docs/lua.md) documented in the instructions below.
 
-Start by setting up your database to have PostGIS and hstore with ``psql -d gis -c 'CREATE EXTENSION postgis; CREATE EXTENSION hstore;'``, then grab some OSM data. It's probably easiest to grab an PBF of OSM data from [Mapzen](https://mapzen.com/metro-extracts/) or [geofabrik](http://download.geofabrik.de/). Once you've done that, import with osm2pgsql:
+Start by setting up your database to have PostGIS and hstore with
+
+```
+psql -d gis -c 'CREATE EXTENSION postgis; CREATE EXTENSION hstore;'
+```
+
+then grab some OSM data. It's probably easiest to grab an PBF of OSM data from [Mapzen](https://mapzen.com/data/metro-extracts/) or [Geofabrik](http://download.geofabrik.de/). Once you've done that, import with osm2pgsql:
 
 ```
 osm2pgsql -G --hstore --style openstreetmap-carto.style --tag-transform-script openstreetmap-carto.lua -d gis ~/path/to/data.osm.pbf
@@ -33,10 +41,12 @@ This script generates and populates the *data* directory with all needed shapefi
 
 You can also download them manually at the following paths:
 
-* [`simplified-land-polygons.shp`](http://data.openstreetmapdata.com/simplified-land-polygons-complete-3857.zip) (updated daily)
-* [`land-polygon.shp`](http://data.openstreetmapdata.com/land-polygons-split-3857.zip) (updated daily)
-* [`builtup_area.shp`](http://planet.openstreetmap.org/historical-shapefiles/world_boundaries-spherical.tgz)
+* [`world_bnd_m.shp`, `builtup_area.shp`, `places.shp`, `world_boundaries_m.shp`](http://planet.openstreetmap.org/historical-shapefiles/world_boundaries-spherical.tgz)
+* [`simplified_land_polygons.shp`](http://data.openstreetmapdata.com/simplified-land-polygons-complete-3857.zip) (updated daily)
 * [`ne_110m_admin_0_boundary_lines_land.shp`](http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/110m/cultural/ne_110m_admin_0_boundary_lines_land.zip)
+* [`land_polygons.shp`](http://data.openstreetmapdata.com/land-polygons-split-3857.zip) (updated daily)
+* [`icesheet_polygons.shp`](http://data.openstreetmapdata.com/antarctica-icesheet-polygons-3857.zip)
+* [`icesheet_outlines.shp`](http://data.openstreetmapdata.com/antarctica-icesheet-outlines-3857.zip)
 
 The repeated www.naturalearthdata.com in the Natural Earth shapefiles is correct.
 

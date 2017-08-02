@@ -73,6 +73,8 @@ if __name__ == "__main__":
     y=int(args.zxy[2])
 
   import mapnik
+  custom_fonts_dir = '/etc/mapnik-osm-data/fonts/'
+  mapnik.register_fonts(custom_fonts_dir)
   m = mapnik.Map(256, 256)
   mapnik.load_map(m, mapfile)
   bba=TileToBBox(x,y,z)

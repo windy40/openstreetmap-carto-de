@@ -30,7 +30,7 @@ _parts:
     srs: "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
   osm2pgsql: &osm2pgsql
     type: "postgis"
-    dbname: "osm"
+    dbname: "geg"
     key_field: ""
     geometry_field: "way"
     extent: "-20037508,-20037508,20037508,20037508"
@@ -56,7 +56,6 @@ Stylesheet:
   - sport.mss
 Layer:
   - id: world
-    name: world
     geometry: polygon
     <<: *extents
     Datasource:
@@ -65,7 +64,6 @@ Layer:
     properties:
       maxzoom: 9
   - id: coast-poly
-    name: coast-poly
     geometry: polygon
     <<: *extents
     Datasource:
@@ -74,7 +72,6 @@ Layer:
     properties:
       minzoom: 10
   - id: builtup
-    name: builtup
     geometry: polygon
     extent: *world
     srs-name: mercator
@@ -86,7 +83,6 @@ Layer:
       minzoom: 8
       maxzoom: 9
   - id: necountries
-    name: necountries
     geometry: linestring
     <<: *extents84
     Datasource:
@@ -96,7 +92,6 @@ Layer:
       minzoom: 1
       maxzoom: 3
   - id: landcover-low-zoom
-    name: landcover-low-zoom
     geometry: polygon
     <<: *extents
     Datasource:
@@ -123,7 +118,6 @@ Layer:
       minzoom: 7
       maxzoom: 9
   - id: landcover
-    name: landcover
     geometry: polygon
     <<: *extents
     Datasource:
@@ -173,7 +167,6 @@ Layer:
     properties:
       minzoom: 10
   - id: landcover-line
-    name: landcover-line
     geometry: linestring
     <<: *extents
     Datasource:
@@ -187,7 +180,6 @@ Layer:
     properties:
       minzoom: 14
   - id: water-lines-casing
-    name: water-lines-casing
     geometry: linestring
     <<: *extents
     Datasource:
@@ -202,7 +194,6 @@ Layer:
     properties:
       minzoom: 13
   - id: water-lines-low-zoom
-    name: water-lines-low-zoom
     geometry: linestring
     <<: *extents
     Datasource:
@@ -219,7 +210,6 @@ Layer:
       minzoom: 8
       maxzoom: 11
   - id: icesheet-poly
-    name: icesheet-poly
     geometry: polygon
     <<: *extents
     Datasource:
@@ -228,7 +218,6 @@ Layer:
     properties:
       minzoom: 4
   - id: water-areas
-    name: water-areas
     geometry: polygon
     <<: *extents
     Datasource:
@@ -253,7 +242,6 @@ Layer:
     properties:
       minzoom: 4
   - id: landcover-area-symbols
-    name: landcover-area-symbols
     geometry: polygon
     <<: *extents
     Datasource:
@@ -281,7 +269,6 @@ Layer:
     properties:
       minzoom: 10
   - id: icesheet-outlines
-    name: icesheet-outlines
     geometry: linestring
     <<: *extents
     Datasource:
@@ -290,7 +277,6 @@ Layer:
     properties:
       minzoom: 4
   - id: water-lines
-    name: water-lines
     class: water-lines
     geometry: linestring
     <<: *extents
@@ -309,7 +295,6 @@ Layer:
     properties:
       minzoom: 12
   - id: water-barriers-line
-    name: water-barriers-line
     geometry: linestring
     <<: *extents
     Datasource:
@@ -324,7 +309,6 @@ Layer:
     properties:
       minzoom: 13
   - id: water-barriers-poly
-    name: water-barriers-poly
     geometry: polygon
     <<: *extents
     Datasource:
@@ -340,7 +324,6 @@ Layer:
     properties:
       minzoom: 13
   - id: marinas-area
-    name: marinas-area
     geometry: polygon
     <<: *extents
     Datasource:
@@ -354,7 +337,6 @@ Layer:
     properties:
       minzoom: 14
   - id: piers-poly
-    name: piers-poly
     geometry: polygon
     <<: *extents
     Datasource:
@@ -368,7 +350,6 @@ Layer:
     properties:
       minzoom: 12
   - id: piers-line
-    name: piers-line
     geometry: linestring
     <<: *extents
     Datasource:
@@ -382,7 +363,6 @@ Layer:
     properties:
       minzoom: 12
   - id: water-barriers-point
-    name: water-barriers-point
     geometry: point
     <<: *extents
     Datasource:
@@ -396,7 +376,6 @@ Layer:
     properties:
       minzoom: 17
   - id: bridge
-    name: bridge
     geometry: polygon
     <<: *extents
     Datasource:
@@ -413,7 +392,6 @@ Layer:
     properties:
       minzoom: 12
   - id: buildings
-    name: buildings
     geometry: polygon
     <<: *extents
     Datasource:
@@ -434,7 +412,6 @@ Layer:
     properties:
       minzoom: 13
   - id: buildings-major
-    name: buildings-major
     geometry: polygon
     <<: *extents
     Datasource:
@@ -455,7 +432,6 @@ Layer:
     properties:
       minzoom: 13
   - id: tunnels
-    name: tunnels
     class: tunnels-fill tunnels-casing access
     geometry: linestring
     <<: *extents
@@ -635,7 +611,6 @@ Layer:
             AND way && !bbox!) as dump) as simplified) as simplified2)
           as sports
   - id: landuse-overlay
-    name: landuse-overlay
     geometry: polygon
     <<: *extents
     Datasource:
@@ -652,7 +627,6 @@ Layer:
     properties:
       minzoom: 7
   - id: line-barriers
-    name: line-barriers
     class: barriers
     geometry: linestring
     <<: *extents
@@ -675,7 +649,6 @@ Layer:
     properties:
       minzoom: 14
   - id: cliffs
-    name: cliffs
     geometry: linestring
     <<: *extents
     Datasource:
@@ -689,7 +662,6 @@ Layer:
     properties:
       minzoom: 13
   - id: area-barriers
-    name: area-barriers
     class: barriers
     geometry: polygon
     <<: *extents
@@ -707,7 +679,6 @@ Layer:
     properties:
       minzoom: 16
   - id: ferry-routes
-    name: ferry-routes
     geometry: linestring
     <<: *extents
     Datasource:
@@ -721,7 +692,6 @@ Layer:
     properties:
       minzoom: 7
   - id: turning-circle-casing
-    name: turning-circle-casing
     geometry: point
     <<: *extents
     Datasource:
@@ -750,7 +720,6 @@ Layer:
     properties:
       minzoom: 15
   - id: highway-area-casing
-    name: highway-area-casing
     geometry: polygon
     <<: *extents
     Datasource:
@@ -770,7 +739,6 @@ Layer:
     properties:
       minzoom: 14
   - id: roads-casing
-    name: roads-casing
     class: roads-casing
     geometry: linestring
     <<: *extents
@@ -923,7 +891,6 @@ Layer:
     properties:
       minzoom: 10
   - id: highway-area-fill
-    name: highway-area-fill
     # FIXME: No geometry?
     <<: *extents
     Datasource:
@@ -946,7 +913,6 @@ Layer:
     properties:
       minzoom: 14
   - id: roads-fill
-    name: roads-fill
     class: roads-fill access
     geometry: linestring
     <<: *extents
@@ -1095,7 +1061,6 @@ Layer:
     properties:
       minzoom: 10
   - id: turning-circle-fill
-    name: turning-circle-fill
     geometry: point
     <<: *extents
     Datasource:
@@ -1124,7 +1089,6 @@ Layer:
     properties:
       minzoom: 15
   - id: aerialways
-    name: aerialways
     geometry: linestring
     <<: *extents
     Datasource:
@@ -1139,7 +1103,6 @@ Layer:
     properties:
       minzoom: 12
   - id: roads-low-zoom
-    name: roads-low-zoom
     geometry: linestring
     <<: *extents
     Datasource:
@@ -1170,7 +1133,6 @@ Layer:
       minzoom: 5
       maxzoom: 9
   - id: waterway-bridges
-    name: waterway-bridges
     class: water-lines
     geometry: linestring
     <<: *extents
@@ -1192,7 +1154,6 @@ Layer:
     properties:
       minzoom: 12
   - id: bridges
-    name: bridges
     class: bridges-fill bridges-casing access
     geometry: linestring
     <<: *extents
@@ -1342,7 +1303,6 @@ Layer:
       group-by: layernotnull
       minzoom: 10
   - id: guideways
-    name: guideways
     geometry: linestring
     <<: *extents
     Datasource:
@@ -1355,9 +1315,8 @@ Layer:
         ) AS guideways
     properties:
       minzoom: 13
-  - name: "admin-low-zoom"
-    id: "admin-low-zoom"
-    geometry: "linestring"
+  - id: admin-low-zoom
+    geometry: linestring
     <<: *extents
     Datasource:
       <<: *osm2pgsql
@@ -1375,7 +1334,6 @@ Layer:
       minzoom: 4
       maxzoom: 10
   - id: admin-mid-zoom
-    name: admin-mid-zoom
     geometry: linestring
     <<: *extents
     Datasource:
@@ -1394,7 +1352,6 @@ Layer:
       minzoom: 11
       maxzoom: 12
   - id: admin-high-zoom
-    name: admin-high-zoom
     geometry: linestring
     <<: *extents
     Datasource:
@@ -1412,7 +1369,6 @@ Layer:
     properties:
       minzoom: 13
   - id: power-minorline
-    name: power-minorline
     geometry: linestring
     <<: *extents
     Datasource:
@@ -1426,7 +1382,6 @@ Layer:
     properties:
       minzoom: 16
   - id: power-line
-    name: power-line
     geometry: linestring
     <<: *extents
     Datasource:
@@ -1440,7 +1395,6 @@ Layer:
     properties:
       minzoom: 14
   - id: nature-reserve-boundaries
-    name: nature-reserve-boundaries
     geometry: polygon
     <<: *extents
     Datasource:
@@ -1459,7 +1413,6 @@ Layer:
     properties:
       minzoom: 7
   - id: tourism-boundary
-    name: tourism-boundary
     geometry: polygon
     <<: *extents
     Datasource:
@@ -1477,7 +1430,6 @@ Layer:
     properties:
       minzoom: 10
   - id: trees
-    name: trees
     geometry: polygon
     <<: *extents
     Datasource:
@@ -1496,7 +1448,6 @@ Layer:
     properties:
       minzoom: 16
   - id: country-names
-    name: country-names
     class: country
     geometry: point
     <<: *extents
@@ -1519,7 +1470,6 @@ Layer:
     properties:
       minzoom: 2
   - id: capital-names
-    name: capital-names
     geometry: point
     <<: *extents
     Datasource:
@@ -1542,7 +1492,6 @@ Layer:
       minzoom: 3
       maxzoom: 15
   - id: state-names
-    name: state-names
     class: state
     geometry: point
     <<: *extents
@@ -1564,7 +1513,6 @@ Layer:
     properties:
       minzoom: 4
   - id: placenames-medium
-    name: placenames-medium
     geometry: point
     <<: *extents
     Datasource:
@@ -1610,7 +1558,6 @@ Layer:
       minzoom: 4
       maxzoom: 15
   - id: placenames-small
-    name: placenames-small
     geometry: point
     <<: *extents
     Datasource:
@@ -1640,7 +1587,6 @@ Layer:
       minzoom: 12
   - id: stations
     class: stations
-    name: stations
     geometry: point
     <<: *extents
     Datasource:
@@ -1666,7 +1612,6 @@ Layer:
     properties:
       minzoom: 12
   - id: stations-poly
-    name: stations-poly
     class: stations
     geometry: polygon
     <<: *extents
@@ -1686,7 +1631,6 @@ Layer:
     properties:
       minzoom: 12
   - id: amenity-points-poly
-    name: amenity-points-poly
     class: points
     geometry: polygon
     <<: *extents
@@ -1723,6 +1667,8 @@ Layer:
             tags->'denomination' as denomination,
             tags->'generator:source' as "generator:source",
             tags->'power_source' as power_source,
+            tags->'icao' as icao,
+            tags->'iata' as iata,
             CASE WHEN shop IN ('supermarket', 'bag', 'bakery', 'beauty', 'books', 'butcher', 'clothes', 'computer', 
                                'confectionery', 'fashion', 'convenience', 'department_store', 'doityourself', 'hardware', 'fishmonger', 'florist', 
                                'garden_centre', 'hairdresser', 'hifi', 'ice_cream', 'car', 'car_repair', 'bicycle', 'mall', 'pet', 
@@ -1730,7 +1676,7 @@ Layer:
                                'mobile_phone', 'motorcycle', 'musical_instrument', 'newsagent', 'optician', 'jewelry', 'jewellery', 
                                'electronics', 'chemist', 'toys', 'travel_agency', 'car_parts', 'greengrocer', 'farm', 'stationery', 
                                'laundry', 'dry_cleaning', 'beverages', 'perfumery', 'cosmetics', 'variety_store', 'wine', 'outdoor', 
-                               'copyshop', 'sports', 'deli', 'tobacco', 'art', 'tea', 'coffee') THEN shop
+                               'copyshop', 'sports', 'deli', 'tobacco', 'art', 'tea', 'coffee', 'tyres') THEN shop
                                ELSE 'other' END AS shop,
             way_area/NULLIF(!pixel_width!::real*!pixel_height!::real,0) AS way_pixels
           FROM planet_osm_polygon
@@ -1758,7 +1704,6 @@ Layer:
     properties:
       minzoom: 10
   - id: amenity-points
-    name: amenity-points
     class: points
     geometry: point
     <<: *extents
@@ -1803,6 +1748,8 @@ Layer:
             tags->'denomination' as denomination,
             tags->'generator:source' as "generator:source",
             tags->'power_source' as power_source,
+            tags->'icao' as icao,
+            tags->'iata' as iata,
             CASE WHEN shop IN ('supermarket', 'bag', 'bakery', 'beauty', 'books', 'butcher', 'clothes', 'computer', 
                                'confectionery', 'fashion', 'convenience', 'department_store', 'doityourself', 'hardware', 'fishmonger', 'florist', 
                                'garden_centre', 'hairdresser', 'hifi', 'ice_cream', 'car', 'car_repair', 'bicycle', 'mall', 'pet', 
@@ -1810,7 +1757,7 @@ Layer:
                                'mobile_phone', 'motorcycle', 'musical_instrument', 'newsagent', 'optician', 'jewelry', 'jewellery', 
                                'electronics', 'chemist', 'toys', 'travel_agency', 'car_parts', 'greengrocer', 'farm', 'stationery', 
                                'laundry', 'dry_cleaning', 'beverages', 'perfumery', 'cosmetics', 'variety_store', 'wine', 'outdoor', 
-                               'copyshop', 'sports', 'deli', 'tobacco', 'art', 'tea', 'coffee') THEN shop
+                               'copyshop', 'sports', 'deli', 'tobacco', 'art', 'tea', 'coffee', 'tyres') THEN shop
                                ELSE 'other' END AS shop,
             NULL AS way_pixels
           FROM planet_osm_point
@@ -1839,7 +1786,6 @@ Layer:
     properties:
       minzoom: 10
   - id: power-towers
-    name: power-towers
     geometry: point
     <<: *extents
     Datasource:
@@ -1853,7 +1799,6 @@ Layer:
     properties:
       minzoom: 14
   - id: power-poles
-    name: power-poles
     geometry: point
     <<: *extents
     Datasource:
@@ -1867,7 +1812,6 @@ Layer:
     properties:
       minzoom: 16
   - id: roads-text-ref-low-zoom
-    name: roads-text-ref-low-zoom
     geometry: linestring
     <<: *extents
     Datasource:
@@ -1920,7 +1864,6 @@ Layer:
       minzoom: 10
       maxzoom: 12
   - id: junctions
-    name: junctions
     geometry: point
     <<: *extents
     Datasource:
@@ -1938,7 +1881,6 @@ Layer:
     properties:
       minzoom: 11
   - id: bridge-text
-    name: bridge-text
     geometry: polygon
     <<: *extents
     Datasource:
@@ -1955,7 +1897,6 @@ Layer:
     properties:
       minzoom: 11
   - id: roads-text-ref
-    name: roads-text-ref
     geometry: linestring
     <<: *extents
     Datasource:
@@ -2010,7 +1951,6 @@ Layer:
     properties:
       minzoom: 13
   - id: roads-area-text-name
-    name: roads-area-text-name
     geometry: polygon
     <<: *extents
     Datasource:
@@ -2030,7 +1970,6 @@ Layer:
     properties:
       minzoom: 15
   - id: roads-text-name
-    name: roads-text-name
     class: directions
     geometry: linestring
     <<: *extents
@@ -2086,7 +2025,6 @@ Layer:
     properties:
       minzoom: 13
   - id: paths-text-name
-    name: paths-text-name
     geometry: linestring
     <<: *extents
     Datasource:
@@ -2104,7 +2042,6 @@ Layer:
     properties:
       minzoom: 15
   - id: text-poly-low-zoom
-    name: text-poly-low-zoom
     class: text-low-zoom
     geometry: polygon
     <<: *extents
@@ -2137,7 +2074,6 @@ Layer:
       minzoom: 7
       maxzoom: 9
   - id: text-poly
-    name: text-poly
     class: text
     geometry: polygon
     <<: *extents
@@ -2168,7 +2104,7 @@ Layer:
                                             'musical_instrument', 'newsagent', 'optician', 'jewelry', 'jewellery', 'electronics', 'chemist', 'toys', 
                                             'travel_agency', 'car_parts', 'greengrocer', 'farm', 'stationery', 'laundry', 'dry_cleaning', 'beverages', 
                                             'perfumery', 'cosmetics', 'variety_store', 'wine', 'outdoor', 'copyshop', 'sports', 'deli', 'tobacco', 'art', 'tea', 
-                                            'coffee') THEN shop 
+                                            'coffee', 'tyres') THEN shop 
                               WHEN shop IN ('no', 'vacant', 'closed', 'disused', 'empty') OR shop IS NULL THEN NULL ELSE 'other' END,
               'leisure_' || CASE WHEN leisure IN ('swimming_pool', 'water_park', 'miniature_golf', 'golf_course', 'fitness_centre', 'sports_centre', 'stadium', 'track', 
                                                   'pitch', 'playground', 'park', 'recreation_ground', 'common', 'garden', 'nature_reserve', 'marina', 
@@ -2193,6 +2129,8 @@ Layer:
             ruins,
             localized_name_without_brackets as name,
             tags->'operator' as operator,
+            tags->'icao' as icao,
+            tags->'iata' as iata,
             ref,
             way_area,
             CASE WHEN access = 'private' OR iata IS NULL OR iata = 'none' THEN 'INT-minor'::text ELSE 'INT-major'::text END aeroway_class,
@@ -2224,7 +2162,6 @@ Layer:
     properties:
       minzoom: 10
   - id: text-line
-    name: text-line
     geometry: linestring
     <<: *extents
     Datasource:
@@ -2249,7 +2186,6 @@ Layer:
     properties:
       minzoom: 10
   - id: text-point
-    name: text-point
     class: text
     geometry: point
     <<: *extents
@@ -2275,6 +2211,8 @@ Layer:
               ELSE NULL
             END AS score,
             operator,
+            icao,
+            iata,
             ref,
             way_area,
             is_building
@@ -2300,7 +2238,7 @@ Layer:
                                                 'seafood', 'shoes', 'alcohol', 'gift', 'furniture', 'kiosk', 'mobile_phone', 'motorcycle', 'musical_instrument', 
                                                 'newsagent', 'optician', 'jewelry', 'jewellery', 'electronics', 'chemist', 'toys', 'travel_agency', 'car_parts', 
                                                 'greengrocer', 'farm', 'stationery', 'laundry', 'dry_cleaning', 'beverages', 'perfumery', 'cosmetics', 
-                                                'variety_store', 'wine', 'outdoor', 'copyshop', 'sports', 'deli', 'tobacco', 'art', 'tea', 'coffee') THEN shop 
+                                                'variety_store', 'wine', 'outdoor', 'copyshop', 'sports', 'deli', 'tobacco', 'art', 'tea', 'coffee', 'tyres') THEN shop 
                                   WHEN shop IN ('no', 'vacant', 'closed', 'disused', 'empty') OR shop IS NULL THEN NULL ELSE 'other' END,
                   'leisure_' || CASE WHEN leisure IN ('swimming_pool', 'water_park', 'miniature_golf', 'golf_course', 'fitness_centre', 'sports_centre', 'stadium', 'track',  
                                                       'pitch','playground', 'park', 'recreation_ground', 'common', 'garden', 'nature_reserve', 'marina',  
@@ -2336,6 +2274,8 @@ Layer:
                 END AS elevation,
                 "natural",
                 tags->'operator' as operator,
+                tags->'icao' as icao,
+                tags->'iata' as iata,
                 ref,
                 NULL AS way_area,
                 CASE WHEN building = 'no' OR building IS NULL THEN 'no' ELSE 'yes' END AS is_building
@@ -2369,7 +2309,6 @@ Layer:
     properties:
       minzoom: 10
   - id: building-text
-    name: building-text
     geometry: polygon
     <<: *extents
     Datasource:
@@ -2388,7 +2327,6 @@ Layer:
     properties:
       minzoom: 14
   - id: interpolation
-    name: interpolation
     geometry: linestring
     <<: *extents
     Datasource:
@@ -2402,7 +2340,6 @@ Layer:
     properties:
       minzoom: 17
   - id: addresses
-    name: addresses
     geometry: point
     <<: *extents
     Datasource:
@@ -2429,7 +2366,6 @@ Layer:
     properties:
       minzoom: 17
   - id: water-lines-text
-    name: water-lines-text
     geometry: linestring
     <<: *extents
     Datasource:
@@ -2452,7 +2388,6 @@ Layer:
     properties:
       minzoom: 13
   - id: ferry-routes-text
-    name: ferry-routes-text
     geometry: linestring
     <<: *extents
     Datasource:
@@ -2468,7 +2403,6 @@ Layer:
     properties:
       minzoom: 13
   - id: admin-text
-    name: admin-text
     geometry: linestring
     <<: *extents
     Datasource:
@@ -2487,7 +2421,6 @@ Layer:
     properties:
       minzoom: 16
   - id: nature-reserve-text
-    name: nature-reserve-text
     geometry: linestring
     <<: *extents
     Datasource:
@@ -2504,7 +2437,6 @@ Layer:
     properties:
       minzoom: 13
   - id: amenity-low-priority
-    name: amenity-low-priority
     class: amenity-low-priority
     geometry: point
     <<: *extents
@@ -2536,7 +2468,6 @@ Layer:
     properties:
       minzoom: 14
   - id: amenity-low-priority-poly
-    name: amenity-low-priority-poly
     class: amenity-low-priority
     geometry: polygon
     <<: *extents
