@@ -30,7 +30,7 @@ _parts:
     srs: "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
   osm2pgsql: &osm2pgsql
     type: "postgis"
-    dbname: "geg"
+    dbname: "osm"
     key_field: ""
     geometry_field: "way"
     extent: "-20037508,-20037508,20037508,20037508"
@@ -578,7 +578,6 @@ Layer:
       group-by: layernotnull
       minzoom: 10
   - id: "sports-grounds"  
-    name: "sports-grounds"
     geometry: "polygon"
     <<: *extents
     Datasource:
@@ -592,7 +591,6 @@ Layer:
           ORDER BY z_order,prio,way_area desc)
         AS sports_grounds
   - id: "sports"
-    name: "sports"
     <<: *extents
     Datasource:
       <<: *osm2pgsql
