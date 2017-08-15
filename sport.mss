@@ -1,6 +1,6 @@
 /*
 
-derived from https://github.com/cquest/osmfr-cartocss/blob/master/golf.mss
+derived from https://github.com/cquest/osmfr-cartocss/blob/master/sports.mss
 contains fixes for europe-centric worldview :)
 
 */
