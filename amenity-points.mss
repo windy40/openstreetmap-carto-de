@@ -2,8 +2,9 @@
 @wetland-text: darken(#4aa5fa, 25%); /* Also for marsh and mud */
 @shop-icon: #ac39ac;
 @shop-text: #939;
-@transportation-icon: #0092da;
-@transportation-text: #0066ff;
+// Kill the difference of transportation-icon and amenity-brown
+@transportation-icon: #734a08;
+@transportation-text: #734a08;
 @airtransport: #8461C4;
 @health-color: #da0092;
 @pharmacy-color: #008000;
@@ -25,16 +26,15 @@
 
 /* Note that .points is also used in water-features.mss */
 .points {
-  [feature = 'tourism_alpine_hut'][zoom >= 13] {
-    point-file: url('symbols/alpinehut.p.16.png');
-    point-placement: interior;
-  }
-
+  [feature = 'tourism_alpine_hut'][zoom >= 13],
   [feature = 'tourism_wilderness_hut'][zoom >= 13],
   [feature = 'amenity_shelter'][zoom >= 16] {
     marker-file: url('symbols/shelter.svg');
     [feature = 'tourism_wilderness_hut'] {
       marker-file: url('symbols/wilderness_hut.svg');
+    }
+    [feature = 'tourism_alpine_hut'] {
+      marker-file: url('symbols/alpinehut.svg');
     }
     marker-fill: @transportation-icon;
     marker-placement: interior;
@@ -1657,7 +1657,7 @@
   [feature = 'tourism_camp_site'][zoom >= 17] {
     text-name: "[name]";
     text-size: @standard-text-size;
-    text-fill: #0066ff;
+    text-fill: @transportation-text;
     text-dy: 11;
     text-face-name: @standard-font;
     text-halo-radius: @standard-halo-radius;
@@ -1681,7 +1681,7 @@
   [feature = 'amenity_embassy'][zoom >= 17] {
     text-name: "[name]";
     text-size: @standard-text-size;
-    text-fill: #0066ff;
+    text-fill: @transportation-text;
     text-dy: 10;
     text-face-name: @standard-font;
     text-halo-radius: @standard-halo-radius;
@@ -1693,7 +1693,7 @@
   [feature = 'amenity_taxi'][zoom >= 17] {
     text-name: "[name]";
     text-size: @standard-text-size;
-    text-fill: #0066ff;
+    text-fill: @transportation-text;
     text-dy: 11;
     text-face-name: @standard-font;
     text-halo-radius: @standard-halo-radius;
