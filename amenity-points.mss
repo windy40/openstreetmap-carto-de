@@ -2,8 +2,9 @@
 @wetland-text: darken(#4aa5fa, 25%); /* Also for marsh and mud */
 @shop-icon: #ac39ac;
 @shop-text: #939;
-@transportation-icon: #0092da;
-@transportation-text: #0066ff;
+// Kill the difference of transportation-icon and amenity-brown
+@transportation-icon: #734a08;
+@transportation-text: #734a08;
 @airtransport: #8461C4;
 @health-color: #da0092;
 @pharmacy-color: #008000;
