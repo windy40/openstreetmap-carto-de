@@ -69,7 +69,7 @@
 @primary-low-zoom-casing: @primary-casing;
 @secondary-low-zoom-casing: @secondary-casing;
 
-@unimportant-road: @residential-casing;
+@unimportant-road: white;
 
 @residential-construction: #aaa;
 @service-construction: #aaa;
@@ -108,11 +108,13 @@
 @trunk-width-z10:                 4.5;
 @primary-width-z10:               2.2;
 @secondary-width-z10:             1;
+@tertiary-width-z10:              1;
 
 @motorway-width-z11:              4.5;
 @trunk-width-z11:                 4.5;
 @primary-width-z11:               2.5;
 @secondary-width-z11:             1;
+@tertiary-width-z11:              1;
 
 @motorway-width-z12:              6;
 @motorway-link-width-z12:         1.5;
@@ -121,6 +123,8 @@
 @primary-width-z12:               3;
 @secondary-width-z12:             2.5;
 @tertiary-width-z12:              2.5;
+@residential-width-z12:           0.5;
+@unclassified-width-z12:          0.8;
 
 @motorway-width-z13:              7.5;
 @motorway-link-width-z13:         4.5;
@@ -130,6 +134,7 @@
 @secondary-width-z13:             7;
 @tertiary-width-z13:              5.5;
 @residential-width-z13:           2.5;
+@service-width-z13:               0.8;
 @living-street-width-z13:         2;
 @pedestrian-width-z13:            2;
 @bridleway-width-z13:             0.3;
@@ -313,6 +318,8 @@
 
 @junction-text-color:             #0528a2;
 @halo-color-for-minor-road: white;
+@lowzoom-halo-color:              white;
+@lowzoom-halo-width:              1;
 
 @motorway-oneway-arrow-color:     #6c70d5;
 @trunk-oneway-arrow-color:        #6c70d5;
@@ -1420,33 +1427,32 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
 .roads-fill[zoom >= 10],
 .bridges-fill[zoom >= 10],
 .tunnels-fill[zoom >= 10] {
+
   ::halo {
-    [zoom = 9][feature = 'highway_secondary'] {
-      line-color: @halo-color-for-minor-road;
-      line-width: 2.2;
-      line-opacity: 0.4;
-      line-join: round;
-      //Missing line-cap: round; is intentional. It would cause rendering glow multiple times in some places - what as result of partial transparency would cause differences in rendering
-      //Also, bridges - including bridge casings - are rendered on top of roads. Enabling line-cap: round would result in glow from bridges rendered on top of road around bridges.
-    }
-    [zoom = 10][feature = 'highway_secondary'],
-    [zoom = 11][feature = 'highway_secondary'] {
-      line-color: @halo-color-for-minor-road;
-      line-width: 2.7;
-      line-opacity: 0.4;
-      line-join: round;
-      //Missing line-cap: round; is intentional. It would cause rendering glow multiple times in some places - what as result of partial transparency would cause differences in rendering
-      //Also, bridges - including bridge casings - are rendered on top of roads. Enabling line-cap: round would result in glow from bridges rendered on top of road around bridges.
-    }
-    [zoom = 10][feature = 'highway_tertiary'],
-    [zoom = 11][feature = 'highway_tertiary'],
-    [zoom = 12][feature = 'highway_unclassified'] {
-      line-color: @halo-color-for-minor-road;
-      line-width: 2.2;
-      line-opacity: 0.3;
-      line-join: round;
-      //Missing line-cap: round; is intentional. It would cause rendering glow multiple times in some places - what as result of partial transparency would cause differences in rendering
-      //Also, bridges - including bridge casings are rendered on top of roads. Enabling line-cap: round would result in glow from bridges rendered on top of road around bridges.
+    [feature = 'highway_motorway'][link != 'yes'][zoom >= 8][zoom < 12],
+    [feature = 'highway_trunk'][link != 'yes'][zoom >= 8][zoom < 12],
+    [feature = 'highway_primary'][link != 'yes'][zoom >= 8][zoom < 12],
+    [feature = 'highway_secondary'][link != 'yes'][zoom >= 11][zoom < 12] {
+      [feature = 'highway_motorway'] {
+        [zoom >= 8] { line-width: @motorway-width-z8 + 2 * @lowzoom-halo-width; }
+        [zoom >= 9] { line-width: @motorway-width-z9 + 2 * @lowzoom-halo-width; }
+        [zoom >= 10] { line-width: @motorway-width-z10 + 2 * @lowzoom-halo-width; }
+        [zoom >= 11] { line-width: @motorway-width-z11 + 2 * @lowzoom-halo-width; }
+      }
+      [feature = 'highway_trunk'] {
+        [zoom >= 8] { line-width: @trunk-width-z8 + 2 * @lowzoom-halo-width; }
+        [zoom >= 9] { line-width: @trunk-width-z9 + 2 * @lowzoom-halo-width; }
+        [zoom >= 10] { line-width: @trunk-width-z10 + 2 * @lowzoom-halo-width; }
+        [zoom >= 11] { line-width: @trunk-width-z11 + 2 * @lowzoom-halo-width; }
+      }
+      [feature = 'highway_primary'] {
+        [zoom >= 8] { line-width: @primary-width-z8 + 2 * @lowzoom-halo-width; }
+        [zoom >= 9] { line-width: @primary-width-z9 + 2 * @lowzoom-halo-width; }
+        [zoom >= 10] { line-width: @primary-width-z10 + 2 * @lowzoom-halo-width; }
+        [zoom >= 11] { line-width: @primary-width-z11 + 2 * @lowzoom-halo-width; }
+      }
+      line-color: @lowzoom-halo-color;
+      line-opacity: .4;
     }
   }
 
@@ -1735,10 +1741,7 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
         line-color: @unimportant-road;
         line-width: @secondary-width-z9;
       }
-      [zoom >=10] {
-        line-color: @unimportant-road;
-        line-width: @secondary-width-z10;
-      }
+      [zoom >= 10] { line-width: @secondary-width-z10; }
       [zoom >= 11] { line-width: @secondary-width-z11; }
       [zoom >= 12] { 
         line-color: @secondary-fill;
@@ -1773,7 +1776,10 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
     [feature = 'highway_tertiary'] {
       [zoom >= 10] {
         line-color: @unimportant-road;
-        line-width: 0.55;
+        line-width: @tertiary-width-z10;
+      }
+      [zoom >= 11] {
+        line-width: @tertiary-width-z11;
       }
       [zoom >= 12] {
         line-color: @tertiary-fill;
@@ -1807,11 +1813,11 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
     [feature = 'highway_unclassified'] {
       [zoom = 12][feature = 'highway_residential'] {
         line-color: @unimportant-road;
-        line-width: 0.4;
+        line-width: @residential-width-z12;
       }
       [zoom = 12][feature = 'highway_unclassified'] {
         line-color: @unimportant-road;
-        line-width: 1;
+        line-width: @unclassified-width-z12;
       }
       [zoom >= 13] {
         line-width: @residential-width-z13 - 2 * @residential-casing-width-z13;
@@ -1902,7 +1908,7 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
 
     [feature = 'highway_service'] {
       [zoom >= 13][service = 'INT-normal'] {
-        line-width: 1;
+        line-width: @service-width-z13;
         line-color: @unimportant-road;
       }
       [zoom >= 14][service = 'INT-normal'],
@@ -3519,6 +3525,116 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
           marker-fill: @bridleway-oneway-arrow-color;
         }
       }
+    }
+  }
+}
+#railways-text-name {
+  /* Mostly started from z17. */
+  [railway = 'rail'],
+  [railway = 'subway'],
+  [railway = 'narrow_gauge'],
+  [railway = 'light_rail'],
+  [railway = 'preserved'],
+  [railway = 'funicular'],
+  [railway = 'monorail'],
+  [railway = 'tram'] {
+    [zoom >= 17] {
+      text-name: "[name]";
+      text-fill: #666666;
+      text-size: 10;
+      text-dy: 6;
+      text-spacing: 900;
+      text-clip: false;
+      text-placement: line;
+      text-min-distance: 18;
+      text-face-name: @book-fonts;
+      text-halo-radius: @standard-halo-radius;
+      text-halo-fill: @standard-halo-fill;
+    }
+    [zoom >= 19] {
+      text-size: 11;
+      text-dy: 7;
+    }
+  }
+  [railway = 'rail'] {
+    /* Render highspeed rails from z11,
+       other main routes at z14. */
+    [highspeed = 'yes'] {
+      [zoom >= 11] {
+        text-name: "[name]";
+        text-fill: #666666;
+        text-size: 10;
+        text-dy: 3;
+        text-spacing: 300;
+        text-clip: false;
+        text-placement: line;
+        text-min-distance: 18;
+        text-face-name: @book-fonts;
+        text-halo-radius: @standard-halo-radius;
+        text-halo-fill: @standard-halo-fill;
+      }
+      [zoom >= 13] {
+        text-dy: 6;
+      }
+      [zoom >= 14] {
+        text-spacing: 600;
+      }
+      [zoom >= 17] {
+        text-size: 11;
+        text-dy: 7;
+      }
+      [zoom >= 19] {
+        text-size: 12;
+        text-dy: 8;
+      }
+    }
+    [highspeed != 'yes'][usage = 'main'] {
+      [zoom >= 14] {
+        text-name: "[name]";
+        text-fill: #666666;
+        text-size: 10;
+        text-dy: 6;
+        text-spacing: 300;
+        text-clip: false;
+        text-placement: line;
+        text-min-distance: 18;
+        text-face-name: @book-fonts;
+        text-halo-radius: @standard-halo-radius;
+        text-halo-fill: @standard-halo-fill;
+      }
+      [zoom >= 17] {
+        text-spacing: 600;
+        text-size: 11;
+        text-dy: 7;
+      }
+      [zoom >= 19] {
+        text-size: 12;
+        text-dy: 8;
+      }
+    }
+  }
+  /* Other minor railway styles. For service rails, see:
+     https://github.com/gravitystorm/openstreetmap-carto/pull/2687 */
+  [railway = 'preserved'],
+  [railway = 'miniature'],
+  [railway = 'disused'],
+  [railway = 'construction'] {
+    [zoom >= 17] {
+      text-name: "[name]";
+      text-fill: #666666;
+      text-size: 10;
+      text-dy: 6;
+      text-spacing: 900;
+      text-clip: false;
+      text-placement: line;
+      text-min-distance: 18;
+      text-face-name: @book-fonts;
+      text-halo-radius: @standard-halo-radius;
+      text-halo-fill: @standard-halo-fill;
+    }
+    [zoom >= 19] {
+      text-size: 11;
+      text-dy: 7;
     }
   }
 }
