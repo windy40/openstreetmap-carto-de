@@ -3,14 +3,20 @@
 An adaptation of the "German" Mapnik style to the CartoCSS structure used by the international
 style. The rest of this README is the original text from the international style.
 
-The style is designed to use with a HSTORE DATABASE in mind. But is also working without it if all the
-required columns are added to a style. In our production setup we are using the provided views to
-osm2pgsql tables with hstore to simulate columns.
+The style is designed to use with a HSTORE-only DATABASE in mind. In our production setup we are using
+the provided views to osm2pgsql tables with hstore to simulate columns.
+
+This way, the database Layout is also capablo of rendering the upstream
+style without any changes.
 
 We are doing our best to keep this fork in sync with upstream.
 
 As a result we will always require at least the same Software versions of carto, mapnik, postgis,
 etc. as upstream.
+
+This repository does also contain a localized version branch of CartoCSS
+without other style changes. To use this you will also need the German style HSTORE-only
+DATABASE layout.
 
 # OpenStreetMap Carto
 
