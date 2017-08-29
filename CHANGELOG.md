@@ -1,4 +1,25 @@
-## [Unreleased](https://github.com/gravitystorm/openstreetmap-carto/compare/v4.1.0...master)
+## [Unreleased](https://github.com/gravitystorm/openstreetmap-carto/compare/v4.2.0...master)
+
+## [v4.2.0](https://github.com/gravitystorm/openstreetmap-carto/compare/v4.1.0...v4.2.0) - 2017-08-25
+### Major changes
+- Water color and default water text color are changed to be more visible
+- Medium zoom level (z8-z12) rework:
+  - Landuses colors are faded and some of them are visible earlier
+  - Most of the man related landuses are combined into one color and more visible
+  - More important roads are better legible
+
+### Changes
+- Leaf type rendering in woods and forests
+- Cemetary symbols are not so dense now and muslim cemetary has its own symbol
+- Rendering of amenity=ferry_terminal
+- Plaque rendering is now different and moved to z19
+- Rendering railway labels
+- Smaller line spaces in labels
+- Junction names on areas 
+- Area color for railway=station is the same as for railways
+- Database perfomance tuning available for Docker
+- Different patterns and all remaining icons moved to SVG
+- Some documentation and code cleaning
 
 ## [v4.1.0](https://github.com/gravitystorm/openstreetmap-carto/compare/v4.0.0...v4.1.0) - 2017-07-30
 ### Changes

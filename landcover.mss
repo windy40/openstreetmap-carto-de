@@ -42,6 +42,7 @@
 @cemetery: #aacbaf; // also grave_yard
 @construction: #c7c7b4; // also brownfield
 @danger_area: pink;
+@danger_background: #fcd8db;
 @heath: #d6d99f;
 @mud: rgba(203,177,154,0.3); // produces #e6dcd1 over @land
 @place_of_worship: #cdccc9;
@@ -179,7 +180,7 @@
       [way_pixels >= 64] { polygon-gamma: 0.3;  }
     }
     [zoom >= 14] {
-      [religion = 'jewish'] { polygon-pattern-file: url('symbols/grave_yard_jewish.png'); }
+      [religion = 'jewish'] { polygon-pattern-file: url('symbols/grave_yard_jewish.svg'); }
       [religion = 'christian'] { polygon-pattern-file: url('symbols/grave_yard_christian.svg'); }
       [religion = 'muslim'] { polygon-pattern-file: url('symbols/grave_yard_muslim.svg'); }
       [religion = 'INT-generic'] { polygon-pattern-file: url('symbols/grave_yard_generic.svg'); }
@@ -240,7 +241,8 @@
       [way_pixels >= 64] { polygon-gamma: 0.3;  }
     }
     [zoom >= 11] {
-      polygon-pattern-file: url('symbols/danger.png');
+      polygon-fill: @danger_background;
+      polygon-pattern-file: url('symbols/danger.svg');
       [way_pixels >= 4]  { polygon-pattern-gamma: 0.75; }
       [way_pixels >= 64] { polygon-pattern-gamma: 0.3;  }
     }
@@ -455,7 +457,7 @@
     }
   }
 
-  [feature = 'natural_sand'][zoom >= 9] {
+  [feature = 'natural_sand'][zoom >= 8] {
     polygon-fill: @sand;
     [way_pixels >= 4]  { polygon-gamma: 0.75; }
     [way_pixels >= 64] { polygon-gamma: 0.3;  }
@@ -536,7 +538,8 @@
     [way_pixels >= 64] { polygon-gamma: 0.3;  }
   }
 
-  [feature = 'aeroway_aerodrome'][zoom >= 10] {
+  [feature = 'aeroway_aerodrome'][zoom >= 10],
+  [feature = 'amenity_ferry_terminal'][zoom >= 15] {
     polygon-fill: @aerodrome;
     line-width: 0.2;
     line-color: saturate(darken(@aerodrome, 40%), 20%);
@@ -618,7 +621,7 @@
 
 #landcover-area-symbols {
   [int_wetland != null][zoom >= 10] {
-    polygon-pattern-file: url('symbols/wetland.svg');
+    polygon-pattern-file: url('symbols/wetland.png');
     polygon-pattern-alignment: global;
   }
   [natural = 'reef'][zoom >= 10] {
@@ -653,7 +656,7 @@
     [natural = 'beach'],
     [natural = 'shoal'] {
       [surface = 'sand'] {
-        polygon-pattern-file: url('symbols/beach.svg');
+        polygon-pattern-file: url('symbols/beach.png');
         polygon-pattern-alignment: global;
       }
       [surface = 'gravel'],
@@ -675,7 +678,11 @@
 
   //Also landuse = forest, converted in the SQL
   [natural = 'wood'][zoom >= 13]::wood {
-    polygon-pattern-file: url('symbols/forest.svg'); // Lch(55,30,135)
+    polygon-pattern-file: url('symbols/leaftype_unknown.svg'); // Lch(55,30,135)
+    [leaf_type = "broadleaved"] { polygon-pattern-file: url('symbols/leaftype_broadleaved.svg'); }
+    [leaf_type = "needleleaved"] { polygon-pattern-file: url('symbols/leaftype_needleleaved.svg'); }
+    [leaf_type = "mixed"] { polygon-pattern-file: url('symbols/leaftype_mixed.svg'); }
+    [leaf_type = "leafless"] { polygon-pattern-file: url('symbols/leaftype_leafless.svg'); }
     polygon-pattern-alignment: global;
     opacity: 0.4; // The entire layer has opacity to handle overlapping forests
   }
