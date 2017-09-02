@@ -6,12 +6,12 @@ style. The rest of this README is the original text from the international style
 The style is designed to use with a HSTORE-only DATABASE in mind. In our production setup we are using
 the provided views to osm2pgsql tables with hstore to simulate columns.
 
-This way, the database Layout is also capablo of rendering the upstream
+This way, the database Layout is also capable of rendering the upstream
 style without any changes.
 
 We are doing our best to keep this fork in sync with upstream.
 
-As a result we will always require at least the same Software versions of carto, mapnik, postgis,
+As a result we will always require at least the same software versions of carto, mapnik, postgis,
 etc. as upstream.
 
 This repository does also contain a localized version branch of CartoCSS
