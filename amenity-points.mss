@@ -9,11 +9,14 @@
 @airtransport: #8461C4; //also ferry_terminal
 @health-color: #da0092;
 @amenity-brown: #734a08;
+@gastronomy: @amenity-brown;
+@memorials: @amenity-brown;
 @man-made-icon: #555;
 @landform-color: #d08f55;
+@leisure-green: darken(@park, 60%);
 
 @landcover-font-size: 10;
-@landcover-wrap-width-size: 25; // 2.5 em
+@landcover-wrap-width-size: 30; // 3 em
 @landcover-line-spacing-size: -1.5; // -0.15 em
 @landcover-font-size-big: 12;
 @landcover-wrap-width-size-big: 36; // 3 em
@@ -61,7 +64,7 @@
 
   [feature = 'amenity_bar'][zoom >= 17] {
     marker-file: url('symbols/bar.svg');
-    marker-fill: @amenity-brown;
+    marker-fill: @gastronomy;
     marker-placement: interior;
     marker-clip: false;
   }
@@ -119,14 +122,14 @@
 
   [feature = 'amenity_cafe'][zoom >= 17] {
     marker-file: url('symbols/cafe.svg');
-    marker-fill: @amenity-brown;
+    marker-fill: @gastronomy;
     marker-placement: interior;
     marker-clip: false;
   }
 
   [feature = 'tourism_artwork'][zoom >= 17] {
     marker-file: url('symbols/artwork.svg');
-    marker-fill: @amenity-brown;
+    marker-fill: @memorials;
     marker-placement: interior;
     marker-clip: false;
   }
@@ -138,6 +141,7 @@
     marker-clip: false;
   }
 
+  // Ford tagging on points - ford on lines is defined later 
   [feature = 'highway_ford'][zoom >= 16] {
     marker-file: url('symbols/ford.svg');
     marker-fill: @transportation-icon;
@@ -182,7 +186,7 @@
 
   [feature = 'amenity_nightclub'][zoom >= 17] {
     marker-file: url('symbols/nightclub.svg');
-    marker-fill: @amenity-brown;
+    marker-fill: @gastronomy;
     marker-placement: interior;
     marker-clip: false;
   }
@@ -272,7 +276,7 @@
 
   [feature = 'amenity_ice_cream'][zoom >= 17] {
     marker-file: url('symbols/shop/ice_cream.svg');
-    marker-fill: @amenity-brown;
+    marker-fill: @gastronomy;
     marker-placement: interior;
     marker-clip: false;
   }
@@ -286,7 +290,7 @@
 
   [feature = 'amenity_embassy'][zoom >= 17] {
     marker-file: url('symbols/embassy.svg');
-    marker-fill: @transportation-icon;
+    marker-fill: @amenity-brown;
     marker-placement: interior;
     marker-clip: false;
   }
@@ -454,14 +458,14 @@
 
   [feature = 'amenity_pub'][zoom >= 17] {
     marker-file: url('symbols/pub.svg');
-    marker-fill: @amenity-brown;
+    marker-fill: @gastronomy;
     marker-placement: interior;
     marker-clip: false;
   }
 
   [feature = 'amenity_biergarten'][zoom >= 17] {
     marker-file: url('symbols/biergarten.svg');
-    marker-fill: @amenity-brown;
+    marker-fill: @gastronomy;
     marker-placement: interior;
     marker-clip: false;
   }
@@ -479,14 +483,14 @@
   [feature = 'amenity_restaurant'][zoom >= 17],
   [feature = 'amenity_food_court'][zoom >= 17] {
     marker-file: url('symbols/restaurant.svg');
-    marker-fill: @amenity-brown;
+    marker-fill: @gastronomy;
     marker-placement: interior;
     marker-clip: false;
   }
 
   [feature = 'amenity_fast_food'][zoom >= 17] {
     marker-file: url('symbols/fast_food.svg');
-    marker-fill: @amenity-brown;
+    marker-fill: @gastronomy;
     marker-placement: interior;
     marker-clip: false;
   }
@@ -498,7 +502,7 @@
     marker-clip: false;
   }
 
-  [feature = 'amenity_emergency_phone'][zoom >= 17] {
+  [feature = 'emergency_phone'][zoom >= 17] {
     marker-file: url('symbols/emergency_phone.svg');
     marker-fill: @amenity-brown;
     marker-placement: interior;
@@ -555,15 +559,15 @@
   }
 
   [feature = 'historic_memorial'][zoom >= 17] {
-    marker-file: url('symbols/memorial.svg');    
-    marker-fill: @amenity-brown;
+    marker-file: url('symbols/memorial.svg');
+    marker-fill: @memorials;
     marker-placement: interior;
     marker-clip: false;
   }
 
   [feature = 'historic_memorial_plaque'][zoom >= 19] {
     marker-file: url('symbols/plaque.svg');
-    marker-fill: @amenity-brown;
+    marker-fill: @memorials;
     marker-placement: interior;
     marker-clip: false;
   }
@@ -571,7 +575,7 @@
   [feature = 'man_made_obelisk'][zoom >= 16],
   [feature = 'historic_monument'][zoom >= 16] {
     marker-file: url('symbols/monument.svg');
-    marker-fill: @amenity-brown;
+    marker-fill: @memorials;
     marker-placement: interior;
     marker-clip: false;
   }
@@ -852,20 +856,20 @@
   [feature = 'leisure_water_park'][zoom >= 17] {
     marker-file: url('symbols/water_park.svg');
     marker-placement: interior;
-    marker-fill: @amenity-brown;
+    marker-fill: @leisure-green;
     marker-clip: false;
   }
 
   [feature = 'leisure_dog_park'][zoom >= 17] {
     marker-file: url('symbols/shop/pet.svg');
     marker-placement: interior;
-    marker-fill: @amenity-brown;
+    marker-fill: @leisure-green;
     marker-clip: false;
   }
 
   [feature = 'leisure_playground'][zoom >= 17] {
     marker-file: url('symbols/playground.svg');
-    marker-fill: @amenity-brown;
+    marker-fill: @leisure-green;
     marker-placement: interior;
     marker-clip: false;
     [access != ''][access != 'permissive'][access != 'yes'] {
@@ -875,14 +879,14 @@
 
   [feature = 'leisure_miniature_golf'][zoom >= 17] {
     marker-file: url('symbols/miniature_golf.svg');
-    marker-fill: darken(@park, 60%);
+    marker-fill: @leisure-green;
     point-placement: interior;
     marker-clip: false;
   }
 
   [feature = 'leisure_golf_course'][zoom >= 15] {
     marker-file: url('symbols/golf.svg');
-    marker-fill: darken(@park, 60%);
+    marker-fill: @leisure-green;
     point-placement: interior;
     marker-clip: false;
   }
@@ -934,7 +938,7 @@
     marker-file: url('symbols/lighthouse.svg');
     marker-placement: interior;
     marker-clip: false;
-    marker-fill: @transportation-icon;
+    marker-fill: @man-made-icon;
   }
 
   [feature = 'natural_peak'][zoom >= 11] {
@@ -1121,7 +1125,7 @@
   [feature = 'amenity_nightclub'] {
     [zoom >= 17] {
       text-name: "[name]";
-      text-fill: @amenity-brown;
+      text-fill: @gastronomy;
       text-size: @standard-font-size;
       text-wrap-width: @standard-wrap-width;
       text-line-spacing: @standard-line-spacing-size;
@@ -1145,7 +1149,8 @@
   [feature = 'amenity_courthouse'],
   [feature = 'amenity_townhall'],
   [feature = 'amenity_cinema'],
-  [feature = 'amenity_arts_centre'] {
+  [feature = 'amenity_arts_centre'],
+  [feature = 'historic_archaeological_site'] {
     [zoom >= 17] {
       text-name: "[name]";
       text-size: @standard-font-size;
@@ -1162,7 +1167,8 @@
       [feature = 'tourism_museum'],
       [feature = 'amenity_theatre'],
       [feature = 'amenity_cinema'],
-      [feature = 'amenity_arts_centre'] {
+      [feature = 'amenity_arts_centre'],
+      [feature = 'historic_archaeological_site'] {
         text-dy: 11;
       }
     }
@@ -1292,13 +1298,12 @@
   [feature = 'historic_memorial'][zoom >= 17],
   [feature = 'historic_memorial_plaque'][zoom >= 19],
   [feature = 'man_made_obelisk'][zoom >= 16],
-  [feature = 'historic_monument'][zoom >= 16],
-  [feature = 'historic_archaeological_site'][zoom >= 17] {
+  [feature = 'historic_monument'][zoom >= 16] {
     text-name: "[name]";
     text-size: @standard-font-size;
     text-wrap-width: @standard-wrap-width;
     text-line-spacing: @standard-line-spacing-size;
-    text-fill: @amenity-brown;
+    text-fill: @memorials;
     text-dy: 11;
     text-face-name: @standard-font;
     text-halo-radius: @standard-halo-radius;
@@ -1312,7 +1317,7 @@
     text-size: @standard-font-size;
     text-wrap-width: @standard-wrap-width;
     text-line-spacing: @standard-line-spacing-size;
-    text-fill: darken(@park, 60%);
+    text-fill: @leisure-green;
     text-face-name: @standard-font;
     text-halo-radius: @standard-halo-radius;
     text-halo-fill: @standard-halo-fill;
@@ -1329,7 +1334,7 @@
       text-size: @standard-font-size;
       text-wrap-width: @standard-wrap-width;
       text-line-spacing: @standard-line-spacing-size;
-      text-fill: darken(@park, 60%);
+      text-fill: @leisure-green;
       text-dy: 11;
       text-face-name: @standard-font;
       text-halo-radius: @standard-halo-radius;
@@ -1374,7 +1379,7 @@
       text-wrap-width: @standard-wrap-width;
       text-line-spacing: @standard-line-spacing-size;
       text-dy: 13;
-      text-fill: darken(@park, 60%);
+      text-fill: @leisure-green;
       text-face-name: @standard-font;
       text-halo-radius: @standard-halo-radius;
       text-halo-fill: @standard-halo-fill;
@@ -1502,6 +1507,7 @@
   [feature = 'landuse_retail'],
   [feature = 'landuse_industrial'],
   [feature = 'landuse_railway'],
+  [feature = 'man_made_works'],
   [feature = 'landuse_commercial'],
   [feature = 'landuse_brownfield'],
   [feature = 'landuse_landfill'],
@@ -1558,7 +1564,7 @@
       [feature = 'landuse_village_green'],
       [feature = 'leisure_common'],
       [feature = 'leisure_garden'] {
-        text-fill: darken(@park, 60%);
+        text-fill: @leisure-green;
       }
       [feature = 'landuse_quarry'] {
         text-fill: darken(@quarry, 60%);
@@ -1597,7 +1603,8 @@
         text-fill: darken(@retail, 50%);
       }
       [feature = 'landuse_industrial'],
-      [feature = 'landuse_railway'] {
+      [feature = 'landuse_railway'],
+      [feature = 'man_made_works'] {
         text-fill: darken(@industrial, 60%);
       }
       [feature = 'landuse_commercial'] {
@@ -1643,7 +1650,7 @@
         text-fill: darken(@stadium, 70%);
       }
       [feature = 'leisure_dog_park'] {
-        text-fill: darken(@park, 60%);
+        text-fill: @leisure-green;
         text-halo-radius: @standard-halo-radius * 1.5; /* Extra halo needed to stand out from paw pattern. */
         text-halo-fill: @standard-halo-fill;
       }
@@ -1724,7 +1731,7 @@
     text-size: @standard-font-size;
     text-wrap-width: @standard-wrap-width;
     text-line-spacing: @standard-line-spacing-size;
-    text-fill: @transportation-text;
+    text-fill: @amenity-brown;
     text-dy: 10;
     text-face-name: @standard-font;
     text-halo-radius: @standard-halo-radius;
@@ -1827,7 +1834,7 @@
     text-size: @standard-font-size;
     text-wrap-width: @standard-wrap-width;
     text-line-spacing: @standard-line-spacing-size;
-    text-fill: @transportation-text;
+    text-fill: @man-made-icon;
     text-dy: 16;
     text-face-name: @standard-font;
     text-halo-radius: @standard-halo-radius;
@@ -2191,6 +2198,14 @@
   }
 }
 
+#amenity-line {
+  // Ford tagging on ways
+  [feature = 'highway_ford'][zoom >= 16] {
+    marker-file: url('symbols/ford.svg');
+    marker-fill: @transportation-icon;
+  }
+}
+
 #trees [zoom >= 16] {
   ::canopy {
     opacity: 0.3;
@@ -2212,17 +2227,11 @@
       }
     }
     [natural = 'tree'] {
-      marker-fill: green;
-      marker-allow-overlap: true;
-      marker-line-width: 0;
-      marker-width: 2.5;
-      marker-height: 2.5;
-      marker-ignore-placement: true;
-      [zoom >= 17] {
-        marker-width: 5;
-        marker-height: 5;
-      }
       [zoom >= 18] {
+        marker-fill: green;
+        marker-allow-overlap: true;
+        marker-line-width: 0;
+        marker-ignore-placement: true;
         marker-width: 10;
         marker-height: 10;
       }

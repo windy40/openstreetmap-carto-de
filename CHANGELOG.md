@@ -1,4 +1,18 @@
-## [Unreleased](https://github.com/gravitystorm/openstreetmap-carto/compare/v4.2.0...master)
+## [Unreleased](https://github.com/gravitystorm/openstreetmap-carto/compare/v4.3.0...master)
+
+## [Unreleased](https://github.com/gravitystorm/openstreetmap-carto/compare/v4.2.0...v4.3.0)
+### Changes
+- Moving ford and emergency phone to a new tagging scheme
+- Moving natural=tree to higher zoom level (z18+)
+- Changing embassy color to brown
+- Rendering name for waterway=dock
+- The same line wrap of amenities for all zoom levels
+- Fixing combined railway/highway ordering regression
+- Fixing line wrapping bug in Docker
+- Some documentation and code cleaning
+- Improve ferry line text legibility
+- Hide small theme parks and zoos
+- Use solid lines for admin borders at low zooms
 
 ## [v4.2.0](https://github.com/gravitystorm/openstreetmap-carto/compare/v4.1.0...v4.2.0) - 2017-08-25
 ### Major changes

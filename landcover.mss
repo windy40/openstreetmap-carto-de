@@ -371,6 +371,14 @@
     [way_pixels >= 64] { polygon-gamma: 0.3;  }
   }
 
+  [feature = 'man_made_works'][zoom >= 16] {
+    line-width: .5;
+    line-color: @industrial-line;
+    [name != ''] {
+      line-width: 0.7;
+    }
+  }
+
   [feature = 'landuse_railway'][zoom >= 10] {
     polygon-fill: @railway;
     [zoom >= 16][name != ''] {
@@ -474,7 +482,7 @@
     [way_pixels >= 4]  { polygon-gamma: 0.75; }
     [way_pixels >= 64] { polygon-gamma: 0.3;  }
   }
- 
+
   [feature = 'wetland_swamp'][zoom >= 8] {
     polygon-fill: @forest;
     [way_pixels >= 4]  { polygon-gamma: 0.75; }
@@ -620,6 +628,10 @@
 }
 
 #landcover-area-symbols {
+  [natural = 'sand'][zoom >= 8] {
+    polygon-pattern-file: url('symbols/beach.png');
+    polygon-pattern-alignment: global;
+  }
   [int_wetland != null][zoom >= 10] {
     polygon-pattern-file: url('symbols/wetland.png');
     polygon-pattern-alignment: global;
@@ -751,8 +763,10 @@
 }
 
 #tourism-boundary {
-  [tourism = 'zoo'][zoom >= 10][way_pixels >= 20],
-  [tourism = 'theme_park'][zoom >= 10][way_pixels >= 20] {
+  [tourism = 'zoo'][zoom >= 10][way_pixels >= 750],
+  [tourism = 'zoo'][zoom >= 17],
+  [tourism = 'theme_park'][zoom >= 10][way_pixels >= 750],
+  [tourism = 'theme_park'][zoom >= 17] {
     a/line-width: 1;
     a/line-offset: -0.5;
     a/line-color: @tourism;
@@ -766,7 +780,7 @@
       b/line-color: @tourism;
       b/line-opacity: 0.3;
       b/line-join: round;
-      b/line-cap: round;    
+      b/line-cap: round;
     }
     [zoom >= 17] {
       a/line-width: 2;
