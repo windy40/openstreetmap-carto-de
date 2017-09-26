@@ -500,6 +500,9 @@
     marker-fill: @gastronomy;
     marker-placement: interior;
     marker-clip: false;
+    [cuisine=~".*kebab.*"] {
+      marker-file: url('symbols-de/kebab.svg');
+    }
   }
 
   [feature = 'amenity_telephone'][zoom >= 17] {
