@@ -500,7 +500,8 @@
     marker-fill: @gastronomy;
     marker-placement: interior;
     marker-clip: false;
-    [cuisine=~".*kebab.*"] {
+    [cuisine=~'.*kebab.*'],
+    [cuisine = 'turkish'] {
       marker-file: url('symbols-de/kebab.svg');
     }
   }
