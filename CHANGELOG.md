@@ -2,6 +2,25 @@
 openstreetmap-carto-de does not maintain a changelog. Instead have a log at the
 git history. openstreetmap-carto-de commit messages are usually prefixed by "GERMAN STYLE:"
 
+## [v4.4.0](https://github.com/gravitystorm/openstreetmap-carto/compare/v4.3.0...v4.4.0) - 2017-10-20
+### Major changes
+- Rendering inland water areas and labels from z0
+- Rendering island and islet labels earlier
+
+### Changes
+- Rendering of amenity=marketplace
+- Rendering of landuse=religious 
+- Rendering shop=pastry like shop=confectionery
+- Rendering of addr:unit
+- Rendering natural=bare_rock earlier
+- Rendering elevation also on polygon alpine_hut and shelter
+- Introducing Noto Sans Arabic 
+- Rendering icon for slipway ways
+- Better minimal distance between housenumbers
+- Moving aeroways to their own layer
+- Creating amenity POI categories
+- Some other documentation and code cleaning
+
 ## [v4.3.0](https://github.com/gravitystorm/openstreetmap-carto/compare/v4.2.0...v4.3.0) - 2017-09-16
 ### Changes
 - Moving ford and emergency phone to a new tagging scheme
