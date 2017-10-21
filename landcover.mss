@@ -194,7 +194,8 @@
     }
   }
 
-  [feature = 'amenity_place_of_worship'][zoom >= 13] {
+  [feature = 'amenity_place_of_worship'][zoom >= 13],
+  [feature = 'landuse_religious'][zoom >= 13] {
     polygon-fill: @place_of_worship;
     polygon-clip: false;
     [zoom >= 15] {
@@ -341,18 +342,21 @@
     }
   }
 
-  [feature = 'landuse_retail'][zoom >= 10] {
-    polygon-fill: @built-up-lower-lowzoom;
-    [zoom >= 11] { polygon-fill: @built-up-upper-lowzoom; }
-    [zoom >= 13] { polygon-fill: @retail; }
-    [zoom >= 16] {
-      line-width: 0.5;
-      line-color: @retail-line;
-      [name != ''] {
-        line-width: 0.7;
+  [feature = 'landuse_retail'],
+  [feature = 'amenity_marketplace'] {
+    [zoom >= 10] {
+      polygon-fill: @built-up-lower-lowzoom;
+      [zoom >= 11] { polygon-fill: @built-up-upper-lowzoom; }
+      [zoom >= 13] { polygon-fill: @retail; }
+      [zoom >= 16] {
+        line-width: 0.5;
+        line-color: @retail-line;
+        [name != ''] {
+          line-width: 0.7;
+        }
+        [way_pixels >= 4]  { polygon-gamma: 0.75; }
+        [way_pixels >= 64] { polygon-gamma: 0.3;  }
       }
-      [way_pixels >= 4]  { polygon-gamma: 0.75; }
-      [way_pixels >= 64] { polygon-gamma: 0.3;  }
     }
   }
 
@@ -440,14 +444,16 @@
     }
   }
 
-  [feature = 'natural_bare_rock'][zoom >= 9] {
+  [feature = 'natural_bare_rock'][zoom >= 8] {
     polygon-fill: @bare_ground;
-    [way_pixels >= 4]  { polygon-gamma: 0.75; }
-    [way_pixels >= 64] { polygon-gamma: 0.3;  }
-    [zoom >= 13] {
-      polygon-pattern-file: url('symbols/rock_overlay.png');
-      [way_pixels >= 4]  { polygon-pattern-gamma: 0.75; }
-      [way_pixels >= 64] { polygon-pattern-gamma: 0.3;  }
+    polygon-pattern-file: url('symbols/rock_overlay.png');
+    [way_pixels >= 4] {
+      polygon-gamma: 0.75;
+      polygon-pattern-gamma: 0.75;
+    }
+    [way_pixels >= 64] {
+      polygon-gamma: 0.3;
+      polygon-pattern-gamma: 0.3;
     }
   }
 
@@ -683,7 +689,7 @@
       }
     }
     [natural = 'scrub'] {
-      polygon-pattern-file: url('symbols/scrub.svg');
+      polygon-pattern-file: url('symbols/scrub.png');
       polygon-pattern-alignment: global;
     }
   }
