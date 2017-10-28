@@ -695,7 +695,7 @@
   }
 
   //Also landuse = forest, converted in the SQL
-  [natural = 'wood'][zoom >= 13]::wood {
+  [natural = 'wood'][leaf_type != ""][zoom >= 13]::wood {
     polygon-pattern-file: url('symbols/leaftype_unknown.svg'); // Lch(55,30,135)
     [leaf_type = "broadleaved"] { polygon-pattern-file: url('symbols-de/wood_broad.png'); }
     [leaf_type = "needleleaved"] { polygon-pattern-file: url('symbols-de/wood_needle.png'); }
