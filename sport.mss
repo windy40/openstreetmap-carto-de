@@ -5,15 +5,16 @@ contains fixes for europe-centric worldview :)
 
 */
 
-@sport-surface-grass: #54a854;
-@sport-surface-clay: #cc7e66;
+/* pitch color is already green so take the same for grass, as this will get confusing otherwise */
+@sport-surface-grass: @pitch;
+@sport-surface-clay: lighten(#cc7e66, 20%);
 
 #sports [zoom>=16][angle_diff>85][angle_diff<95] {
 	[sport='tennis'] {
 		[surface='clay']::surface {
                   polygon-fill: @sport-surface-clay;
                   line-width: 0.6;
-                  line-color: saturate(darken(@sport-surface-clay, 30%), 20%);
+                  line-color: saturate(darken(@sport-surface-clay, 20%), 20%);
 		}
 		[surface='grass']::surface {
                   polygon-fill: @sport-surface-grass;
