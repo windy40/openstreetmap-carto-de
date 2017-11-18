@@ -22,8 +22,7 @@ preview-de.png: $(XMLSTYLE)
 # to ensure successful merges from upstream
 test: test-z03.png test-z04.png test-z05.png test-z06.png test-z07.png test-z08.png test-z09.png \
 	test-z10.png test-z11.png test-z12.png test-z13.png test-z14.png test-z15.png test-z16.png \
-	test-z17.png test-z18.png test-z19.png test-castle1.png test-castle2.png \
-	test-camp-caravan.png test-campsite.png test-backcountry.png
+	test-z17.png test-z18.png test-z19.png test-l10n1.png test-l10n2.png
 
 test-z03.png: $(XMLSTYLE)
 	./scripts/render_single_tile.py -s $(XMLSTYLE) -o $@ -u /3/3/2.png
@@ -75,6 +74,12 @@ test-z18.png: $(XMLSTYLE)
 	
 test-z19.png: $(XMLSTYLE)
 	./scripts/render_single_tile.py -s $(XMLSTYLE) -o $@ -u /19/274450/180045.png
+# l10n (country-names)
+test-l10n1.png:
+	./scripts/render_single_tile.py -s $(XMLSTYLE) -o $@ -u /3/5/3.png
+# l10n (latin + asian scripts)
+test-l10n2.png:
+	./scripts/render_single_tile.py -s $(XMLSTYLE) -o $@ -u /10/792/483.png
 
 clean:
 	rm -f project-de.* $(XMLSTYLE) test-*.png
