@@ -30,7 +30,7 @@
 @landcover-face-name: @oblique-fonts;
 
 @standard-font-size: 10;
-@standard-wrap-width: 30;
+@standard-wrap-width: 30; // 3 em
 @standard-line-spacing-size: -1.5; // -0.15 em
 @standard-font: @book-fonts;
 
@@ -892,6 +892,14 @@
     marker-clip: false;
   }
 
+  [feature = 'leisure_fitness_centre'][zoom >= 17],
+  [feature = 'leisure_fitness_station'][zoom >= 17] {
+    marker-file: url('symbols/fitness.svg');
+    marker-placement: interior;
+    marker-fill: @leisure-green;
+    marker-clip: false;
+  }
+
   [feature = 'leisure_dog_park'][zoom >= 17] {
     marker-file: url('symbols/shop/pet.svg');
     marker-placement: interior;
@@ -1000,6 +1008,13 @@
     marker-placement: interior;
     marker-clip: false;
   }
+  
+  [feature = 'military_bunker'][zoom >= 17] {
+    marker-file: url('symbols/bunker.svg');
+    marker-fill: @man-made-icon;    
+    marker-placement: interior;
+    marker-clip: false;
+  }  
 
   [feature = 'natural_spring'][zoom >= 14] {
     marker-file: url('symbols/spring.svg');
@@ -1020,7 +1035,7 @@
   [feature = 'man_made_windmill'][zoom >= 16] {
     marker-file: url('symbols/windmill.svg');
     marker-placement: interior;
-    marker-fill: @amenity-brown;
+    marker-fill: @man-made-icon;
     marker-clip: false;
   }
 
@@ -1369,6 +1384,19 @@
     text-halo-fill: @standard-halo-fill;
     text-placement: interior;
   }
+  
+  [feature = 'military_bunker'][zoom >= 17] {
+    text-name: "[name]";
+    text-size: @standard-font-size;
+    text-wrap-width: @standard-wrap-width;
+    text-line-spacing: @standard-line-spacing-size;
+    text-fill: @man-made-icon;
+    text-dy: 11;
+    text-face-name: @standard-font;
+    text-halo-radius: @standard-halo-radius;
+    text-halo-fill: @standard-halo-fill;
+    text-placement: interior;
+  }
 
   [feature = 'leisure_miniature_golf'][zoom >= 17],
   [feature = 'leisure_golf_course'][zoom >= 15] {
@@ -1428,7 +1456,9 @@
   }
 
   [feature = 'leisure_playground'],
-  [feature = 'leisure_dog_park'] {
+  [feature = 'leisure_dog_park'],
+  [feature = 'leisure_fitness_centre'],
+  [feature = 'leisure_fitness_station'] {
     [way_area >= 150000][zoom >= 14],
     [way_area >= 80000][zoom >= 15],
     [way_area >= 20000][zoom >= 16],
@@ -1584,6 +1614,7 @@
   [feature = 'natural_shoal'],
   [feature = 'natural_reef'],
   [feature = 'leisure_fitness_centre'],
+  [feature = 'leisure_fitness_station'],
   [feature = 'leisure_sports_centre'],
   [feature = 'leisure_stadium'],
   [feature = 'leisure_track'],
@@ -1703,11 +1734,13 @@
       [feature = 'natural_shoal'] {
         text-fill: darken(@beach, 60%);
       }
-      [feature = 'leisure_fitness_centre'],
       [feature = 'leisure_sports_centre'],
       [feature = 'leisure_stadium'] {
         text-fill: darken(@stadium, 70%);
       }
+      [feature = 'leisure_dog_park'],
+      [feature = 'leisure_fitness_centre'],
+      [feature = 'leisure_fitness_station'],
       [feature = 'leisure_dog_park'] {
         text-fill: @leisure-green;
         text-halo-radius: @standard-halo-radius * 1.5; /* Extra halo needed to stand out from paw pattern. */
@@ -1861,28 +1894,28 @@
     }
   }
 
-  [feature = 'man_made_lighthouse'][zoom >= 15] {
+  [feature = 'man_made_lighthouse'][zoom >= 15],
+  [feature = 'man_made_windmill'][zoom >= 17] {
     text-name: "[name]";
     text-size: @standard-font-size;
     text-wrap-width: @standard-wrap-width;
     text-line-spacing: @standard-line-spacing-size;
     text-fill: @man-made-icon;
     text-dy: 16;
+    [feature = 'man_made_windmill'] { text-dy: 12; }
     text-face-name: @standard-font;
     text-halo-radius: @standard-halo-radius;
     text-halo-fill: @standard-halo-fill;
     text-placement: interior;
   }
 
-  [feature = 'man_made_windmill'][zoom >= 17],
   [feature = 'amenity_recycling'][zoom >= 17] {
     text-name: "[name]";
     text-size: @standard-font-size;
     text-wrap-width: @standard-wrap-width;
     text-line-spacing: @standard-line-spacing-size;
     text-fill: @amenity-brown;
-    text-dy: 12;
-    [feature = 'amenity_recycling'] { text-dy: 10; }
+    text-dy: 10;
     text-face-name: @standard-font;
     text-halo-radius: @standard-halo-radius;
     text-halo-fill: @standard-halo-fill;

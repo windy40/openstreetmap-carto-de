@@ -2,6 +2,22 @@
 openstreetmap-carto-de does not maintain a changelog. Instead have a log at the
 git history. openstreetmap-carto-de commit messages are usually prefixed by "GERMAN STYLE:"
 
+## [v4.5.0](https://github.com/gravitystorm/openstreetmap-carto/compare/v4.4.0...v4.5.0) - 2017-11-17
+### Major changes
+- Cleaning up low zoom levels (z5-z7):
+  - Rendering roads from z6 instead of z5
+  - Rendering national parks from z8 instead of z7
+  - Rendering railways from z8 instead of z7
+- Changing parking color from yellow to gray
+
+### Changes
+- Unified rendering of leisure=fitness_station and leisure=fitness_centre 
+- Rendering of military=bunker
+- Rendering all station buildings as major buildings 
+- Text wrapping for station labels
+- Changing windmill color from amenity brown to man_made gray
+- Some other documentation and code changes
+
 ## [v4.4.0](https://github.com/gravitystorm/openstreetmap-carto/compare/v4.3.0...v4.4.0) - 2017-10-20
 ### Major changes
 - Rendering inland water areas and labels from z0
