@@ -1057,8 +1057,8 @@
   }
 
   [feature = 'amenity_parking'][zoom >= 17],
-  [feature = 'amenity_bicycle_parking'][zoom >= 17],
-  [feature = 'amenity_motorcycle_parking'][zoom >= 17] {
+  [feature = 'amenity_bicycle_parking'][zoom >= 18],
+  [feature = 'amenity_motorcycle_parking'][zoom >= 18] {
     [feature = 'amenity_parking'] {
       marker-file: url('symbols/parking.svg');
     }
