@@ -70,17 +70,6 @@ Layer:
       type: shape
     properties:
       minzoom: 10
-  - id: builtup
-    geometry: polygon
-    extent: *world
-    srs-name: mercator
-    srs: "+proj=merc +datum=WGS84 +over"
-    Datasource:
-      file: data/world_boundaries/builtup_area.shp
-      type: shape
-    properties:
-      minzoom: 8
-      maxzoom: 9
   - id: necountries
     geometry: linestring
     <<: *extents84
@@ -101,12 +90,12 @@ Layer:
             COALESCE(wetland, landuse, "natural") AS feature
           FROM (SELECT
               way, COALESCE(name, '') AS name, religion,
-              ('landuse_' || (CASE WHEN landuse IN ('forest', 'military', 'farmland') THEN landuse ELSE NULL END)) AS landuse,
+              ('landuse_' || (CASE WHEN landuse IN ('forest', 'military', 'farmland', 'residential', 'commercial', 'retail', 'industrial') THEN landuse ELSE NULL END)) AS landuse,
               ('natural_' || (CASE WHEN "natural" IN ('wood', 'sand', 'scree', 'shingle', 'bare_rock') THEN "natural" ELSE NULL END)) AS "natural",
               ('wetland_' || (CASE WHEN "natural" IN ('wetland', 'mud') THEN (CASE WHEN "natural" IN ('mud') THEN "natural" ELSE tags->'wetland' END) ELSE NULL END)) AS wetland,
               way_area/NULLIF(!pixel_width!::real*!pixel_height!::real,0) AS way_pixels
             FROM planet_osm_polygon
-            WHERE (landuse IN ('forest', 'military', 'farmland')
+            WHERE (landuse IN ('forest', 'military', 'farmland', 'residential', 'commercial', 'retail', 'industrial')
               OR "natural" IN ('wood', 'wetland', 'mud', 'sand', 'scree', 'shingle', 'bare_rock'))
               AND way_area > 0.01*!pixel_width!::real*!pixel_height!::real
               AND building IS NULL
@@ -129,7 +118,8 @@ Layer:
               way, COALESCE(name, '') AS name,
               ('aeroway_' || (CASE WHEN aeroway IN ('apron', 'aerodrome') THEN aeroway ELSE NULL END)) AS aeroway,
               ('amenity_' || (CASE WHEN amenity IN ('parking', 'bicycle_parking', 'motorcycle_parking', 'university', 'college', 'school',
-                                                    'hospital', 'kindergarten', 'grave_yard', 'prison', 'place_of_worship', 'clinic', 'ferry_terminal', 'marketplace')
+                                                    'hospital', 'kindergarten', 'grave_yard', 'prison', 'place_of_worship', 'clinic', 'ferry_terminal',
+                                                    'marketplace', 'community_centre', 'social_facility')
                                                     THEN amenity ELSE NULL END)) AS amenity,
               ('landuse_' || (CASE WHEN landuse IN ('quarry', 'vineyard', 'orchard', 'cemetery', 'residential', 'garages', 'meadow', 'grass',
                                                     'allotments', 'forest', 'farmyard', 'farmland', 'greenhouse_horticulture',
@@ -153,7 +143,7 @@ Layer:
               OR leisure IS NOT NULL
               OR aeroway IN ('apron', 'aerodrome')
               OR amenity IN ('parking', 'bicycle_parking', 'motorcycle_parking', 'university', 'college', 'school', 'hospital', 'kindergarten',
-                             'grave_yard', 'place_of_worship', 'prison', 'clinic', 'ferry_terminal', 'marketplace')
+                             'grave_yard', 'place_of_worship', 'prison', 'clinic', 'ferry_terminal', 'marketplace', 'community_centre', 'social_facility')
               OR man_made IN ('works')
               OR military IN ('danger_area')
               OR "natural" IN ('beach', 'shoal', 'heath', 'mud', 'marsh', 'wetland', 'grassland', 'wood', 'sand', 'scree', 'shingle', 'bare_rock', 'scrub')
@@ -217,7 +207,7 @@ Layer:
       file: data/antarctica-icesheet-polygons-3857/icesheet_polygons.shp
       type: shape
     properties:
-      minzoom: 4
+      minzoom: 8
   - id: water-areas
     geometry: polygon
     <<: *extents
@@ -277,7 +267,7 @@ Layer:
       file: data/antarctica-icesheet-outlines-3857/icesheet_outlines.shp
       type: shape
     properties:
-      minzoom: 4
+      minzoom: 8
   - id: water-lines
     class: water-lines
     geometry: linestring
@@ -443,7 +433,7 @@ Layer:
     properties:
       minzoom: 13
   - id: tunnels
-    class: tunnels-fill tunnels-casing access
+    class: access
     geometry: linestring
     <<: *extents
     Datasource:
@@ -613,7 +603,7 @@ Layer:
           WHERE route = 'ferry'
         ) AS ferry_routes
     properties:
-      minzoom: 7
+      minzoom: 8
   - id: turning-circle-casing
     geometry: point
     <<: *extents
@@ -662,7 +652,6 @@ Layer:
     properties:
       minzoom: 14
   - id: roads-casing
-    class: roads-casing
     geometry: linestring
     <<: *extents
     Datasource:
@@ -776,7 +765,7 @@ Layer:
     properties:
       minzoom: 14
   - id: roads-fill
-    class: roads-fill access
+    class: access
     geometry: linestring
     <<: *extents
     Datasource:
@@ -968,7 +957,7 @@ Layer:
     properties:
       minzoom: 12
   - id: bridges
-    class: bridges-fill bridges-casing access
+    class: access
     geometry: linestring
     <<: *extents
     Datasource:
@@ -1068,7 +1057,7 @@ Layer:
           WHERE highway = 'bus_guideway'
         ) AS guideways
     properties:
-      minzoom: 13
+      minzoom: 11
   - id: aeroways
     geometry: linestring
     <<: *extents

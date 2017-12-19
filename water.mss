@@ -4,13 +4,10 @@
 
 #water-areas {
   [natural = 'glacier']::natural {
-    [zoom >= 6] {
-      line-width: 0.75;
+    [zoom >= 8] {
+      line-width: 1.0;
       line-color: @glacier-line;
       polygon-fill: @glacier;
-      [zoom >= 8] {
-        line-width: 1.0;
-      }
       [zoom >= 10] {
         line-dasharray: 4,2;
         line-width: 1.5;
@@ -30,20 +27,26 @@
     }
   }
 
-  [landuse = 'basin'][zoom >= 7]::landuse {
-    polygon-fill: @water-color;
-    [way_pixels >= 4] {
-      polygon-gamma: 0.75;
-    }
-    [way_pixels >= 64] {
-      polygon-gamma: 0.6;
+  [landuse = 'basin']::landuse {
+    [zoom >= 7][way_pixels >= 32],
+    [zoom >= 8] {
+      polygon-fill: @water-color;
+      [way_pixels >= 4] {
+        polygon-gamma: 0.75;
+      }
+      [way_pixels >= 64] {
+        polygon-gamma: 0.6;
+      }
     }
   }
 
   [natural = 'water']::natural,
   [landuse = 'reservoir']::landuse,
   [waterway = 'riverbank']::waterway {
-    [zoom >= 0] {
+    [zoom >= 0][zoom < 1][way_pixels >= 4],
+    [zoom >= 1][zoom < 2][way_pixels >= 16],
+    [zoom >= 2][zoom < 8][way_pixels >= 32],
+    [zoom >= 8] {
       polygon-fill: @water-color;
       [way_pixels >= 4] {
         polygon-gamma: 0.75;

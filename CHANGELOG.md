@@ -1,4 +1,18 @@
-## [Unreleased](https://github.com/gravitystorm/openstreetmap-carto/compare/v4.5.0...master)
+## [Unreleased](https://github.com/gravitystorm/openstreetmap-carto/compare/v4.6.0...master)
+
+
+## [v4.6.0](https://github.com/gravitystorm/openstreetmap-carto/compare/v4.5.0...v4.6.0) - 2017-12-17
+### Changes
+- Change sports_centre and stadium color to light green
+- Change shades of green for landuse/leisure=recreation_ground and garden
+- Do not render glaciers and icesheets on z6 and z7 
+- Do not render very small water areas on low zoom
+- Do not render small national parks and nature reserves
+- Do not render ferries on z7
+- Improve rendering for bus guideways
+- For built-up areas, replace the external data on z8 and z9 by OSM data
+- Do not render bicycle/motorbike parking icons to z17
+- Render community_centre and social_facility areas in light yellow
 
 ## [v4.5.0](https://github.com/gravitystorm/openstreetmap-carto/compare/v4.4.0...v4.5.0) - 2017-11-17
 ### Major changes

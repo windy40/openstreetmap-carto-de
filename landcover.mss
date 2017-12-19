@@ -1,10 +1,10 @@
 // --- Parks, woods, other green things ---
 
-@grass: #cdebb0; // also meadow, common, garden, village_green
+@grass: #cdebb0; // also grassland, meadow, common, village_green
 @scrub: #b5e3b5;
 @forest: #add19e;       // Lch(80,30,135)
 @forest-text: #46673b;  // Lch(40,30,135)
-@park: #c8facc;         // Lch(94,30,145) also recreation_ground
+@park: #c8facc;         // Lch(94,30,145) also garden
 @orchard: #aedfa3; // also vineyard, plant_nursery
 
 // --- "Base" landuses ---
@@ -61,7 +61,7 @@
 
 @pitch: #aae0cb; // also track
 @track: @pitch;
-@stadium: @societal_amenities; // also sports_centre
+@stadium: @leisure; // also sports_centre
 @golf_course: #b5e3b5;
 
 #landcover-low-zoom[zoom < 10],
@@ -97,6 +97,8 @@
     [way_pixels >= 64] { polygon-gamma: 0.3;  }
   }
 
+  [feature = 'leisure_recreation_ground'][zoom >= 10],
+  [feature = 'landuse_recreation_ground'][zoom >= 10],
   [feature = 'leisure_playground'][zoom >= 13],
   [feature = 'leisure_fitness_station'][zoom >= 13] {
     polygon-fill: @leisure;
@@ -214,7 +216,7 @@
     line-opacity: 0.329;
   }
 
-  [feature = 'landuse_residential'][zoom >= 10] {
+  [feature = 'landuse_residential'][zoom >= 8] {
     polygon-fill: @built-up-lower-lowzoom;
     [zoom >= 11] { polygon-fill: @built-up-upper-lowzoom; }
     [zoom >= 13] { polygon-fill: @residential; }
@@ -251,7 +253,7 @@
   }
 
   [feature = 'leisure_park'],
-  [feature = 'leisure_recreation_ground'] {
+  [feature = 'leisure_garden'] {
     [zoom >= 10] {
       polygon-fill: @park;
       [way_pixels >= 4]  { polygon-gamma: 0.75; }
@@ -332,10 +334,8 @@
   [feature = 'landuse_meadow'],
   [feature = 'natural_grassland'],
   [feature = 'landuse_grass'],
-  [feature = 'landuse_recreation_ground'],
   [feature = 'landuse_village_green'],
-  [feature = 'leisure_common'],
-  [feature = 'leisure_garden'] {
+  [feature = 'leisure_common'] {
     [zoom >= 10] {
       polygon-fill: @grass;
       [way_pixels >= 4]  { polygon-gamma: 0.75; }
@@ -345,7 +345,7 @@
 
   [feature = 'landuse_retail'],
   [feature = 'amenity_marketplace'] {
-    [zoom >= 10] {
+    [zoom >= 8] {
       polygon-fill: @built-up-lower-lowzoom;
       [zoom >= 11] { polygon-fill: @built-up-upper-lowzoom; }
       [zoom >= 13] { polygon-fill: @retail; }
@@ -361,7 +361,7 @@
     }
   }
 
-  [feature = 'landuse_industrial'][zoom >= 10] {
+  [feature = 'landuse_industrial'][zoom >= 8] {
     polygon-fill: @built-up-lower-lowzoom;
     [zoom >= 11] { polygon-fill: @built-up-upper-lowzoom; }
     [zoom >= 13] { polygon-fill: @industrial; }
@@ -413,7 +413,7 @@
     [way_pixels >= 64] { polygon-gamma: 0.3;  }
   }
 
-  [feature = 'landuse_commercial'][zoom >= 10] {
+  [feature = 'landuse_commercial'][zoom >= 8] {
     polygon-fill: @built-up-lower-lowzoom;
     [zoom >= 11] { polygon-fill: @built-up-upper-lowzoom; }
     [zoom >= 13] { polygon-fill: @commercial; }
@@ -520,7 +520,9 @@
   [feature = 'amenity_university'],
   [feature = 'amenity_college'],
   [feature = 'amenity_school'],
-  [feature = 'amenity_kindergarten'] {
+  [feature = 'amenity_kindergarten'],
+  [feature = 'amenity_community_centre'],
+  [feature = 'amenity_social_facility'] {
     [zoom >= 10] {
       polygon-fill: @residential;
       [zoom >= 12] {
