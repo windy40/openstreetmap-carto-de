@@ -478,7 +478,7 @@
     [way_pixels >= 64] { polygon-gamma: 0.3;  }
   }
 
-  [feature = 'natural_heath'][zoom >= 10] {
+  [feature = 'natural_heath'][zoom >= 8] {
     polygon-fill: @heath;
     [way_pixels >= 4]  { polygon-gamma: 0.75; }
     [way_pixels >= 64] { polygon-gamma: 0.3;  }
@@ -522,7 +522,8 @@
   [feature = 'amenity_school'],
   [feature = 'amenity_kindergarten'],
   [feature = 'amenity_community_centre'],
-  [feature = 'amenity_social_facility'] {
+  [feature = 'amenity_social_facility'],
+  [feature = 'amenity_arts_centre'] {
     [zoom >= 10] {
       polygon-fill: @residential;
       [zoom >= 12] {
