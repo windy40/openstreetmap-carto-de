@@ -25,7 +25,7 @@ test: test-z03.png test-z04.png test-z05.png test-z06.png test-z07.png test-z08.
 	test-z17.png test-z18.png test-z19.png test-castle1.png test-castle2.png \
 	test-camp-caravan.png test-campsite.png test-backcountry.png test-kebab.png \
 	test-sport.png test-l10n1.png test-l10n2.png test-foot-cycle-path-track.png \
-	test-living-street.png test-proposed.png
+	test-living-street.png test-proposed.png test-coast1.png test-coast2.png test-lake-ocean.png
 
 test-z03.png: $(XMLSTYLE)
 	./scripts/render_single_tile.py -s $(XMLSTYLE) -o $@ -u /3/3/2.png
@@ -112,6 +112,14 @@ test-living-street.png:
 	./scripts/render_single_tile.py -s $(XMLSTYLE) -o $@ -u /17/68619/45014.png
 test-proposed.png:
 	./scripts/render_single_tile.py -s $(XMLSTYLE) -o $@ -u //17/68615/45002.png
+
+# coastline (using water polygons)
+test-coast1.png:
+	./scripts/render_single_tile.py -s $(XMLSTYLE) -o $@ -u /14/8020/5446.png
+test-coast2.png:
+	./scripts/render_single_tile.py -s $(XMLSTYLE) -o $@ -u /13/4010/2723.png
+test-lake-ocean.png:
+	./scripts/render_single_tile.py -s $(XMLSTYLE) -o $@ -u /7/114/25.png
 
 clean:
 	rm -f project-de.* $(XMLSTYLE) test-*.png
