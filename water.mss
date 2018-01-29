@@ -1,4 +1,4 @@
-@water-text: #4d80b3;
+@water-text: #3b8ea2;       // Lch(55,26,224)
 @glacier: #ddecec;
 @glacier-line: #9cf;
 
@@ -48,6 +48,11 @@
     [zoom >= 2][zoom < 8][way_pixels >= 32],
     [zoom >= 8] {
       polygon-fill: @water-color;
+      [natural = 'water'][water = 'river'],
+      [natural = 'water'][water = 'canal'],
+      [waterway = 'riverbank'] {
+        polygon-fill: @river-color;
+      }
       [way_pixels >= 4] {
         polygon-gamma: 0.75;
       }
@@ -69,7 +74,7 @@
         [waterway = 'stream'][zoom >= 15] {
           line-width: 3.5;
         }
-        [intermittent = 'yes'] {
+        [int_intermittent = 'yes'] {
           line-dasharray: 4,3;
           line-cap: butt;
           line-join: round;
@@ -82,13 +87,13 @@
 
 #water-lines-low-zoom {
   [waterway = 'river'][zoom >= 8][zoom < 12] {
-    [intermittent = 'yes'] {
+    [int_intermittent = 'yes'] {
       line-dasharray: 8,4;
       line-cap: butt;
       line-join: round;
       line-clip: false;
     }
-    line-color: @water-color;
+    line-color: @river-color;
     line-width: 0.7;
     [zoom >= 9] { line-width: 1.2; }
     [zoom >= 10] { line-width: 1.6; }
@@ -118,12 +123,12 @@
       }
     }
 
-    water/line-color: @water-color;
+    water/line-color: @river-color;
     water/line-width: 2;
     water/line-cap: round;
     water/line-join: round;
 
-    [intermittent = 'yes'],
+    [int_intermittent = 'yes'],
     [waterway = 'wadi'] {
       [bridge = 'yes'][zoom >= 14] {
         bridgefill/line-color: white;
@@ -176,7 +181,7 @@
         background/line-color: @land-color;
       }
       water/line-width: 2;
-      water/line-color: @water-color;
+      water/line-color: @river-color;
 
       [bridge = 'yes'] {
         [zoom >= 14] {
@@ -191,7 +196,7 @@
         }
       }
 
-      [intermittent = 'yes'] {
+      [int_intermittent = 'yes'] {
         water/line-dasharray: 4,3;
         water/line-cap: butt;
         water/line-join: round;

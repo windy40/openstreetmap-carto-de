@@ -47,11 +47,11 @@ settings = {
     },
 
     2: {
-        'directory': 'simplified-land-polygons-complete-3857',
-        'url': 'http://data.openstreetmapdata.com/simplified-land-polygons-complete-3857.zip',  # noqa
+        'directory': 'simplified-water-polygons-complete-3857',
+        'url': 'http://data.openstreetmapdata.com/simplified-water-polygons-complete-3857.zip',  # noqa
         'type': 'zip',
-        'shp_basename': ['simplified_land_polygons'],
-        'long_opt': '--simplified-land'
+        'shp_basename': ['simplified_water_polygons'],
+        'long_opt': '--simplified-water'
     },
 
     3: {
@@ -63,11 +63,11 @@ settings = {
     },
 
     4: {
-        'directory': 'land-polygons-split-3857',
-        'url': 'http://data.openstreetmapdata.com/land-polygons-split-3857.zip',  # noqa
+        'directory': 'water-polygons-split-3857',
+        'url': 'http://data.openstreetmapdata.com/water-polygons-split-3857.zip',  # noqa
         'type': 'zip',
-        'shp_basename': ['land_polygons'],
-        'long_opt': '--land-polygons'
+        'shp_basename': ['water_polygons'],
+        'long_opt': '--water-polygons'
     },
 
     5: {
@@ -84,6 +84,30 @@ settings = {
         'type': 'zip',
         'shp_basename': ['icesheet_outlines'],
         'long_opt': '--icesheet-outlines'
+    },
+
+    7: {
+        'directory': 'ocean-polygons-reduced-3857',
+        'url': 'http://data.openstreetmapdata.com/ocean-polygons-reduced-3857.zip',  # noqa
+        'type': 'zip',
+        'shp_basename': ['ocean_reduced_z0', 'ocean_reduced_z1', 'ocean_reduced_z2', 'ocean_reduced_z3', 'ocean_reduced_z4', 'ocean_reduced_z5', 'ocean_reduced_z6'],
+        'long_opt': '--ocean-polygons-reduced'
+    },
+
+    8: {
+        'directory': 'lakes-polygons-reduced-3857',
+        'url': 'http://data.openstreetmapdata.com/lakes-polygons-reduced-3857.zip',  # noqa
+        'type': 'zip',
+        'shp_basename': ['lakes_reduced_z0', 'lakes_reduced_z1', 'lakes_reduced_z2', 'lakes_reduced_z3', 'lakes_reduced_z4', 'lakes_reduced_z5', 'lakes_reduced_z6'],
+        'long_opt': '--lakes-polygons-reduced'
+    },
+
+    9: {
+        'directory': 'river-polygons-reduced-3857',
+        'url': 'http://data.openstreetmapdata.com/river-polygons-reduced-3857.zip',  # noqa
+        'type': 'zip',
+        'shp_basename': ['river_reduced_z0', 'river_reduced_z1', 'river_reduced_z2', 'river_reduced_z3', 'river_reduced_z4', 'river_reduced_z5', 'river_reduced_z6'],
+        'long_opt': '--river-polygons-reduced'
     }
 }
 

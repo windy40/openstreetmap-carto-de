@@ -78,17 +78,6 @@
   ::upper-mid-zoom[zoom >= 12][zoom < 13],
   ::high-zoom[zoom >= 13] {
 
-  ::first {
-    [feature = 'wetland_mud'],
-    [feature = 'wetland_tidalflat'] {
-      [zoom >= 9] {
-        polygon-fill: @mud;
-        [way_pixels >= 4]  { polygon-gamma: 0.75; }
-        [way_pixels >= 64] { polygon-gamma: 0.3;  }
-      }
-    }
-  }
-
   [feature = 'leisure_swimming_pool'][zoom >= 14] {
     polygon-fill: @water-color;
     line-color: saturate(darken(@water-color, 40%), 30%);
@@ -478,7 +467,7 @@
     [way_pixels >= 64] { polygon-gamma: 0.3;  }
   }
 
-  [feature = 'natural_heath'][zoom >= 10] {
+  [feature = 'natural_heath'][zoom >= 8] {
     polygon-fill: @heath;
     [way_pixels >= 4]  { polygon-gamma: 0.75; }
     [way_pixels >= 64] { polygon-gamma: 0.3;  }
@@ -522,7 +511,8 @@
   [feature = 'amenity_school'],
   [feature = 'amenity_kindergarten'],
   [feature = 'amenity_community_centre'],
-  [feature = 'amenity_social_facility'] {
+  [feature = 'amenity_social_facility'],
+  [feature = 'amenity_arts_centre'] {
     [zoom >= 10] {
       polygon-fill: @residential;
       [zoom >= 12] {
@@ -636,6 +626,16 @@
 }
 
 #landcover-area-symbols {
+  ::first {
+    [natural = 'mud'],
+    [int_wetland = 'tidalflat'] {
+      [zoom >= 9] {
+        polygon-fill: @mud;
+        [way_pixels >= 4]  { polygon-gamma: 0.75; }
+        [way_pixels >= 64] { polygon-gamma: 0.3;  }
+      }
+    }
+  }
   [natural = 'sand'][zoom >= 8] {
     polygon-pattern-file: url('symbols/beach.png');
     polygon-pattern-alignment: global;
