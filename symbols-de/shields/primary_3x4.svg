@@ -7,7 +7,7 @@
    xmlns="http://www.w3.org/2000/svg"
    version="1.1"
    id="svg2"
-   viewBox="0 0 27.0 $h1.0"
+   viewBox="0 0 27.0 42.0"
    height="100%"
    width="100%">
   <metadata
@@ -30,7 +30,7 @@
        x="0"
        y="0"
        width="27"
-       height="$h1"
+       height="42"
        rx="2"
        ry="2"
        id="s1"
@@ -39,7 +39,7 @@
        x="0.9375"
        y="0.9375"
        width="25.125"
-       height="$h2"
+       height="40.125"
        rx="2"
        ry="2"
        id="s2"
