@@ -1,56 +1,6 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   version="1.1"
-   id="svg16"
-   viewBox="0 0 27.0 15.0"
-   height="100%"
-   width="100%"
-   inkscape:version="0.91 r13725"
-   sodipodi:docname="autobahn_3x1.svg">
-  <sodipodi:namedview
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1"
-     objecttolerance="10"
-     gridtolerance="10"
-     guidetolerance="10"
-     inkscape:pageopacity="0"
-     inkscape:pageshadow="2"
-     inkscape:window-width="1001"
-     inkscape:window-height="732"
-     id="namedview6"
-     showgrid="false"
-     inkscape:zoom="13.074074"
-     inkscape:cx="13.5"
-     inkscape:cy="7.5"
-     inkscape:window-x="140"
-     inkscape:window-y="141"
-     inkscape:window-maximized="0"
-     inkscape:current-layer="svg16" />
-  <metadata
-     id="metadata23">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
-  <defs
-     id="defs21" />
-  <path
-     d="m 0.49997168,7.5000013 0,-4.8364119 q 0,-0.2545499 0.41935569,-0.3818208 L 13.22043,0.51266465 q 0,-0.0126932 0.279569,-0.0126932 0.27957,0 0.27957,0.0126932 L 26.080672,2.2817686 q 0.419356,0.1272709 0.419356,0.3818208 l 0,9.6728256 q 0,0.25455 -0.419356,0.38182 l -12.301103,1.769104 q 0,0.01269 -0.27957,0.01269 -0.279569,0 -0.279569,-0.01269 L 0.91932747,12.718235 q -0.41935579,-0.12727 -0.41935579,-0.38182 z"
-     id="path6"
-     style="fill:#365eaf;fill-opacity:1;stroke:#0528a2;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-     inkscape:connector-curvature="0" />
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="28pt" height="18pt" viewBox="0 0 28 18" version="1.1">
+<g id="surface1">
+<path style="fill-rule:nonzero;fill:rgb(21.176471%,36.862745%,68.627451%);fill-opacity:1;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(1.960784%,15.686275%,63.529412%);stroke-opacity:1;stroke-miterlimit:4;" d="M 0.500977 7.5 L 0.500977 2.66276 C 0.500977 2.49349 0.640346 2.366536 0.919085 2.281901 L 13.221261 0.511068 C 13.221261 0.504557 13.31543 0.501302 13.5 0.501302 C 13.68457 0.501302 13.778739 0.504557 13.778739 0.511068 L 26.080915 2.281901 C 26.359654 2.366536 26.499023 2.49349 26.499023 2.66276 L 26.499023 12.33724 C 26.499023 12.50651 26.359654 12.633464 26.080915 12.718099 L 13.778739 14.488932 C 13.778739 14.495443 13.68457 14.498698 13.5 14.498698 C 13.31543 14.498698 13.221261 14.495443 13.221261 14.488932 L 0.919085 12.718099 C 0.640346 12.633464 0.500977 12.50651 0.500977 12.33724 Z M 0.500977 7.5 " transform="matrix(1.037037,0,0,1.2,0,0)"/>
+</g>
 </svg>
