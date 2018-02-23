@@ -122,6 +122,13 @@
     marker-clip: false;
   }
 
+  [feature = 'barrier_toll_booth'][zoom >= 16] {
+    marker-file: url('symbols/toll_booth.svg');
+    marker-fill: @transportation-icon;
+    marker-placement: interior;
+    marker-clip: false;
+  }
+
   [feature = 'amenity_cafe'][zoom >= 17] {
     marker-file: url('symbols/cafe.svg');
     marker-fill: @gastronomy;
@@ -182,6 +189,13 @@
   [feature = 'amenity_cinema'][zoom >= 16] {
     marker-file: url('symbols/cinema.svg');
     marker-fill: @culture;
+    marker-placement: interior;
+    marker-clip: false;
+  }
+
+  [feature = 'amenity_public_bath'][zoom >= 17] {
+    marker-file: url('symbols/public_bath.svg');
+    marker-fill: @amenity-brown;
     marker-placement: interior;
     marker-clip: false;
   }
@@ -444,6 +458,13 @@
     marker-clip: false;
   }
 
+  [feature = 'historic_wayside_shrine'][zoom >= 17] {
+    marker-file: url('symbols/shrine.svg');
+    marker-fill: @man-made-icon;
+    marker-placement: interior;
+    marker-clip: false;
+  }
+    
   [feature = 'amenity_police'][zoom >= 16] {
     marker-file: url('symbols/police.svg');
     marker-fill: @public-service;
@@ -590,6 +611,13 @@
     marker-clip: false;
   }
 
+  [feature = 'historic_fort'][zoom >= 16] {
+    marker-file: url('symbols/fort.svg');
+    marker-fill: @memorials;
+    marker-placement: interior;
+    marker-clip: false;
+  }
+
   [feature = 'historic_archaeological_site'][zoom >= 16] {
     marker-file: url('symbols/archaeological_site.svg');
     marker-fill: @culture;
@@ -679,6 +707,7 @@
       marker-file: url('symbols/shop/convenience.svg');
     }
 
+    [shop = 'chocolate'][zoom >= 18],
     [shop = 'confectionery'][zoom >= 18],
     [shop = 'pastry'][zoom >= 18] {
       marker-file: url('symbols/shop/confectionery.svg');
@@ -1039,6 +1068,17 @@
     marker-placement: interior;
     marker-clip: false;
   }
+  
+  // waste_disposal tagging on ways - tagging on nodes is defined later 
+  [feature = 'amenity_waste_disposal'][zoom >= 19] {
+    [access = null],
+    [access = 'permissive'],
+    [access = 'yes'] {
+      marker-file: url('symbols/waste_disposal.svg');
+      marker-fill: @amenity-brown;
+      marker-placement: interior;
+    }
+  }
 }
 
 .amenity-low-priority {
@@ -1102,7 +1142,8 @@
   }
 
   [feature = 'barrier_bollard'],
-  [feature = 'barrier_block'] {
+  [feature = 'barrier_block'],
+  [feature = 'barrier_log'] {
     [zoom >= 16] {
       marker-width: 3;
       marker-line-width: 0;
@@ -1125,6 +1166,17 @@
     marker-file: url('symbols/waste_basket.10.svg');
     marker-fill: @amenity-brown;
     marker-placement: interior;
+  }
+
+  // waste_disposal tagging on nodes - tagging on ways is defined earlier 
+  [feature = 'amenity_waste_disposal'][zoom >= 19]::amenity {
+    [access = null],
+    [access = 'permissive'],
+    [access = 'yes'] {
+      marker-file: url('symbols/waste_disposal.svg');
+      marker-fill: @amenity-brown;
+      marker-placement: interior;
+    }
   }
 }
 
@@ -1207,8 +1259,22 @@
     }
   }
 
+  [feature = 'amenity_public_bath'][zoom >= 17] {
+    text-name: "[name]";
+    text-size: @standard-font-size;
+    text-wrap-width: @standard-wrap-width;
+    text-line-spacing: @standard-line-spacing-size;
+    text-fill: @amenity-brown;
+    text-dy: 11;
+    text-face-name: @standard-font;
+    text-halo-radius: @standard-halo-radius;
+    text-halo-fill: @standard-halo-fill;
+    text-placement: interior;
+  }
+
   [feature = 'amenity_car_rental'][zoom >= 17],
   [feature = 'amenity_bicycle_rental'][zoom >= 17],
+  [feature = 'barrier_toll_booth'][zoom >= 17],
   [feature = 'leisure_slipway'][zoom >= 17] {
     text-name: "[name]";
     text-size: @standard-font-size;
@@ -1217,6 +1283,7 @@
     text-fill: @transportation-text;
     [feature = 'amenity_car_rental']     { text-dy: 10; }
     [feature = 'amenity_bicycle_rental'] { text-dy: 10; }
+    [feature = 'barrier_toll_booth']     { text-dy: 13; }
     [feature = 'leisure_slipway']        { text-dy: 13; }
     text-face-name: @standard-font;
     text-halo-radius: @standard-halo-radius;
@@ -1338,6 +1405,7 @@
 
   [feature = 'man_made_cross'][zoom >= 17],
   [feature = 'historic_wayside_cross'][zoom >= 17],
+  [feature = 'historic_wayside_shrine'][zoom >= 17],
   [feature = 'natural_cave_entrance'][zoom >= 15],
   [feature = 'man_made_mast'][zoom >= 17],
   [feature = 'man_made_water_tower'][zoom >= 17] {
@@ -1365,7 +1433,8 @@
   [feature = 'historic_memorial'][zoom >= 17],
   [feature = 'historic_memorial_plaque'][zoom >= 19],
   [feature = 'man_made_obelisk'][zoom >= 16],
-  [feature = 'historic_monument'][zoom >= 16] {
+  [feature = 'historic_monument'][zoom >= 16],
+  [feature = 'historic_fort'][zoom >= 16] {
     text-name: "[name]";
     text-size: @standard-font-size;
     text-wrap-width: @standard-wrap-width;
@@ -1378,7 +1447,8 @@
     text-placement: interior;
   }
   
-  [feature = 'military_bunker'][zoom >= 17] {
+  [feature = 'military_bunker'][zoom >= 17],
+  [feature = 'historic_wayside_shrine'][zoom >= 17] {
     text-name: "[name]";
     text-size: @standard-font-size;
     text-wrap-width: @standard-wrap-width;
@@ -1528,7 +1598,7 @@
         text-wrap-width: @landcover-wrap-width-size-bigger;
         text-line-spacing: @landcover-line-spacing-size-bigger;
       }
-      text-fill: darken(@danger_area, 40%);
+      text-fill: darken(@military, 40%);
       text-face-name: @bold-fonts;
       text-halo-radius: @standard-halo-radius;
       text-halo-fill: @standard-halo-fill;
@@ -1957,6 +2027,7 @@
   [feature = 'shop_convenience'],
   [feature = 'shop_confectionery'],
   [feature = 'shop_pastry'],
+  [feature = 'shop_chocolate'],
   [feature = 'shop_copyshop'],
   [feature = 'shop_deli'],
   [feature = 'shop_doityourself'],
