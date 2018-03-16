@@ -1,56 +1,6 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="100%"
-   height="100%"
-   viewBox="0 0 89.0 17.0"
-   id="svg2"
-   version="1.1"
-   inkscape:version="0.91 r13725"
-   sodipodi:docname="autobahn_11x1_z18.svg">
-  <metadata
-     id="metadata9">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
-  <defs
-     id="defs7" />
-  <sodipodi:namedview
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1"
-     objecttolerance="10"
-     gridtolerance="10"
-     guidetolerance="10"
-     inkscape:pageopacity="0"
-     inkscape:pageshadow="2"
-     inkscape:window-width="1008"
-     inkscape:window-height="598"
-     id="namedview5"
-     showgrid="false"
-     inkscape:zoom="3.9662921"
-     inkscape:cx="44.5"
-     inkscape:cy="8.5"
-     inkscape:window-x="236"
-     inkscape:window-y="144"
-     inkscape:window-maximized="0"
-     inkscape:current-layer="svg2" />
-  <path
-     inkscape:connector-curvature="0"
-     d="m 0.5,8.499997 0,-5.527306 Q 0.5,2.681779 1.919355,2.536329 L 43.553768,0.514504 q 0,-0.01451 0.946231,-0.01451 0.946234,0 0.946234,0.01451 l 41.634416,2.021825 q 1.41935,0.14545 1.41935,0.436362 l 0,11.054612 q 0,0.290911 -1.41935,0.436363 L 45.446233,16.48549 q 0,0.01451 -0.946234,0.01451 -0.946231,0 -0.946231,-0.01451 L 1.919355,14.463666 Q 0.5,14.318214 0.5,14.027303 Z"
-     id="path6"
-     style="fill:#365eaf;fill-opacity:1;stroke:#0528a2;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="85pt" height="21pt" viewBox="0 0 85 21" version="1.1">
+<g id="surface1">
+<path style="fill-rule:nonzero;fill:rgb(21.176471%,36.862745%,68.627451%);fill-opacity:1;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(1.960784%,15.686275%,63.529412%);stroke-opacity:1;stroke-miterlimit:4;" d="M 0.498989 8.5 L 0.498989 2.97247 C 0.498989 2.779576 0.973438 2.634115 1.918244 2.536086 L 43.555193 0.515439 C 43.555193 0.505952 43.870129 0.499628 44.5 0.499628 C 45.129871 0.499628 45.444807 0.505952 45.444807 0.515439 L 87.081756 2.536086 C 88.026563 2.634115 88.501011 2.779576 88.501011 2.97247 L 88.501011 14.02753 C 88.501011 14.220424 88.026563 14.365885 87.081756 14.463914 L 45.444807 16.484561 C 45.444807 16.494048 45.129871 16.500372 44.5 16.500372 C 43.870129 16.500372 43.555193 16.494048 43.555193 16.484561 L 1.918244 14.463914 C 0.973438 14.365885 0.498989 14.220424 0.498989 14.02753 Z M 0.498989 8.5 " transform="matrix(0.955056,0,0,1.235294,0,0)"/>
+</g>
 </svg>

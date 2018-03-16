@@ -9,7 +9,7 @@ $(XMLSTYLE): *.mss project.mml
 	mv $(TEMPFILE) $@
 
 project-hrb.mml: project.mml
-	sed -e 's/localized_[^ ]\+/name_hrb/g' project.mml >project-hrb.mml
+	sed -e 's/localized_[a-z_]\+/name_hrb/g' project.mml >project-hrb.mml
 
 osm-hrb.xml: *.mss project-hrb.mml
 	carto -a $(MAPNIK_API) project-hrb.mml > $(TEMPFILE)
