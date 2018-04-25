@@ -2,7 +2,25 @@
 openstreetmap-carto-de does not maintain a changelog. Instead have a log at the
 git history. openstreetmap-carto-de commit messages are usually prefixed by "GERMAN STYLE:"
 
-## [Unreleased](https://github.com/gravitystorm/openstreetmap-carto/compare/v4.9.0...master)
+## [Unreleased](https://github.com/gravitystorm/openstreetmap-carto/compare/v4.10.0...master)
+
+## [v4.10.0](https://github.com/gravitystorm/openstreetmap-carto/compare/v4.9.0...v4.10.0) - 2018-04-20
+### Changes
+- Adding rendering for historic=castle and historic=manor
+- Adding rendering office=* as dots + names
+- Adding rendering for waterway=waterfall
+- Adding place=square name rendering for nodes
+- Adding rendering for big natural=bay
+- Adding rendering for leisure=beach_resort
+- Adding rendering for amenity=parking_space
+- Adding rendering of aerialway=zip_line
+- Adding rendering for shop=bed
+- Adding rendering for shop=video_games
+- Adding halo to roads on z6 and z7
+- Extending intermittent waterbody rendering to landuse=basin
+- Moving highway=mini_roundabout rendering to higher zoom level
+- Dropping waterway=derelict_canal rendering
+- Small documentation and code fixes
 
 ## [v4.9.0](https://github.com/gravitystorm/openstreetmap-carto/compare/v4.8.0...v4.9.0) - 2018-03-23
 ### Major changes

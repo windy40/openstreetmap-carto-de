@@ -30,12 +30,23 @@
   [landuse = 'basin']::landuse {
     [zoom >= 7][way_pixels >= 32],
     [zoom >= 8] {
-      polygon-fill: @water-color;
-      [way_pixels >= 4] {
-        polygon-gamma: 0.75;
+      [int_intermittent = 'no'] {
+        polygon-fill: @water-color;
+        [way_pixels >= 4] {
+          polygon-gamma: 0.75;
+        }
+        [way_pixels >= 64] {
+          polygon-gamma: 0.6;
+        }
       }
-      [way_pixels >= 64] {
-        polygon-gamma: 0.6;
+      [int_intermittent = 'yes'] {
+        polygon-pattern-file: url('symbols/intermittent_water.png');
+        [way_pixels >= 4] {
+          polygon-pattern-gamma: 0.75;
+        }
+        [way_pixels >= 64] {
+          polygon-pattern-gamma: 0.6;
+        }
       }
     }
   }
@@ -225,22 +236,6 @@
     }
   }
 
-  [waterway = 'derelict_canal'][zoom >= 12] {
-    line-width: 1.5;
-    line-color: #b5e4d0;
-    line-dasharray: 4,4;
-    line-opacity: 0.5;
-    line-join: round;
-    line-cap: round;
-    [zoom >= 13] {
-      line-width: 2.5;
-      line-dasharray: 4,6;
-    }
-    [zoom >= 14] {
-      line-width: 4.5;
-      line-dasharray: 4,8;
-    }
-  }
 }
 
 #water-lines-text {
@@ -305,25 +300,13 @@
       text-halo-fill: @standard-halo-fill;
     }
 
-    [waterway = 'derelict_canal'][zoom >= 13] {
-      text-name: "[name]";
-      text-size: 10;
-      text-fill: #80d1ae;
-      text-face-name: @oblique-fonts;
-      text-placement: line;
-      text-spacing: 600;
-      text-halo-radius: @standard-halo-radius;
-      text-halo-fill: @standard-halo-fill;
-      [zoom >= 14] {
-        text-size: 12;
-      }
-    }
   }
 }
 
 .text-low-zoom[zoom < 10],
 .text[zoom >= 10] {
   [feature = 'natural_water'],
+  [feature = 'natural_bay'],
   [feature = 'landuse_reservoir'],
   [feature = 'landuse_basin'],
   [feature = 'waterway_dock'] {

@@ -22,10 +22,11 @@ preview-de.png: $(XMLSTYLE)
 # to ensure successful merges from upstream
 test: test-z03.png test-z04.png test-z05.png test-z06.png test-z07.png test-z08.png test-z09.png \
 	test-z10.png test-z11.png test-z12.png test-z13.png test-z14.png test-z15.png test-z16.png \
-	test-z17.png test-z18.png test-z19.png test-castle1.png test-castle2.png \
-	test-camp-caravan.png test-campsite.png test-backcountry.png test-kebab.png \
+	test-z17.png test-z18.png test-z19.png test-castle1.png test-castle2.png test-castle3.png\
+	test-castle4.png test-camp-caravan.png test-campsite.png test-backcountry.png test-kebab.png \
 	test-sport.png test-l10n1.png test-l10n2.png test-foot-cycle-path-track.png \
-	test-living-street.png test-proposed.png test-coast1.png test-coast2.png test-lake-ocean.png
+	test-living-street.png test-proposed.png test-coast1.png test-coast2.png test-lake-ocean.png \
+	test-l10n1.png test-l10n2.png
 
 test-z03.png: $(XMLSTYLE)
 	./scripts/render_single_tile.py -s $(XMLSTYLE) -o $@ -u /3/3/2.png
@@ -78,13 +79,20 @@ test-z18.png: $(XMLSTYLE)
 test-z19.png: $(XMLSTYLE)
 	./scripts/render_single_tile.py -s $(XMLSTYLE) -o $@ -u /19/274450/180045.png
 
-# incomplete tests for German style only features
+# tests for German style only features
 # castle
 test-castle1.png: $(XMLSTYLE)
-	./scripts/render_single_tile.py -s $(XMLSTYLE) -o $@ -u /18/137259/90022.png
+	./scripts/render_single_tile.py -s $(XMLSTYLE) -o $@ -u /14/8582/5621.png
 # castle (ruined)
 test-castle2.png: $(XMLSTYLE)
-	./scripts/render_single_tile.py -s $(XMLSTYLE) -o $@ -u /17/68625/45014.png
+	./scripts/render_single_tile.py -s $(XMLSTYLE) -o $@ -u /14/8581/5623.png
+# castle (like upstream)
+test-castle3.png: $(XMLSTYLE)
+	./scripts/render_single_tile.py -s $(XMLSTYLE) -o $@ -u /18/137259/90022.png
+# castle (ruined) (like upstream)
+test-castle4.png: $(XMLSTYLE)
+	./scripts/render_single_tile.py -s $(XMLSTYLE) -o $@ -u /18/137144/90174.png
+
 # camping/caravaning
 test-camp-caravan.png: $(XMLSTYLE)
 	./scripts/render_single_tile.py -s $(XMLSTYLE) -o $@ -u /17/68658/44952.png
@@ -96,7 +104,7 @@ test-backcountry.png: $(XMLSTYLE)
 	./scripts/render_single_tile.py -s $(XMLSTYLE) -o $@ -u /19/274268/181238.png
 # Dönerbude
 test-kebab.png:
-	./scripts/render_single_tile.py -s $(XMLSTYLE) -o $@ -u /19/274422/180021.png
+	./scripts/render_single_tile.py -s $(XMLSTYLE) -o $@ -u /19/274475/180053.png
 # sport pitches
 test-sport.png:
 	./scripts/render_single_tile.py -s $(XMLSTYLE) -o $@ -u /16/34311/22505.png
