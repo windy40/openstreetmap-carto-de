@@ -359,7 +359,7 @@
         [zoom >= 17] { line-width: @primary-width-z17; }
         [zoom >= 18] { line-width: @primary-width-z18; }
         [zoom >= 19] { line-width: @primary-width-z19; }
-        #roads {
+        #roads-casing {
           line-join: round;
           line-cap: round;
         }
@@ -1158,7 +1158,7 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
         [construction = 'cycleway'],
         [construction = 'bridleway'],
         [construction = 'path'],
-        [construction = 'track'], 
+        [construction = 'track'],
         [construction = 'steps']{
           [zoom < 14] {
             line-width: 0;
@@ -2436,7 +2436,7 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
         /* Offset name on traffic_signals on zoomlevels where they are displayed
         in order not to hide the text */
         [highway = 'traffic_signals'] {
-          text-dy: 14;
+          text-dy: 9;
         }
       }
     }
