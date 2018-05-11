@@ -253,7 +253,7 @@
       [int_tunnel = 'yes'] { text-min-distance: 200; }
     }
 
-    [waterway = 'canal'][zoom >= 13][zoom < 14] {
+    [waterway = 'canal'][zoom >= 13] {
       text-name: "[name]";
       text-face-name: @oblique-fonts;
       text-halo-radius: @standard-halo-radius;
@@ -289,17 +289,6 @@
         text-halo-fill: @standard-halo-fill;
       }
     }
-
-    [waterway = 'canal'][zoom >= 14] {
-      text-name: "[name]";
-      text-size: 10;
-      text-fill: @water-text;
-      text-placement: line;
-      text-face-name: @oblique-fonts;
-      text-halo-radius: @standard-halo-radius;
-      text-halo-fill: @standard-halo-fill;
-    }
-
   }
 }
 
