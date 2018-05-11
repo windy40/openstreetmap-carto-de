@@ -4,6 +4,8 @@ TEMPFILE := $(shell mktemp -u)
 
 XMLSTYLE := osm-de.xml
 
+all: $(XMLSTYLE) osm-hrb.xml
+
 $(XMLSTYLE): *.mss project.mml
 	carto -a $(MAPNIK_API) project.mml > $(TEMPFILE)
 	mv $(TEMPFILE) $@
