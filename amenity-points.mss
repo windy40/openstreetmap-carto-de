@@ -758,7 +758,7 @@
     }
 
     [shop = 'bakery'][zoom >= 18] {
-      marker-file: url('symbols/shop/bakery.svg');
+      marker-file: url('symbols-de/bakery.svg');
     }
 
     [shop = 'beauty'][zoom >= 18] {
