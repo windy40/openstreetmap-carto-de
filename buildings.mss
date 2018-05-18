@@ -10,6 +10,9 @@
 
 #buildings {
   [zoom >= 13] {
+    [building = 'greenhouse'] {
+       polygon-opacity: 0;
+    }
     polygon-fill: @building-low-zoom;
     polygon-clip: false;
     [zoom >= 15] {
