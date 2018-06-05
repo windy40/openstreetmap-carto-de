@@ -31,10 +31,28 @@ psql -d osm -f views_osmde/view-polygon.sql
 psql -d osm -f views_osmde/view-roads.sql
 ```
 
-For compatibility reasons, the views are given the same name as the default
-osm2pgsql tables used in upstream openstreetmap carto style.
+For convenience reasons you can also use the provided shell-script for
+the generation of the views as follows:
 
-An unchanged version of the upstream style will work fine using this
+```
+./views_osmde/apply-views.sh osm de
+
+```
+
+An advantage of using this script is the langage option which will change
+the views for the given target language. For using english as your target
+language just call the script as follows:
+
+
+```
+./views_osmde/apply-views.sh osm en
+
+```
+
+For compatibility reasons, the views are given the same name as the default
+osm2pgsql tables used in upstream openstreetmap carto style!
+
+Thus an unchanged version of the upstream style will work fine using this
 slightly different database layout.
 
 Starting from openstreetmap-carto 4.x this style will also work using the
