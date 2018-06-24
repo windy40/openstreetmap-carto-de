@@ -865,6 +865,39 @@
       }
     }
 
+    // GERMAN STYLE: track casing starting from zoom 15 is drawn like service
+    // but with track-fill color as casing color
+    // zoom 13 and 14 is "casing" only
+    [feature = 'highway_track'][int_surface = 'paved'],
+    [feature = 'highway_track'][tracktype = 'grade1'] {
+      [zoom >= 13] {
+        line-color: @track-fill;
+        line-width: @track-width-z13;
+        [zoom >= 15] { line-width: @service-width-z14; }
+        [zoom >= 16] { line-width: @service-width-z16; }
+        [zoom >= 17] { line-width: @service-width-z17; }
+        [zoom >= 18] { line-width: @service-width-z18; }
+        [zoom >= 19] { line-width: @service-width-z19; }
+        #roads-casing {
+          line-join: round;
+          line-cap: round;
+        }
+        #tunnels {
+          line-dasharray: 4,2;
+        }
+        #bridges {
+          line-color: @track-fill;
+          line-join: round;
+          line-width: @track-width-z13;
+         [zoom >= 15] { line-width: 2* @casing-width-z14 + @service-width-z14; }
+          [zoom >= 16] { line-width: 2* @casing-width-z16 + @service-width-z16; }
+          [zoom >= 17] { line-width: 2* @casing-width-z17 + @service-width-z17; }
+          [zoom >= 18] { line-width: 2* @casing-width-z18 + @service-width-z18; }
+          [zoom >= 19] { line-width: 2* @casing-width-z19 + @service-width-z19; }
+        }
+      }
+    }
+
     [feature = 'highway_pedestrian'] {
       [zoom >= 13] {
         line-color: @pedestrian-casing;
@@ -1016,7 +1049,7 @@
       }
     }
 
-    [feature = 'highway_track'] {
+    [feature = 'highway_track'][tracktype != 'grade1'][int_surface != 'paved'] {
       #bridges {
         [zoom >= 13][access != 'no'] {
           line-color: @bridge-casing;
@@ -1244,7 +1277,7 @@
       }
     }
 
-    [feature = 'highway_track'] {
+    [feature = 'highway_track'][tracktype != 'grade1'][int_surface != 'paved'] {
       /* We don't set opacity here, so it's 1.0. Aside from that, it's basically a copy of roads-fill::background in the track part of ::fill */
       #bridges {
         [zoom >= 13][access != 'no'] {
@@ -1838,7 +1871,7 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
     }
 
     // z_order 110
-    [feature = 'highway_track'] {
+    [feature = 'highway_track'][tracktype != 'grade1'][int_surface != 'paved'] {
       [zoom >= 13][access != 'no'],
       [zoom >= 15] {
         /* The white casing that you mainly see against forests and other dark features */
@@ -1953,6 +1986,32 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
             [zoom >= 18] { line-width: @minor-service-width-z18 - 2 * @bridge-casing-width-z18; }
             [zoom >= 19] { line-width: @minor-service-width-z19 - 2 * @bridge-casing-width-z19; }
           }
+        }
+      }
+    }
+
+    // track grade1 fill in service-fill color (starting from z15)
+    [feature = 'highway_track'][int_surface = 'paved'],
+    [feature = 'highway_track'][tracktype = 'grade1'] {
+      [zoom >= 15] {
+        line-color: @service-fill;
+        line-width: @service-width-z14 - 2 * @casing-width-z14;
+        [zoom >= 16] { line-width: @service-width-z16 - 2 * @casing-width-z16; }
+        [zoom >= 17] { line-width: @service-width-z17 - 2 * @casing-width-z17; }
+        [zoom >= 18] { line-width: @service-width-z18 - 2 * @casing-width-z18; }
+        [zoom >= 19] { line-width: @service-width-z19 - 2 * @casing-width-z19; }
+        line-join: round;
+        line-cap: round;
+
+        #tunnels {
+          line-color: darken(white, 5%);
+        }
+        #bridges {
+          line-width: @service-width-z14 - 2 * @bridge-casing-width-z14;
+          [zoom >= 16] { line-width: @service-width-z16 - 2 * @bridge-casing-width-z16; }
+          [zoom >= 17] { line-width: @service-width-z17 - 2 * @bridge-casing-width-z17; }
+          [zoom >= 18] { line-width: @service-width-z18 - 2 * @bridge-casing-width-z18; }
+          [zoom >= 19] { line-width: @service-width-z19 - 2 * @bridge-casing-width-z19; }
         }
       }
     }
