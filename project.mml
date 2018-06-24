@@ -1152,6 +1152,7 @@ Layer:
             int_surface,
             access,
             construction,
+            proposed_construction_minor,
             service,
             link,
             layernotnull
@@ -1174,6 +1175,9 @@ Layer:
                   ELSE NULL
                 END AS access,
                 construction,
+                case when proposed in ('residential','unclassified','road','living_street') or
+                          construction in ('residential','unclassified','road','living_street')
+                then 'yes' else 'no' end as proposed_construction_minor,
                 CASE
                   WHEN service IN ('parking_aisle', 'drive-through', 'driveway') OR leisure IN ('slipway') THEN 'INT-minor'::text
                   ELSE 'INT-normal'::text
@@ -1212,6 +1216,9 @@ Layer:
                   ELSE NULL
                 END AS access,
                 construction,
+                case when proposed in ('residential','unclassified','road','living_street') or
+                          construction in ('residential','unclassified','road','living_street')
+                then 'yes' else 'no' end as proposed_construction_minor,
                 CASE WHEN service IN ('parking_aisle', 'drive-through', 'driveway') OR leisure IN ('slipway') THEN 'INT-minor'::text
                   ELSE 'INT-normal'::text END AS service,
                 'no' AS link,
@@ -1233,6 +1240,7 @@ Layer:
                 NULL AS surface,
                 NULL AS access,
                 NULL AS construction,
+                NULL AS proposed_construction_minor,
                 NULL AS service,
                 NULL AS link,
                 NULL AS layernotnull,

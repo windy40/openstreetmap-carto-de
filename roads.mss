@@ -334,8 +334,314 @@
 @shield-clip: false;
 @shield-motorway-font: @bold-fonts;
 
+@proposed_casing_factor: 2.0;
+@proposed_casing_factor_lowzoom: 1.0;
+
 #roads-casing, #bridges, #tunnels {
   ::casing {
+    /*
+
+      In German style we render highway=proposed as "casing only" simulated by offset and
+      highway=construction with an additional striped opaque fill.
+      Casing width is @proposed_casing_factor the width of normal road casing.
+
+    */
+    [feature = 'highway_proposed'][proposed =~ ".*motorway.*"]                 
+    ,[feature = 'highway_construction'][construction =~ ".*motorway.*"]{
+      [zoom >= 12]{
+        a/line-join:round;
+        a/line-width: @proposed_casing_factor_lowzoom*@major-casing-width-z12;
+        a/line-color:@motorway-fill;
+        a/line-offset:0.5 * (@motorway-width-z12 - @proposed_casing_factor_lowzoom*@major-casing-width-z12);
+        b/line-join:round;
+        b/line-width: @proposed_casing_factor_lowzoom*@major-casing-width-z12;
+        b/line-color:@motorway-fill;
+        b/line-offset:-0.5 * (@motorway-width-z12 - @proposed_casing_factor_lowzoom*@major-casing-width-z12);
+       [zoom >= 13]{
+          a/line-width: @proposed_casing_factor*@major-casing-width-z13;
+          a/line-offset: 0.5 * (@motorway-width-z13 - @proposed_casing_factor*@major-casing-width-z13);
+          b/line-width: @proposed_casing_factor*@major-casing-width-z13;
+          b/line-offset:-0.5 * (@motorway-width-z13 - @proposed_casing_factor*@major-casing-width-z13);
+        }
+       [zoom >= 15]{
+          a/line-width: @proposed_casing_factor*@major-casing-width-z15;
+          a/line-offset: 0.5 * (@motorway-width-z15 - @proposed_casing_factor*@major-casing-width-z15);
+          b/line-width: @proposed_casing_factor*@major-casing-width-z15;
+          b/line-offset:-0.5 * (@motorway-width-z15 - @proposed_casing_factor*@major-casing-width-z15);
+        }
+       [zoom >= 17]{
+          a/line-width: @proposed_casing_factor*@major-casing-width-z17;
+          a/line-offset: 0.5 * (@motorway-width-z17 - @proposed_casing_factor*@major-casing-width-z17);
+          b/line-width: @proposed_casing_factor*@major-casing-width-z17;
+          b/line-offset:-0.5 * (@motorway-width-z17 - @proposed_casing_factor*@major-casing-width-z17);
+        }
+       [zoom >= 18]{
+          a/line-width: @proposed_casing_factor*@major-casing-width-z18;
+          a/line-offset: 0.5 * (@motorway-width-z18 - @proposed_casing_factor*@major-casing-width-z18);
+          b/line-width: @proposed_casing_factor*@major-casing-width-z18;
+          b/line-offset:-0.5 * (@motorway-width-z18 - @proposed_casing_factor*@major-casing-width-z18);
+        }
+       [zoom >= 19]{
+          a/line-width: @proposed_casing_factor*@major-casing-width-z19;
+          a/line-offset: 0.5 * (@motorway-width-z19 - @proposed_casing_factor*@major-casing-width-z19);
+          b/line-width: @proposed_casing_factor*@major-casing-width-z19;
+          b/line-offset:-0.5 * (@motorway-width-z19 - @proposed_casing_factor*@major-casing-width-z19);
+        }
+      }
+    }
+
+    [feature = 'highway_proposed'][proposed =~ ".*trunk.*"]                
+    ,[feature = 'highway_construction'][construction =~ ".*trunk.*"]{
+      [zoom >= 12]{
+        a/line-join:round;
+        a/line-width: @proposed_casing_factor_lowzoom*@major-casing-width-z12;
+        a/line-color:@trunk-fill;
+        a/line-offset:0.5 * (@trunk-width-z12 - @proposed_casing_factor_lowzoom*@major-casing-width-z12);
+        b/line-join:round;
+        b/line-width: @proposed_casing_factor_lowzoom*@major-casing-width-z12;
+        b/line-color:@trunk-fill;
+        b/line-offset:-0.5 * (@trunk-width-z12 - @proposed_casing_factor_lowzoom*@major-casing-width-z12);
+       [zoom >= 13]{
+          a/line-width: @proposed_casing_factor*@major-casing-width-z13;
+          a/line-offset: 0.5 * (@trunk-width-z13 - @proposed_casing_factor*@major-casing-width-z13);
+          b/line-width: @proposed_casing_factor*@major-casing-width-z13;
+          b/line-offset:-0.5 * (@trunk-width-z13 - @proposed_casing_factor*@major-casing-width-z13);
+        }
+       [zoom >= 15]{
+          a/line-width: @proposed_casing_factor*@major-casing-width-z15;
+          a/line-offset: 0.5 * (@trunk-width-z15 - @proposed_casing_factor*@major-casing-width-z15);
+          b/line-width: @proposed_casing_factor*@major-casing-width-z15;
+          b/line-offset:-0.5 * (@trunk-width-z15 - @proposed_casing_factor*@major-casing-width-z15);
+        }
+       [zoom >= 17]{
+          a/line-width: @proposed_casing_factor*@major-casing-width-z17;
+          a/line-offset: 0.5 * (@trunk-width-z17 - @proposed_casing_factor*@major-casing-width-z17);
+          b/line-width: @proposed_casing_factor*@major-casing-width-z17;
+          b/line-offset:-0.5 * (@trunk-width-z17 - @proposed_casing_factor*@major-casing-width-z17);
+        }
+       [zoom >= 18]{
+          a/line-width: @proposed_casing_factor*@major-casing-width-z18;
+          a/line-offset: 0.5 * (@trunk-width-z18 - @proposed_casing_factor*@major-casing-width-z18);
+          b/line-width: @proposed_casing_factor*@major-casing-width-z18;
+          b/line-offset:-0.5 * (@trunk-width-z18 - @proposed_casing_factor*@major-casing-width-z18);
+        }
+       [zoom >= 19]{
+          a/line-width: @proposed_casing_factor*@major-casing-width-z19;
+          a/line-offset: 0.5 * (@trunk-width-z19 - @proposed_casing_factor*@major-casing-width-z19);
+          b/line-width: @proposed_casing_factor*@major-casing-width-z19;
+          b/line-offset:-0.5 * (@trunk-width-z19 - @proposed_casing_factor*@major-casing-width-z19);
+        }
+      }
+    }
+
+    [feature = 'highway_proposed'][proposed =~ ".*primary.*"]                  
+    ,[feature = 'highway_construction'][construction =~ ".*primary.*"]{
+      [zoom >= 12]{
+        a/line-join:round;
+        a/line-width: @proposed_casing_factor_lowzoom*@major-casing-width-z12;
+        a/line-color:@primary-fill;
+        a/line-offset:0.5 * (@primary-width-z12 - @proposed_casing_factor_lowzoom*@major-casing-width-z12);
+        b/line-join:round;
+        b/line-width: @proposed_casing_factor_lowzoom*@major-casing-width-z12;
+        b/line-color:@primary-fill;
+        b/line-offset:-0.5 * (@primary-width-z12 - @proposed_casing_factor_lowzoom*@major-casing-width-z12);
+       [zoom >= 13]{
+          a/line-width: @proposed_casing_factor*@major-casing-width-z13;
+          a/line-offset: 0.5 * (@primary-width-z13 - @proposed_casing_factor*@major-casing-width-z13);
+          b/line-width: @proposed_casing_factor*@major-casing-width-z13;
+          b/line-offset:-0.5 * (@primary-width-z13 - @proposed_casing_factor*@major-casing-width-z13);
+        }
+       [zoom >= 15]{
+          a/line-width: @proposed_casing_factor*@major-casing-width-z15;
+          a/line-offset: 0.5 * (@primary-width-z15 - @proposed_casing_factor*@major-casing-width-z15);
+          b/line-width: @proposed_casing_factor*@major-casing-width-z15;
+          b/line-offset:-0.5 * (@primary-width-z15 - @proposed_casing_factor*@major-casing-width-z15);
+        }
+       [zoom >= 17]{
+          a/line-width: @proposed_casing_factor*@major-casing-width-z17;
+          a/line-offset: 0.5 * (@primary-width-z17 - @proposed_casing_factor*@major-casing-width-z17);
+          b/line-width: @proposed_casing_factor*@major-casing-width-z17;
+          b/line-offset:-0.5 * (@primary-width-z17 - @proposed_casing_factor*@major-casing-width-z17);
+        }
+       [zoom >= 18]{
+          a/line-width: @proposed_casing_factor*@major-casing-width-z18;
+          a/line-offset: 0.5 * (@primary-width-z18 - @proposed_casing_factor*@major-casing-width-z18);
+          b/line-width: @proposed_casing_factor*@major-casing-width-z18;
+          b/line-offset:-0.5 * (@primary-width-z18 - @proposed_casing_factor*@major-casing-width-z18);
+        }
+       [zoom >= 19]{
+          a/line-width: @proposed_casing_factor*@major-casing-width-z19;
+          a/line-offset: 0.5 * (@primary-width-z19 - @proposed_casing_factor*@major-casing-width-z19);
+          b/line-width: @proposed_casing_factor*@major-casing-width-z19;
+          b/line-offset:-0.5 * (@primary-width-z19 - @proposed_casing_factor*@major-casing-width-z19);
+        }
+      }
+    }
+
+    [feature = 'highway_proposed'][proposed =~ ".*secondary.*"]               
+    ,[feature = 'highway_construction'][construction =~ ".*secondary.*"]{
+      [zoom >= 12]{
+        a/line-join:round;
+        a/line-width: @proposed_casing_factor_lowzoom*@secondary-casing-width-z12;
+        a/line-color:@secondary-fill;
+        a/line-offset:0.5 * (@secondary-width-z12 - @proposed_casing_factor_lowzoom*@secondary-casing-width-z12);
+        b/line-join:round;
+        b/line-width: @proposed_casing_factor_lowzoom*@secondary-casing-width-z12;
+        b/line-color:@secondary-fill;
+        b/line-offset:-0.5 * (@secondary-width-z12 - @proposed_casing_factor_lowzoom*@secondary-casing-width-z12);
+       [zoom >= 13]{
+          a/line-width: @proposed_casing_factor*@secondary-casing-width-z13;
+          a/line-offset: 0.5 * (@secondary-width-z13 - @proposed_casing_factor*@secondary-casing-width-z13);
+          b/line-width: @proposed_casing_factor*@secondary-casing-width-z13;
+          b/line-offset:-0.5 * (@secondary-width-z13 - @proposed_casing_factor*@secondary-casing-width-z13);
+        }
+       [zoom >= 14]{
+          a/line-width: @proposed_casing_factor*@secondary-casing-width-z14;
+          a/line-offset: 0.5 * (@secondary-width-z14 - @proposed_casing_factor*@secondary-casing-width-z14);
+          b/line-width: @proposed_casing_factor*@secondary-casing-width-z14;
+          b/line-offset:-0.5 * (@secondary-width-z14 - @proposed_casing_factor*@secondary-casing-width-z14);
+        }
+       [zoom >= 15]{
+          a/line-width: @proposed_casing_factor*@secondary-casing-width-z15;
+          a/line-offset: 0.5 * (@secondary-width-z15 - @proposed_casing_factor*@secondary-casing-width-z15);
+          b/line-width: @proposed_casing_factor*@secondary-casing-width-z15;
+          b/line-offset:-0.5 * (@secondary-width-z15 - @proposed_casing_factor*@secondary-casing-width-z15);
+        }
+       [zoom >= 16]{
+          a/line-width: @proposed_casing_factor*@secondary-casing-width-z16;
+          a/line-offset: 0.5 * (@secondary-width-z16 - @proposed_casing_factor*@secondary-casing-width-z16);
+          b/line-width: @proposed_casing_factor*@secondary-casing-width-z16;
+          b/line-offset:-0.5 * (@secondary-width-z16 - @proposed_casing_factor*@secondary-casing-width-z16);
+        }
+       [zoom >= 17]{
+          a/line-width: @proposed_casing_factor*@secondary-casing-width-z17;
+          a/line-offset: 0.5 * (@secondary-width-z17 - @proposed_casing_factor*@secondary-casing-width-z17);
+          b/line-width: @proposed_casing_factor*@secondary-casing-width-z17;
+          b/line-offset:-0.5 * (@secondary-width-z17 - @proposed_casing_factor*@secondary-casing-width-z17);
+        }
+       [zoom >= 18]{
+          a/line-width: @proposed_casing_factor*@secondary-casing-width-z18;
+          a/line-offset: 0.5 * (@secondary-width-z18 - @proposed_casing_factor*@secondary-casing-width-z18);
+          b/line-width: @proposed_casing_factor*@secondary-casing-width-z18;
+          b/line-offset:-0.5 * (@secondary-width-z18 - @proposed_casing_factor*@secondary-casing-width-z18);
+        }
+       [zoom >= 19]{
+          a/line-width: @proposed_casing_factor*@secondary-casing-width-z19;
+          a/line-offset: 0.5 * (@secondary-width-z19 - @proposed_casing_factor*@secondary-casing-width-z19);
+          b/line-width: @proposed_casing_factor*@secondary-casing-width-z19;
+          b/line-offset:-0.5 * (@secondary-width-z19 - @proposed_casing_factor*@secondary-casing-width-z19);
+        }
+      }
+    }
+
+    [feature = 'highway_proposed'][proposed =~ ".*tertiary.*"]               
+    ,[feature = 'highway_construction'][construction =~ ".*tertiary.*"]{
+      [zoom >= 12]{
+        a/line-join:round;
+        a/line-width: @proposed_casing_factor_lowzoom*@casing-width-z12;
+        a/line-color:@tertiary-fill;
+        a/line-offset:0.5 * (@tertiary-width-z12 - @proposed_casing_factor_lowzoom*@casing-width-z12);
+        b/line-join:round;
+        b/line-width: @proposed_casing_factor_lowzoom*@casing-width-z12;
+        b/line-color:@tertiary-fill;
+        b/line-offset:-0.5 * (@tertiary-width-z12 - @proposed_casing_factor_lowzoom*@casing-width-z12);
+       [zoom >= 13]{
+          a/line-width: @proposed_casing_factor*@casing-width-z13;
+          a/line-offset: 0.5 * (@tertiary-width-z13 - @proposed_casing_factor*@casing-width-z13);
+          b/line-width: @proposed_casing_factor*@casing-width-z13;
+          b/line-offset:-0.5 * (@tertiary-width-z13 - @proposed_casing_factor*@casing-width-z13);
+        }
+       [zoom >= 14]{
+          a/line-width: @proposed_casing_factor*@casing-width-z14;
+          a/line-offset: 0.5 * (@tertiary-width-z14 - @proposed_casing_factor*@casing-width-z14);
+          b/line-width: @proposed_casing_factor*@casing-width-z14;
+          b/line-offset:-0.5 * (@tertiary-width-z14 - @proposed_casing_factor*@casing-width-z14);
+        }
+       [zoom >= 15]{
+          a/line-width: @proposed_casing_factor*@casing-width-z15;
+          a/line-offset: 0.5 * (@tertiary-width-z15 - @proposed_casing_factor*@casing-width-z15);
+          b/line-width: @proposed_casing_factor*@casing-width-z15;
+          b/line-offset:-0.5 * (@tertiary-width-z15 - @proposed_casing_factor*@casing-width-z15);
+        }
+       [zoom >= 16]{
+          a/line-width: @proposed_casing_factor*@casing-width-z16;
+          a/line-offset: 0.5 * (@tertiary-width-z16 - @proposed_casing_factor*@casing-width-z16);
+          b/line-width: @proposed_casing_factor*@casing-width-z16;
+          b/line-offset:-0.5 * (@tertiary-width-z16 - @proposed_casing_factor*@casing-width-z16);
+        }
+       [zoom >= 17]{
+          a/line-width: @proposed_casing_factor*@casing-width-z17;
+          a/line-offset: 0.5 * (@tertiary-width-z17 - @proposed_casing_factor*@casing-width-z17);
+          b/line-width: @proposed_casing_factor*@casing-width-z17;
+          b/line-offset:-0.5 * (@tertiary-width-z17 - @proposed_casing_factor*@casing-width-z17);
+        }
+       [zoom >= 18]{
+          a/line-width: @proposed_casing_factor*@casing-width-z18;
+          a/line-offset: 0.5 * (@tertiary-width-z18 - @proposed_casing_factor*@casing-width-z18);
+          b/line-width: @proposed_casing_factor*@casing-width-z18;
+          b/line-offset:-0.5 * (@tertiary-width-z18 - @proposed_casing_factor*@casing-width-z18);
+        }
+       [zoom >= 19]{
+          a/line-width: @proposed_casing_factor*@casing-width-z19;
+          a/line-offset: 0.5 * (@tertiary-width-z19 - @proposed_casing_factor*@casing-width-z19);
+          b/line-width: @proposed_casing_factor*@casing-width-z19;
+          b/line-offset:-0.5 * (@tertiary-width-z19 - @proposed_casing_factor*@casing-width-z19);
+        }
+      }
+    }
+
+    [feature = 'highway_proposed'][proposed_construction_minor = 'yes'] 
+    ,[feature = 'highway_construction'][proposed_construction_minor = 'yes']{
+      [zoom >= 13]{
+        a/line-join:round;
+        a/line-width: @proposed_casing_factor*@casing-width-z13;
+        a/line-color:@residential-fill;
+        a/line-offset:0.5 * (@residential-width-z13 - @proposed_casing_factor*@casing-width-z13);
+        a/line-opacity:0.3;
+        b/line-join:round;
+        b/line-width: @proposed_casing_factor*@casing-width-z13;
+        b/line-color:@residential-fill;
+        b/line-offset:-0.5 * (@residential-width-z13 - @proposed_casing_factor*@casing-width-z13); 
+        b/line-opacity:0.3;
+        }
+      [zoom >= 14]{
+        a/line-width: @proposed_casing_factor*@casing-width-z14;
+        a/line-offset:0.5 * (@residential-width-z14 - @proposed_casing_factor*@casing-width-z14);
+        b/line-width: @proposed_casing_factor*@casing-width-z14;
+        b/line-offset:-0.5 * (@residential-width-z14 - @proposed_casing_factor*@casing-width-z14); 
+        }
+      [zoom >= 15]{         
+        a/line-width: @proposed_casing_factor*@casing-width-z15;
+        a/line-offset:0.5 * (@residential-width-z15 - @proposed_casing_factor*@casing-width-z15);
+        b/line-width: @proposed_casing_factor*@casing-width-z15;
+        b/line-offset:-0.5 * (@residential-width-z15 - @proposed_casing_factor*@casing-width-z15);
+        }
+      [zoom >= 16]{         
+        a/line-width: @proposed_casing_factor*@casing-width-z16;
+        a/line-offset:0.5 * (@residential-width-z16 - @proposed_casing_factor*@casing-width-z16);
+        b/line-width: @proposed_casing_factor*@casing-width-z16;
+        b/line-offset:-0.5 * (@residential-width-z16 - @proposed_casing_factor*@casing-width-z16);
+        }
+      [zoom >= 17]{         
+        a/line-width: @proposed_casing_factor*@casing-width-z17;
+        a/line-offset:0.5 * (@residential-width-z17 - @proposed_casing_factor*@casing-width-z17);
+        b/line-width: @proposed_casing_factor*@casing-width-z17;
+        b/line-offset:-0.5 * (@residential-width-z17 - @proposed_casing_factor*@casing-width-z17);
+        }
+      [zoom >= 18]{
+        a/line-width: @proposed_casing_factor*@casing-width-z18;
+        a/line-offset:0.5 * (@residential-width-z18 - @proposed_casing_factor*@casing-width-z18);
+        b/line-width: @proposed_casing_factor*@casing-width-z18;
+        b/line-offset:-0.5 * (@residential-width-z18 - @proposed_casing_factor*@casing-width-z18);
+        }
+      [zoom >= 19]{
+        a/line-width: @proposed_casing_factor*@casing-width-z19;
+        a/line-offset:0.5 * (@residential-width-z19 - @proposed_casing_factor*@casing-width-z19);
+        b/line-width: @proposed_casing_factor*@casing-width-z19;
+        b/line-offset:-0.5 * (@residential-width-z19 - @proposed_casing_factor*@casing-width-z19);
+        }
+    }
+
     [zoom >= 12] {
       [feature = 'highway_motorway'] {
         line-width: @motorway-width-z12;
@@ -1136,93 +1442,150 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
 
   // z_order 10
   ::construction-fill {
-    /*
-     * The construction rules for small roads are strange, since if construction is null its assumed that
-     * it's a more major road. The line-width = 0 could be removed by playing with the query to set a construction
-     * string for non-small roads.
-     *
-     * Also note that these rules are quite sensitive to re-ordering, since the instances end up swapping round
-     * (and then the dashes appear below the fills). See
-     * https://github.com/gravitystorm/openstreetmap-carto/issues/23
-     * https://github.com/mapbox/carto/issues/235
-     * https://github.com/mapbox/carto/issues/237
-     */
-    [feature = 'highway_construction'] {
-      [zoom >= 12] {
-        line-width: 2;
-        line-color: #9cc;
+    [feature = 'highway_construction'][construction =~ ".*motorway.*"]{
+      [zoom >= 12]{
+        a/line-join:round;
+        b/line-join:round;
+        a/line-dasharray: 25,10;
+        b/line-dasharray: 25,10;
+        a/line-width: 5;
+        a/line-color:@motorway-construction-fill;
+        a/line-opacity:0.5;
+        b/line-width:1;
+        b/line-color:@motorway-construction-overlay;
+        b/line-opacity:0.75;
 
-        [construction = 'motorway'],
-        [construction = 'motorway_link'] {
-          line-color: @motorway-fill;
+       [zoom >= 13]{
+        a/line-width: 5.5;
+        b/line-width:1.25
         }
-        [construction = 'trunk'],
-        [construction = 'trunk_link'] {
-          line-color: @trunk-fill;
+        [zoom >= 15]{
+        
+        a/line-width: 8.5;
+        b/line-width:1.5;
         }
-        [construction = 'primary'],
-        [construction = 'primary_link'] {
-          line-color: @primary-fill;
-        }
-        [construction = 'secondary'],
-        [construction = 'secondary_link'] {
-          line-color: @secondary-fill;
-        }
-        [construction = 'tertiary'],
-        [construction = 'tertiary_link'],
-        [construction = 'residential'],
-        [construction = 'unclassified'],
-        [construction = 'living_street'] {
-          line-color: @residential-construction;
-          [zoom < 13] {
-            line-width: 0;
-            b/line-width: 0;
-          }
-          [zoom >= 13][zoom < 14] {
-            line-width: 3;
-            b/line-width: 2;
-            b/line-dasharray: 5,3;
-          }
-        }
-        [construction = 'service'] {
-          line-color: @service-construction;
-          [zoom < 14] {
-            line-width: 0;
-            b/line-width: 0;
-          }
-        }
-        b/line-width: 2;
-        b/line-dasharray: 4,2;
-        b/line-color: white;
-        [zoom >= 13] {
-          line-width: 4;
-          b/line-width: 3.5;
-          b/line-dasharray: 6,4;
-        }
-        [zoom >= 16] {
-          line-width: 8;
-          b/line-width: 7;
-          b/line-dasharray: 8,6;
-        }
-        [construction = 'footway'],
-        [construction = 'cycleway'],
-        [construction = 'bridleway'],
-        [construction = 'path'],
-        [construction = 'track'],
-        [construction = 'steps']{
-          [zoom < 14] {
-            line-width: 0;
-            b/line-width: 0;
-          }
-          line-color: white;
-          line-width: 3;
-          line-opacity: 0.4;
-          b/line-width: 1.2;
-          b/line-color: #69f;
-          b/line-dasharray: 2,6;
+        [zoom >= 17]{
+        
+        a/line-width: 10.5;
+        b/line-width:2;
         }
       }
     }
+
+    [feature = 'highway_construction'][construction =~ ".*trunk.*"]{
+       [zoom >= 12]{
+        a/line-join:round;
+        b/line-join:round;
+        a/line-dasharray: 25,10;
+        b/line-dasharray: 25,10;
+        a/line-width: 5;
+        a/line-color:@trunk-construction-fill;
+        a/line-opacity:0.5;
+        b/line-width:1;
+        b/line-color:@trunk-construction-overlay;
+        b/line-opacity:0.75;
+
+       [zoom >= 13]{
+        a/line-width: 5.5;
+        b/line-width:1.25
+        }
+        [zoom >= 15]{
+        
+        a/line-width: 8.5;
+        b/line-width:1.5;
+        }
+        [zoom >= 17]{
+        
+        a/line-width: 10.5;
+        b/line-width:2;
+        }
+      }
+    }
+
+    [feature = 'highway_construction'][construction =~ ".*primary.*"]{
+       [zoom >= 12]{
+        line-join:round;
+        line-dasharray: 30,15;
+        line-width: 5;
+        line-color:@primary-construction-fill;
+        line-opacity:0.75;
+       
+       [zoom >= 13]{
+        line-width: 5.5;
+        
+        }
+        [zoom >= 15]{
+        
+        line-width: 8.5;
+        
+        }
+        [zoom >= 17]{
+        
+        line-width: 10.5;
+        
+        }
+      }
+    }
+
+    [feature = 'highway_construction'][construction =~ ".*secondary.*"]{
+       [zoom >= 12]{
+        line-join:round;
+        line-dasharray: 30,15;
+        line-width: 5;
+        line-color:@secondary-construction-fill;
+        line-opacity:0.75;
+         
+         
+       [zoom >= 13]{
+        line-width: 5.5;
+        
+        }
+        [zoom >= 15]{
+        
+        line-width: 8.5;
+        
+        }
+        [zoom >= 17]{
+          
+        line-width: 10.5;
+          
+        }
+      }
+    }
+
+    [feature = 'highway_construction'][construction =~ ".*tertiary.*"]{
+       [zoom >= 12]{
+        line-join:round;
+        line-dasharray: 20,8;
+        line-width: @tertiary-width-z12 - 2 * @casing-width-z12;
+        line-color:@tertiary-construction-fill;
+        line-opacity:0.5;
+        [zoom >= 13] { line-width: @tertiary-width-z14 - 2 * @casing-width-z13; }
+	[zoom >= 14] { line-width: @tertiary-width-z14 - 2 * @casing-width-z14; }
+        [zoom >= 15] { line-width: @tertiary-width-z15 - 2 * @casing-width-z15; }
+        [zoom >= 16] { line-width: @tertiary-width-z16 - 2 * @casing-width-z16; }
+        [zoom >= 17] { line-width: @tertiary-width-z17 - 2 * @casing-width-z17; }
+        [zoom >= 18] { line-width: @tertiary-width-z18 - 2 * @casing-width-z18; }
+        [zoom >= 19] { line-width: @tertiary-width-z19 - 2 * @casing-width-z19; }
+       }
+    }
+
+    [feature = 'highway_construction'][proposed_construction_minor = 'yes']{
+       [zoom >= 13]{
+        line-join:round;
+        line-dasharray: 20,8;
+        line-width: @residential-width-z13 - 2 * @casing-width-z13;
+        line-color:@unimportant-construction-fill;
+        line-opacity:0.5;
+        [zoom >= 14] { line-width: @residential-width-z14 - 2 * @casing-width-z14; }
+        [zoom >= 15] { line-width: @residential-width-z15 - 2 * @casing-width-z15; }
+        [zoom >= 16] { line-width: @residential-width-z16 - 2 * @casing-width-z16; }
+        [zoom >= 17] { line-width: @residential-width-z17 - 2 * @casing-width-z17; }
+        [zoom >= 18] { line-width: @residential-width-z18 - 2 * @casing-width-z18; }
+        [zoom >= 19] { line-width: @residential-width-z19 - 2 * @casing-width-z19; }
+       }
+    }
+
   }
 
   // z_order 90 (platform)
