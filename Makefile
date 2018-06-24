@@ -117,7 +117,7 @@ test-l10n1.png:
 test-l10n2.png:
 	./scripts/render_single_tile.py -s $(XMLSTYLE) -o $@ -u /10/792/483.png
 test-foot-cycle-path-track.png:
-	./scripts/render_single_tile.py -s $(XMLSTYLE) -o $@ -u /17/68595/45003.png
+	./scripts/render_single_tile.py -s $(XMLSTYLE) -o $@ -u /17/68596/45003.png
 test-living-street.png:
 	./scripts/render_single_tile.py -s $(XMLSTYLE) -o $@ -u /17/68619/45014.png
 test-proposed.png:
