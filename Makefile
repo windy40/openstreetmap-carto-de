@@ -28,7 +28,7 @@ test: test-z03.png test-z04.png test-z05.png test-z06.png test-z07.png test-z08.
 	test-castle4.png test-camp-caravan.png test-campsite.png test-backcountry.png test-kebab.png \
 	test-sport.png test-l10n1.png test-l10n2.png test-foot-cycle-path-track.png \
 	test-living-street.png test-proposed.png test-coast1.png test-coast2.png test-lake-ocean.png \
-	test-l10n1.png test-l10n2.png
+	test-l10n1.png test-l10n2.png test-construction.png
 
 test-z03.png: $(XMLSTYLE)
 	./scripts/render_single_tile.py -s $(XMLSTYLE) -o $@ -u /3/3/2.png
@@ -117,11 +117,13 @@ test-l10n1.png:
 test-l10n2.png:
 	./scripts/render_single_tile.py -s $(XMLSTYLE) -o $@ -u /10/792/483.png
 test-foot-cycle-path-track.png:
-	./scripts/render_single_tile.py -s $(XMLSTYLE) -o $@ -u /17/68595/45003.png
+	./scripts/render_single_tile.py -s $(XMLSTYLE) -o $@ -u /17/68596/45003.png
 test-living-street.png:
 	./scripts/render_single_tile.py -s $(XMLSTYLE) -o $@ -u /17/68619/45014.png
 test-proposed.png:
-	./scripts/render_single_tile.py -s $(XMLSTYLE) -o $@ -u //17/68615/45002.png
+	./scripts/render_single_tile.py -s $(XMLSTYLE) -o $@ -u /17/68615/45002.png
+test-construction.png:
+	./scripts/render_single_tile.py -s $(XMLSTYLE) -o $@ -u /15/17090/11446.png
 
 # coastline (using water polygons)
 test-coast1.png:
