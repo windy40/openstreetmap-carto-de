@@ -1685,7 +1685,7 @@ Layer:
                 osm_id,
                 way,
                 place,
-                localized_name_first as name,
+                localized_name_second as name,
                 capital,
                 (
                   (CASE
@@ -1719,7 +1719,7 @@ Layer:
         (SELECT
             way,
             place,
-            localized_name_first as name
+            localized_name_second as name
           FROM planet_osm_point
           WHERE place IN ('suburb', 'village', 'hamlet', 'neighbourhood', 'locality', 'isolated_dwelling', 'farm')
             AND name IS NOT NULL
@@ -2688,7 +2688,7 @@ Layer:
       <<: *osm2pgsql
       table: |-
         (SELECT
-            localized_name_first as name,
+            localized_name_second as name,
             way,
             way_area/NULLIF(!pixel_width!::real*!pixel_height!::real,0) AS way_pixels
           FROM planet_osm_polygon
