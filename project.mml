@@ -89,7 +89,7 @@ Layer:
             way, name, way_pixels, religion,
             COALESCE(wetland, landuse, "natural") AS feature
           FROM (SELECT
-              way, COALESCE(name, '') AS name, religion,
+              way, localized_name_second AS name, religion,
               ('landuse_' || (CASE WHEN landuse IN ('forest', 'military', 'farmland', 'residential', 'commercial', 'retail', 'industrial', 'meadow') THEN landuse ELSE NULL END)) AS landuse,
               ('natural_' || (CASE WHEN "natural" IN ('wood', 'sand', 'scree', 'shingle', 'bare_rock', 'heath', 'grassland') THEN "natural" ELSE NULL END)) AS "natural",
               ('wetland_' || (CASE WHEN "natural" IN ('wetland', 'mud') THEN (CASE WHEN "natural" IN ('mud') THEN "natural" ELSE tags->'wetland' END) ELSE NULL END)) AS wetland,
@@ -115,7 +115,7 @@ Layer:
             way, name, religion, way_pixels,
             COALESCE(aeroway, amenity, wetland, power, landuse, leisure, man_made, military, "natural", tourism, highway, railway) AS feature
           FROM (SELECT
-              way, COALESCE(name, '') AS name,
+              way, localized_name_second AS name,
               ('aeroway_' || (CASE WHEN aeroway IN ('apron', 'aerodrome') THEN aeroway ELSE NULL END)) AS aeroway,
               ('amenity_' || (CASE WHEN amenity IN ('parking', 'bicycle_parking', 'motorcycle_parking', 'university', 'college', 'school', 'taxi',
                                                     'hospital', 'kindergarten', 'grave_yard', 'prison', 'place_of_worship', 'clinic', 'ferry_terminal',
@@ -581,7 +581,7 @@ Layer:
         (SELECT
             way,
             way_area/NULLIF(!pixel_width!::real*!pixel_height!::real,0) AS way_pixels,
-            name,
+            localized_name_second as name,
             tourism
           FROM planet_osm_polygon
           WHERE tourism = 'theme_park'
@@ -962,7 +962,7 @@ Layer:
         (SELECT
             way,
             aerialway,
-            name
+            localized_name_second as name
           FROM planet_osm_line
           WHERE aerialway IS NOT NULL
         ) AS aerialways
@@ -1357,7 +1357,7 @@ Layer:
                 osm_id,
                 way,
                 place,
-                localized_name_first as name,
+                localized_name_second as name,
                 (
                   (CASE
                     WHEN (tags->'population' ~ '^[0-9]{1,8}$') THEN (tags->'population')::INTEGER
@@ -1391,7 +1391,7 @@ Layer:
             way,
             place,
             leisure,
-            localized_name_first as name
+            localized_name_second as name
           FROM planet_osm_point
           WHERE place IN ('village', 'hamlet')
              AND name IS NOT NULL
@@ -1468,7 +1468,7 @@ Layer:
       table: |-
         (SELECT
             way,
-            name,
+            localized_name_without_brackets as name,
             COALESCE(
               'aeroway_' || CASE WHEN aeroway IN ('helipad', 'aerodrome') THEN aeroway ELSE NULL END,
               'tourism_' || CASE WHEN tourism IN ('artwork', 'alpine_hut', 'camp_site', 'caravan_site', 'chalet', 'wilderness_hut', 'guest_house', 'apartment',
@@ -1581,7 +1581,7 @@ Layer:
       table: |-
         (SELECT
             way,
-            name,
+            localized_name_without_brackets as name,
             COALESCE(
               'aeroway_' || CASE WHEN aeroway IN ('helipad', 'aerodrome') THEN aeroway ELSE NULL END,
               'tourism_' || CASE WHEN tourism IN ('artwork', 'alpine_hut', 'camp_site', 'caravan_site', 'chalet', 'wilderness_hut', 'guest_house', 'apartment', 'hostel',
@@ -1980,7 +1980,7 @@ Layer:
             tags->'highspeed' as highspeed,
             tags->'usage' as usage,
             construction,
-            name
+            localized_name_second as name
           FROM planet_osm_line l
           WHERE railway IN ('rail', 'subway', 'narrow_gauge', 'light_rail', 'preserved', 'funicular',
                             'monorail', 'miniature', 'tram', 'disused', 'construction')
@@ -2337,7 +2337,7 @@ Layer:
       <<: *osm2pgsql
       table: |-
         (SELECT
-            localized_name_first as name,
+            localized_name_second as name,
             way,
             way_area/NULLIF(!pixel_width!::real*!pixel_height!::real,0) AS way_pixels
           FROM planet_osm_polygon
