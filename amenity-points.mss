@@ -863,7 +863,7 @@
   }
 
   [feature = 'shop'] {
-    [shop != 'mall'][zoom >= 17],
+    [shop != 'mall'][shop != 'massage'][zoom >= 17],
     [shop = 'supermarket'][zoom >= 16],
     [shop = 'department_store'][zoom >= 16] {
       marker-placement: interior;
@@ -871,7 +871,7 @@
       marker-fill: @shop-icon;
     }
 
-    [zoom >= 17][zoom < 18][shop != 'supermarket'][shop != 'department_store'][shop != 'mall'] {
+    [zoom >= 17][zoom < 18][shop != 'supermarket'][shop != 'department_store'][shop != 'mall'][shop != 'massage'] {
       marker-width: 4;
       marker-line-width: 0;
     }
@@ -1056,6 +1056,10 @@
       }
     }
 
+    [shop = 'paint'][zoom >= 18] {
+      marker-file: url('symbols/shop/paint.svg');
+    }
+
     [shop = 'shoes'][zoom >= 18] {
       marker-file: url('symbols/shop/shoes.svg');
     }
@@ -1089,6 +1093,11 @@
 
     [shop = 'interior_decoration'][zoom >= 18] {
       marker-file: url('symbols/shop/interior_decoration.svg');
+    }
+
+    [shop = 'massage'][zoom >= 18] {
+      marker-file: url('symbols/shop/massage.svg');
+      marker-fill: @leisure-green;
     }
     
     [shop = 'medical_supply'][zoom >= 18]{
@@ -1163,6 +1172,10 @@
 
     [shop = 'variety_store'][zoom >= 18] {
       marker-file: url('symbols/shop/variety_store.svg');
+    }
+
+    [shop = 'video'][zoom >= 18] {
+      marker-file: url('symbols/shop/video.svg');
     }
 
     [shop = 'video_games'][zoom >= 18] {
@@ -1265,6 +1278,27 @@
 
   [feature = 'leisure_beach_resort'][zoom >= 16] {
      marker-file: url('symbols/beach_resort.svg');
+     marker-fill: @leisure-green;
+     marker-placement: interior;
+     marker-clip: false;
+   }
+
+  [feature = 'leisure_bowling_alley'][zoom >= 17] {
+     marker-file: url('symbols/bowling_alley.svg');
+     marker-fill: @leisure-green;
+     marker-placement: interior;
+     marker-clip: false;
+   }
+
+  [feature = 'leisure_outdoor_seating'][zoom >= 19] {
+     marker-file: url('symbols/outdoor_seating.svg');
+     marker-fill: @leisure-green;
+     marker-placement: interior;
+     marker-clip: false;
+   }
+
+  [feature = 'leisure_bird_hide'][zoom >= 17] {
+     marker-file: url('symbols/bird_hide.svg');
      marker-fill: @leisure-green;
      marker-placement: interior;
      marker-clip: false;
@@ -1673,7 +1707,10 @@
   [feature = 'amenity_car_wash'][zoom >= 17],
   [feature = 'amenity_drinking_water'][zoom >= 17],
   [feature = 'tourism_picnic_site'][zoom >= 17],
+  [feature = 'leisure_bowling_alley'][zoom >= 17],
   [feature = 'leisure_beach_resort'][zoom >= 17],
+  [feature = 'leisure_bird_hide'][zoom >= 17],
+  [feature = 'leisure_outdoor_seating'][zoom >= 19],
   [feature = 'leisure_picnic_table'][zoom >= 17] {
     text-name: "[name]";
     text-size: @standard-font-size;
@@ -1681,6 +1718,9 @@
     text-line-spacing: @standard-line-spacing-size;
     text-fill: @amenity-brown;
     [feature = 'tourism_picnic_site'],
+    [feature = 'leisure_outdoor_seating'],
+    [feature = 'leisure_bowling_alley'],
+    [feature = 'leisure_bird_hide'],
     [feature = 'leisure_beach_resort'] {
       text-fill: @leisure-green;
     }
@@ -2176,9 +2216,10 @@
       [feature = 'leisure_stadium'] {
         text-fill: darken(@stadium, 70%);
       }
-      [feature = 'leisure_dog_park'],
       [feature = 'leisure_fitness_centre'],
-      [feature = 'leisure_fitness_station'],
+      [feature = 'leisure_fitness_station'] {
+        text-fill: @leisure-green;
+      }
       [feature = 'leisure_dog_park'] {
         text-fill: @leisure-green;
         text-halo-radius: @standard-halo-radius * 1.5; /* Extra halo needed to stand out from paw pattern. */
@@ -2522,6 +2563,7 @@
   [feature = 'shop_perfumery'],
   [feature = 'shop_furniture'],
   [feature = 'shop_kiosk'],
+  [feature = 'shop_massage'],
   [feature = 'shop_medical_supply'],
   [feature = 'shop_mobile_phone'],
   [feature = 'shop_motorcycle'],
@@ -2532,6 +2574,7 @@
   [feature = 'shop_jewellery'],
   [feature = 'shop_laundry'],
   [feature = 'shop_chemist'],
+  [feature = 'shop_paint'],
   [feature = 'shop_toys'],
   [feature = 'shop_travel_agency'],
   [feature = 'shop_seafood'],
@@ -2543,6 +2586,7 @@
   [feature = 'shop_ticket'],
   [feature = 'shop_tyres'],
   [feature = 'shop_variety_store'],
+  [feature = 'shop_video'],
   [feature = 'shop_video_games'],
   [feature = 'shop_wine'],
   [feature = 'shop_other'] {
@@ -2560,6 +2604,9 @@
       text-placement: interior;
       [feature = 'shop_car_repair'] {
         text-fill: @amenity-brown;
+      }
+      [feature = 'shop_massage'] {
+        text-fill: @leisure-green;
       }
     }
   }

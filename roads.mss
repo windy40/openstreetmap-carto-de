@@ -236,7 +236,7 @@
 
 @major-casing-width-z11:          0.3;
 
-@casing-width-z12:                0.1;
+@casing-width-z12:                0.3;
 @secondary-casing-width-z12:      0.3;
 @major-casing-width-z12:          0.5;
 
@@ -353,6 +353,8 @@
 
 @proposed_casing_factor: 2.0;
 @proposed_casing_factor_lowzoom: 1.0;
+
+@railway-text-repeat-distance: 200;
 
 #roads-casing, #bridges, #tunnels {
   ::casing {
@@ -3591,10 +3593,10 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
       text-spacing: 900;
       text-clip: false;
       text-placement: line;
-      text-min-distance: 18;
       text-face-name: @book-fonts;
       text-halo-radius: @standard-halo-radius;
       text-halo-fill: @standard-halo-fill;
+      text-repeat-distance: @railway-text-repeat-distance;
     }
     [zoom >= 19] {
       text-size: 11;
@@ -3613,10 +3615,10 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
         text-spacing: 300;
         text-clip: false;
         text-placement: line;
-        text-min-distance: 18;
         text-face-name: @book-fonts;
         text-halo-radius: @standard-halo-radius;
         text-halo-fill: @standard-halo-fill;
+        text-repeat-distance: @railway-text-repeat-distance;
       }
       [zoom >= 13] {
         text-dy: 6;
@@ -3642,10 +3644,10 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
         text-spacing: 300;
         text-clip: false;
         text-placement: line;
-        text-min-distance: 18;
         text-face-name: @book-fonts;
         text-halo-radius: @standard-halo-radius;
         text-halo-fill: @standard-halo-fill;
+        text-repeat-distance: @railway-text-repeat-distance;
       }
       [zoom >= 17] {
         text-spacing: 600;
@@ -3672,10 +3674,10 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
       text-spacing: 900;
       text-clip: false;
       text-placement: line;
-      text-min-distance: 18;
       text-face-name: @book-fonts;
       text-halo-radius: @standard-halo-radius;
       text-halo-fill: @standard-halo-fill;
+      text-repeat-distance: @railway-text-repeat-distance;
     }
     [zoom >= 19] {
       text-size: 11;
