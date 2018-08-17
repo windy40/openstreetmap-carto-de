@@ -13,8 +13,6 @@ osm2pgsql -G -S hstore-only.style --hstore --tag-transform-script openstreetmap-
 The database layout of the git master branch is aiming to be compatible witch
 openstreetmap-carto 4.x
 
-For older databases without lua transform script use the de3.x branch.
-
 You also need to make sure that the version of osm2pgsql used supports the `nocolumn` option!
 This is the case from 0.89 onwards. 
 
@@ -70,6 +68,9 @@ project.yaml or the database views provided in the `views_osmde` directory.
 
 To actually use this style you need to generate ```osm-de.xml``` from ```project.mml```.
 The easiest way to do this is using ```make```!
+
+When using the upstream database layout call ```make DBSCHEME=upstream```
+instead.
 
 It is also possible to use [Magnacarto](https://github.com/omniscale/magnacarto) or
 [Kosmtik](https://github.com/kosmtik/kosmtik).

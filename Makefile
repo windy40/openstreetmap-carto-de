@@ -1,3 +1,5 @@
+DBSCHEME = "de"
+
 MAPNIK_API = $(shell mapnik-config -v)
 
 TEMPFILE := $(shell mktemp -u)
@@ -7,7 +9,12 @@ XMLSTYLE := osm-de.xml
 all: $(XMLSTYLE) osm-hrb.xml
 
 $(XMLSTYLE): *.mss project.mml
+ifeq ($(DBSCHEME),upstream)
+	cd contrib/use-upstream-database/; ./replace-tablenames.sh
+	carto -a $(MAPNIK_API) project-mod.mml > $(TEMPFILE)
+else
 	carto -a $(MAPNIK_API) project.mml > $(TEMPFILE)
+endif
 	mv $(TEMPFILE) $@
 
 project-hrb.mml: project.mml
