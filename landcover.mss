@@ -51,11 +51,15 @@
 @power: darken(@industrial, 5%);
 @power-line: darken(@industrial-line, 5%);
 @sand: #f5e9c6;
-@societal_amenities: #f0f0d8;
+@societal_amenities: #fbecd7;   // Lch(94,12,80)
 @tourism: #734a08;
 @quarry: #c5c3c3;
 @military: #f55;
 @beach: #fff1ba;
+@wastewater_plant: @industrial;
+@wastewater_plant-line: @industrial-line;
+@water_works: @industrial;
+@water_works-line: @industrial-line;
 
 // --- Sports ---
 
@@ -382,6 +386,34 @@
     }
   }
 
+  [feature = 'man_made_wastewater_plant'] {
+    polygon-fill: @industrial;
+    [zoom >= 15] {
+      polygon-fill: @wastewater_plant;
+    }
+    [zoom >= 16] {
+      line-width: 0.5;
+      line-color: @wastewater_plant-line;
+      [name != ''] {
+        line-width: 0.7;
+      }
+    }
+  }
+  
+  [feature = 'man_made_water_works'] {
+    polygon-fill: @industrial;
+    [zoom >= 15] {
+      polygon-fill: @water_works;
+    }
+    [zoom >= 16] {
+      line-width: 0.5;
+      line-color: @water_works-line;
+      [name != ''] {
+        line-width: 0.7;
+      }
+    }
+  }
+  
   [feature = 'landuse_railway'][zoom >= 10] {
     polygon-fill: @railway;
     [zoom >= 16][name != ''] {
