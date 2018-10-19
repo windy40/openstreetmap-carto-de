@@ -28,7 +28,7 @@
 // --- Transport ----
 
 @transportation-area: #e9e7e2;
-@apron: #e9d1ff;
+@apron: #dadae0;
 @garages: #dfddce;
 @parking: #eeeeee;
 @parking-outline: saturate(darken(@parking, 40%), 20%);
@@ -51,7 +51,7 @@
 @power: darken(@industrial, 5%);
 @power-line: darken(@industrial-line, 5%);
 @sand: #f5e9c6;
-@societal_amenities: #fbecd7;   // Lch(94,12,80)
+@societal_amenities: #ffffe5;   // Lch(99,13,109)
 @tourism: #734a08;
 @quarry: #c5c3c3;
 @military: #f55;
@@ -399,7 +399,7 @@
       }
     }
   }
-  
+
   [feature = 'man_made_water_works'] {
     polygon-fill: @industrial;
     [zoom >= 15] {
@@ -413,7 +413,7 @@
       }
     }
   }
-  
+
   [feature = 'landuse_railway'][zoom >= 10] {
     polygon-fill: @railway;
     [zoom >= 16][name != ''] {
@@ -574,12 +574,12 @@
   [feature = 'amenity_fire_station'][zoom >= 13],
   [feature = 'amenity_police'][zoom >= 13] {
     polygon-fill: #F3E3DD;
-    line-color: @military; 
+    line-color: @military;
     line-opacity: 0.24;
-    line-width: 1.0; 
+    line-width: 1.0;
     line-offset: -0.5;
     [zoom >= 15] {
-      line-width: 2; 
+      line-width: 2;
       line-offset: -1.0;
     }
   }
