@@ -2,6 +2,8 @@
 @glacier: #ddecec;
 @glacier-line: #9cf;
 
+@waterway-text-repeat-distance: 200;
+
 #water-areas {
   [natural = 'glacier']::natural {
     [zoom >= 8] {
@@ -253,7 +255,7 @@
       text-spacing: 400;
       text-size: 10;
       text-halo-radius: @standard-halo-radius;
-      text-halo-fill: @standard-halo-fill; 
+      text-halo-fill: @standard-halo-fill;
   }
 
   [lock != 'yes'][int_tunnel != 'yes'] {
@@ -266,8 +268,8 @@
       text-halo-fill: @standard-halo-fill;
       text-spacing: 400;
       text-placement: line;
+      text-repeat-distance: @waterway-text-repeat-distance;
       [zoom >= 14] { text-size: 12; }
-      [int_tunnel = 'yes'] { text-min-distance: 200; }
     }
 
     [waterway = 'canal'][zoom >= 13] {
@@ -278,6 +280,7 @@
       text-halo-radius: @standard-halo-radius;
       text-halo-fill: @standard-halo-fill;
       text-placement: line;
+      text-repeat-distance: @waterway-text-repeat-distance;
     }
 
     [waterway = 'stream'][zoom >= 15] {
@@ -291,6 +294,7 @@
       text-placement: line;
       text-vertical-alignment: middle;
       text-dy: 8;
+      text-repeat-distance: @waterway-text-repeat-distance;
     }
 
     [waterway = 'drain'],
@@ -306,6 +310,7 @@
         text-placement: line;
         text-vertical-alignment: middle;
         text-dy: 8;
+        text-repeat-distance: @waterway-text-repeat-distance;
       }
     }
   }
@@ -315,6 +320,7 @@
 .text[zoom >= 10] {
   [feature = 'natural_water'],
   [feature = 'natural_bay'],
+  [feature = 'natural_strait'],
   [feature = 'landuse_reservoir'],
   [feature = 'landuse_basin'],
   [feature = 'waterway_dock'] {
