@@ -138,11 +138,9 @@
 @secondary-link-width-z13:        4;
 @tertiary-width-z13:              4;
 @residential-width-z13:           2.5;
-@service-width-z13:               0.8;
 @living-street-width-z13:         2;
-@pedestrian-width-z13:            2;
 @bridleway-width-z13:             0.3;
-@footway-width-z13:               0.7;
+@footway-width-z14:               0.7;
 @cycleway-width-z13:              0.7;
 @path-width-z13:                  0.2;
 @track-width-z13:                 0.5;
@@ -369,6 +367,9 @@
 
 @proposed_casing_factor: 2.0;
 @proposed_casing_factor_lowzoom: 1.0;
+
+@major-highway-text-repeat-distance: 50;
+@minor-highway-text-repeat-distance: 10;
 
 @railway-text-repeat-distance: 200;
 
@@ -958,10 +959,9 @@ Casing width is @proposed_casing_factor the width of normal road casing.
     }
 
     [feature = 'highway_pedestrian'] {
-      [zoom >= 13] {
+      [zoom >= 14] {
         line-color: @pedestrian-casing;
-        line-width: @pedestrian-width-z13;
-        [zoom >= 14] { line-width: @pedestrian-width-z14; }
+        line-width: @pedestrian-width-z14;
         [zoom >= 15] { line-width: @pedestrian-width-z15; }
         [zoom >= 16] { line-width: @pedestrian-width-z16; }
         [zoom >= 17] { line-width: @pedestrian-width-z17; }
@@ -975,10 +975,8 @@ Casing width is @proposed_casing_factor the width of normal road casing.
           line-dasharray: 4,2;
         }
         #bridges {
-          [zoom >= 14] {
-            line-color: @bridge-casing;
-            line-join: round;
-          }
+          line-color: @bridge-casing;
+          line-join: round;
         }
       }
     }
@@ -987,16 +985,25 @@ Casing width is @proposed_casing_factor the width of normal road casing.
       [zoom >= 13] {
         line-color: @residential-casing;
         line-width: @living-street-width-z13;
-        [zoom >= 14] { line-width: @living-street-width-z14; }
-        [zoom >= 15] {
-	  line-width: @living-street-width-z15;
-	  line-color: @living-street-casing;
-          [zoom >= 16] { line-width: @living-street-width-z16; }
-          [zoom >= 17] { line-width: @living-street-width-z17; }
-          [zoom >= 18] { line-width: @living-street-width-z18; }
-          [zoom >= 19] { line-width: @living-street-width-z19; }
-          #roads-casing {
-            line-cap: round;
+        [zoom >= 14] {
+          line-color: @living-street-casing;
+          line-width: @living-street-width-z14;
+        }
+        [zoom >= 15] { line-width: @living-street-width-z15; }
+        [zoom >= 16] { line-width: @living-street-width-z16; }
+        [zoom >= 17] { line-width: @living-street-width-z17; }
+        [zoom >= 18] { line-width: @living-street-width-z18; }
+        [zoom >= 19] { line-width: @living-street-width-z19; }
+        #roads-casing {
+          line-cap: round;
+          line-join: round;
+        }
+        #tunnels {
+          line-dasharray: 4,2;
+        }
+        #bridges {
+          [zoom >= 14] {
+            line-color: @bridge-casing;
             line-join: round;
           }
           #tunnels {
@@ -1057,9 +1064,9 @@ Casing width is @proposed_casing_factor the width of normal road casing.
 
     [feature = 'highway_footway'],
     [feature = 'highway_path'][foot = 'designated'][bicycle != 'designated'] {
-      [zoom >= 13] {
+      [zoom >= 14] {
         line-color: lighten(@path-fill,50%);
-        line-width: @footway-width-z13;
+        line-width: @footway-width-z14;
         [zoom >= 15] { line-width: @footway-width-z15; }
         [zoom >= 16] { line-width: @footway-width-z16; }
         [zoom >= 18] { line-width: @footway-width-z18; }
@@ -1074,7 +1081,7 @@ Casing width is @proposed_casing_factor the width of normal road casing.
         // double casing width on bridges
         #bridges {
           line-join: round;
-          line-width: 2* @casing-width-z13 + @footway-width-z13;
+          line-width: 2* @casing-width-z13 + @footway-width-z14;
           [zoom >= 15] { line-width: 2* @casing-width-z15 + @footway-width-z15; }
           [zoom >= 16] { line-width: 2* @casing-width-z16 + @footway-width-z16; }
           [zoom >= 18] { line-width: 2* @casing-width-z18 + @footway-width-z18; }
@@ -1998,10 +2005,6 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
     }
 
     [feature = 'highway_service'] {
-      [zoom >= 13][service = 'INT-normal'] {
-        line-width: @service-width-z13;
-        line-color: @unimportant-road;
-      }
       [zoom >= 14][service = 'INT-normal'],
       [zoom >= 16][service = 'INT-minor'] {
         line-color: @service-fill;
@@ -2068,9 +2071,8 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
     }
 
     [feature = 'highway_pedestrian'] {
-      [zoom >= 13] {
-        line-width: @living-street-width-z13 - 2 * @casing-width-z13;
-        [zoom >= 14] { line-width: @pedestrian-width-z14 - 2 * @casing-width-z14; }
+      [zoom >= 14] {
+        line-width: @pedestrian-width-z14 - 2 * @casing-width-z14;
         [zoom >= 15] { line-width: @pedestrian-width-z15 - 2 * @casing-width-z15; }
         [zoom >= 16] { line-width: @pedestrian-width-z16 - 2 * @casing-width-z16; }
         [zoom >= 17] { line-width: @pedestrian-width-z17 - 2 * @casing-width-z17; }
@@ -2078,8 +2080,7 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
         [zoom >= 19] { line-width: @pedestrian-width-z19 - 2 * @casing-width-z19; }
         line-color: @pedestrian-fill;
         #bridges {
-          line-width: @pedestrian-width-z13 - 2 * @casing-width-z13;
-          [zoom >= 14] { line-width: @pedestrian-width-z14 - 2 * @bridge-casing-width-z14; }
+          line-width: @pedestrian-width-z14 - 2 * @bridge-casing-width-z14;
           [zoom >= 15] { line-width: @pedestrian-width-z15 - 2 * @bridge-casing-width-z15; }
           [zoom >= 16] { line-width: @pedestrian-width-z16 - 2 * @bridge-casing-width-z16; }
           [zoom >= 17] { line-width: @pedestrian-width-z17 - 2 * @bridge-casing-width-z17; }
@@ -2378,9 +2379,6 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
       [zoom >= 12] {
         line-color: #6E6E6E;
         line-width: 0.75;
-        [zoom >= 13] {
-          line-color: #444;
-        }
         [zoom >= 14] {
           line-width: 1;
         }
@@ -2803,7 +2801,8 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
 
 #highway-area-casing {
   [feature = 'highway_residential'],
-  [feature = 'highway_unclassified'] {
+  [feature = 'highway_unclassified'],
+  [feature = 'highway_service'] {
     [zoom >= 14] {
       line-color: #999;
       line-width: 1;
@@ -2811,17 +2810,16 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
   }
 
   [feature = 'highway_pedestrian'],
-  [feature = 'highway_service'],
   [feature = 'highway_footway'],
   [feature = 'highway_cycleway'],
   [feature = 'highway_path'] {
-    [zoom >= 14] {
+    [zoom >= 15] {
       line-color: grey;
       line-width: 1;
     }
   }
 
-  [feature = 'highway_track'][zoom >= 14] {
+  [feature = 'highway_track'][zoom >= 15] {
     line-color: @track-fill;
     line-width: 1;
     line-dasharray: 5,4,2,4;
@@ -2857,12 +2855,12 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
   [feature = 'highway_footway'],
   [feature = 'highway_cycleway'],
   [feature = 'highway_path'] {
-    [zoom >= 14] {
+    [zoom >= 15] {
       polygon-fill: @pedestrian-fill;
     }
   }
 
-  [feature = 'highway_track'][zoom >= 14] {
+  [feature = 'highway_track'][zoom >= 15] {
     polygon-fill: #cdbea0;
   }
 
@@ -2899,7 +2897,7 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
       text-wrap-character: ";";
       text-wrap-width: 2; // effectively break after every wrap character
       text-line-spacing: -1.5; // -0.15 em
-      [zoom >= 12] {
+      [zoom >= 13] {
         ["name" != null]["ref" = null] {
           text-name: "[name]";
         }
@@ -3304,10 +3302,10 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
       text-spacing: 750;
       text-clip: false;
       text-placement: line;
-      text-min-distance: 18;
       text-face-name: @book-fonts;
       text-halo-radius: @standard-halo-radius;
       text-halo-fill: @standard-halo-fill;
+      text-repeat-distance: @minor-highway-text-repeat-distance;
     }
   }
 }
@@ -3327,6 +3325,7 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
       text-clip: false;
       text-placement: line;
       text-face-name: @book-fonts;
+      text-repeat-distance: @major-highway-text-repeat-distance;
       [tunnel = 'no'] {
         text-halo-radius: @standard-halo-radius;
         [highway = 'motorway'] { text-halo-fill: @motorway-fill; }
@@ -3359,6 +3358,7 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
       text-face-name: @book-fonts;
       text-halo-radius: @standard-halo-radius;
       text-halo-fill: @secondary-fill;
+      text-repeat-distance: @major-highway-text-repeat-distance;
     }
     [zoom >= 14] {
       text-size: 9;
@@ -3385,6 +3385,7 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
       text-face-name: @book-fonts;
       text-halo-radius: @standard-halo-radius;
       text-halo-fill: @tertiary-fill;
+      text-repeat-distance: @major-highway-text-repeat-distance;
     }
     [zoom >= 17] {
       text-size: 11;
@@ -3403,6 +3404,7 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
     text-halo-radius: @standard-halo-radius;
     text-halo-fill: @standard-halo-fill;
     text-face-name: @book-fonts;
+    text-repeat-distance: @major-highway-text-repeat-distance;
 
     [zoom >= 17] {
       text-size: 11;
@@ -3429,6 +3431,8 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
       text-halo-radius: @standard-halo-radius;
       text-halo-fill: @residential-fill;
       text-face-name: @book-fonts;
+      text-repeat-distance: @minor-highway-text-repeat-distance;
+      [highway = 'unclassified'] { text-repeat-distance: @major-highway-text-repeat-distance;}
     }
     [zoom >= 16] {
       text-size: 9;
@@ -3458,6 +3462,7 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
       [highway = 'raceway'] { text-halo-fill: @raceway-fill; }
       [highway = 'service'] { text-halo-fill: @service-fill; }
       text-face-name: @book-fonts;
+      text-repeat-distance: @major-highway-text-repeat-distance;
     }
     [zoom >= 17] {
       text-size: 11;
@@ -3476,9 +3481,13 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
       text-clip: false;
       text-placement: line;
       text-halo-radius: @standard-halo-radius;
-      [highway = 'living_street'] { text-halo-fill: @living-street-fill; }
+      [highway = 'living_street'] { 
+        text-halo-fill: @living-street-fill;
+        text-repeat-distance: @major-highway-text-repeat-distance;
+      }
       [highway = 'pedestrian'] { text-halo-fill: @pedestrian-fill; }
       text-face-name: @book-fonts;
+      text-repeat-distance: @minor-highway-text-repeat-distance;
     }
     [zoom >= 16] {
       text-size: 9;
@@ -3549,6 +3558,8 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
       text-face-name: @book-fonts;
       text-vertical-alignment: middle;
       text-dy: 7;
+      text-repeat-distance: @major-highway-text-repeat-distance;
+      [highway = 'steps'] { text-repeat-distance: @minor-highway-text-repeat-distance; }
     }
     [zoom >= 17] {
       text-size: 11;
