@@ -91,15 +91,17 @@ Layer:
       <<: *osm2pgsql
       table: |-
         (SELECT
-            way, name, religion, way_pixels,
+            way, name, religion, way_pixels, is_building,
             COALESCE(aeroway, amenity, wetland, power, landuse, leisure, man_made, "natural", tourism, highway, railway) AS feature
           FROM (SELECT
               way, localized_name_second AS name,
               ('aeroway_' || (CASE WHEN aeroway IN ('apron', 'aerodrome') THEN aeroway ELSE NULL END)) AS aeroway,
-              ('amenity_' || (CASE WHEN amenity IN ('parking', 'bicycle_parking', 'motorcycle_parking', 'university', 'college', 'school', 'taxi',
+              ('amenity_' || (CASE WHEN amenity IN ('bicycle_parking', 'motorcycle_parking', 'university', 'college', 'school', 'taxi',
                                                     'hospital', 'kindergarten', 'grave_yard', 'prison', 'place_of_worship', 'clinic', 'ferry_terminal',
                                                     'marketplace', 'community_centre', 'social_facility', 'arts_centre', 'parking_space', 'bus_station',
-                                                    'fire_station', 'police') THEN amenity ELSE NULL END)) AS amenity,
+                                                    'fire_station', 'police')
+                              OR amenity IN ('parking') AND (tags->'parking' NOT IN ('underground') OR (tags->'parking') IS NULL) THEN amenity ELSE NULL END)) AS amenity,
+              ('healthcare_' || (CASE WHEN tags->'healthcare' IN ('clinic' ,'hospital') THEN tags->'healthcare' ELSE NULL END)) AS healthcare,
               ('landuse_' || (CASE WHEN landuse IN ('quarry', 'vineyard', 'orchard', 'cemetery', 'residential', 'garages', 'meadow', 'grass',
                                                     'allotments', 'forest', 'farmyard', 'farmland', 'greenhouse_horticulture',
                                                     'recreation_ground', 'village_green', 'retail', 'industrial', 'railway', 'commercial',
@@ -116,6 +118,7 @@ Layer:
               ('railway_' || (CASE WHEN railway = 'station' THEN railway ELSE NULL END)) AS railway,
               CASE WHEN religion IN ('christian', 'jewish', 'muslim') THEN religion ELSE 'INT-generic'::text END AS religion,
               way_area/NULLIF(!pixel_width!::real*!pixel_height!::real,0) AS way_pixels,
+              CASE WHEN building = 'no' OR building IS NULL THEN 'no' ELSE 'yes' END AS is_building,
               way_area
             FROM planet_osm_polygon
             WHERE (landuse IS NOT NULL
@@ -203,14 +206,22 @@ Layer:
       <<: *osm2pgsql
       table: |-
         (SELECT
-             way, "natural"
-           FROM planet_osm_polygon
-           WHERE "natural" IN ('spring')
-         UNION ALL
-         SELECT
-             way, "natural"
-           FROM planet_osm_point
-           WHERE "natural" IN ('spring')
+            way,
+            "natural"
+          FROM
+          (SELECT
+              ST_PointOnSurface(way) AS way,
+              "natural"
+            FROM planet_osm_polygon
+            WHERE way && !bbox!
+          UNION ALL
+          SELECT
+              way,
+              "natural"
+            FROM planet_osm_point
+            WHERE way && !bbox!
+            ) _
+          WHERE "natural" IN ('spring')
         ) AS springs
     properties:
       minzoom: 14
@@ -679,7 +690,7 @@ Layer:
       table: |-
         (SELECT
             way,
-            (CASE WHEN substr(feature, length(feature)-4, 5) = '_link' THEN substr(feature, 0, length(feature)-4) ELSE feature END) AS feature,
+            (CASE WHEN feature IN ('highway_motorway_link', 'highway_trunk_link', 'highway_primary_link', 'highway_secondary_link', 'highway_tertiary_link') THEN substr(feature, 0, length(feature)-4) ELSE feature END) AS feature,
             horse,
             foot,
             bicycle,
@@ -719,7 +730,7 @@ Layer:
                   ELSE 'INT-normal'::text
                 END AS service,
                 CASE
-                  WHEN substr(highway, length(highway)-4, 5) = '_link' THEN 'yes'
+                  WHEN highway IN ('motorway_link', 'trunk_link', 'primary_link', 'secondary_link', 'tertiary_link') THEN 'yes'
                   ELSE 'no'
                 END AS link,
                 COALESCE(layer,0) AS layernotnull,
@@ -966,7 +977,7 @@ Layer:
       table: |-
         (SELECT
             way,
-            (CASE WHEN substr(feature, length(feature)-4, 5) = '_link' THEN substr(feature, 0, length(feature)-4) ELSE feature END) AS feature,
+            (CASE WHEN feature IN ('highway_motorway_link', 'highway_trunk_link', 'highway_primary_link', 'highway_secondary_link', 'highway_tertiary_link') THEN substr(feature, 0, length(feature)-4) ELSE feature END) AS feature,
             horse,
             foot,
             bicycle,
@@ -1106,7 +1117,7 @@ Layer:
       table: |-
         (SELECT
             way,
-            (CASE WHEN substr(feature, length(feature)-4, 5) = '_link' THEN substr(feature, 0, length(feature)-4) ELSE feature END) AS feature,
+            (CASE WHEN feature IN ('highway_motorway_link', 'highway_trunk_link', 'highway_primary_link', 'highway_secondary_link', 'highway_tertiary_link') THEN substr(feature, 0, length(feature)-4) ELSE feature END) AS feature,
             horse,
             foot,
             bicycle,
@@ -1145,7 +1156,7 @@ Layer:
                   ELSE 'INT-normal'::text
                 END AS service,
                 CASE
-                  WHEN substr(highway, length(highway)-4, 5) = '_link' THEN 'yes'
+                  WHEN highway IN ('motorway_link', 'trunk_link', 'primary_link', 'secondary_link', 'tertiary_link') THEN 'yes'
                   ELSE 'no'
                 END AS link,
                 COALESCE(layer,0) AS layernotnull,
@@ -1249,12 +1260,13 @@ Layer:
         (SELECT
             way,
             COALESCE(
-              ('highway_' || (CASE WHEN substr(highway, length(highway)-4, 5) = '_link' THEN substr(highway, 0, length(highway)-4) ELSE highway end)),
+              ('highway_' || (CASE WHEN highway IN ('motorway_link', 'trunk_link', 'primary_link', 'secondary_link', 'tertiary_link')
+                                     THEN substr(highway, 0, length(highway)-4) ELSE highway end)),
               ('railway_' || (CASE WHEN (railway = 'rail' AND service IN ('spur', 'siding', 'yard')) THEN 'INT-spur-siding-yard'
                                    WHEN railway IN ('rail', 'tram', 'light_rail', 'funicular', 'narrow_gauge') THEN railway ELSE NULL END))
             ) AS feature,
             CASE WHEN tunnel = 'yes' OR tunnel = 'building_passage' OR covered = 'yes' THEN 'yes' ELSE 'no' END AS int_tunnel,
-            CASE WHEN substr(highway, length(highway)-4, 5) = '_link' THEN 'yes' ELSE 'no' END AS link,
+            CASE WHEN highway IN ('motorway_link', 'trunk_link', 'primary_link', 'secondary_link', 'tertiary_link') THEN 'yes' ELSE 'no' END AS link,
             CASE WHEN surface IN ('unpaved', 'compacted', 'dirt', 'earth', 'fine_gravel', 'grass', 'grass_paver', 'gravel', 'ground',
                                   'mud', 'pebblestone', 'salt', 'sand', 'woodchips', 'clay', 'ice', 'snow') THEN 'unpaved'
               WHEN surface IN ('paved', 'asphalt', 'cobblestone', 'cobblestone:flattened', 'sett', 'concrete', 'concrete:lanes',
@@ -1303,7 +1315,7 @@ Layer:
       table: |-
         (SELECT
             way,
-            (CASE WHEN substr(feature, length(feature)-4, 5) = '_link' THEN substr(feature, 0, length(feature)-4) ELSE feature END) AS feature,
+            (CASE WHEN feature IN ('highway_motorway_link', 'highway_trunk_link', 'highway_primary_link', 'highway_secondary_link', 'highway_tertiary_link') THEN substr(feature, 0, length(feature)-4) ELSE feature END) AS feature,
             horse,
             foot,
             bicycle,
@@ -1349,7 +1361,7 @@ Layer:
                   ELSE NULL
                 END AS oneway,
                 CASE
-                  WHEN substr(highway, length(highway)-4, 5) = '_link' THEN 'yes'
+                  WHEN highway IN ('motorway_link', 'trunk_link', 'primary_link', 'secondary_link', 'tertiary_link') THEN 'yes'
                   ELSE 'no'
                 END AS link,
                 COALESCE(layer,0) AS layernotnull,
@@ -1546,7 +1558,9 @@ Layer:
             boundary,
             way_area/NULLIF(!pixel_width!::real*!pixel_height!::real,0) AS way_pixels
           FROM planet_osm_polygon
-          WHERE (boundary = 'national_park' OR leisure = 'nature_reserve')
+          WHERE (boundary = 'national_park'
+                 OR leisure = 'nature_reserve'
+                 OR (boundary = 'protected_area' AND tags->'protect_class' IN ('1','1a','1b','2','3','4','5','6','7','97','98','99')))
             AND building IS NULL
             AND way_area > 1*!pixel_width!::real*!pixel_height!::real
         ) AS national_park_boundaries
@@ -1725,6 +1739,7 @@ Layer:
             ref,
             railway,
             aerialway,
+            tags->'station' as "station",
             CASE railway
               WHEN 'station' THEN 1
               WHEN 'subway_entrance' THEN 3
@@ -1750,7 +1765,8 @@ Layer:
             localized_name_without_brackets as name,
             ref,
             railway,
-            aerialway
+            aerialway,
+            tags->'station' as "station"
         FROM planet_osm_polygon
         WHERE railway IN ('station', 'halt', 'tram_stop')
           OR aerialway = 'station'
@@ -1773,13 +1789,18 @@ Layer:
                                                   'hostel', 'hotel', 'motel', 'information', 'museum', 'picnic_site', 'gallery') THEN tourism ELSE NULL END,
               'amenity_' || CASE WHEN amenity IN ('shelter', 'atm', 'bank', 'bar', 'bbq', 'bicycle_rental', 'bureau_de_change', 'bus_station', 'cafe', 'public_bath',
                                                   'car_rental', 'car_wash', 'cinema', 'clinic', 'community_centre', 'fire_station', 'fountain',
-                                                  'fuel', 'hospital', 'ice_cream', 'embassy', 'library', 'courthouse', 'townhall', 'parking',
+                                                  'fuel', 'hospital', 'ice_cream', 'embassy', 'library', 'courthouse', 'townhall',
                                                   'bicycle_parking', 'motorcycle_parking', 'pharmacy', 'doctors', 'dentist', 'place_of_worship',
                                                   'police', 'post_box', 'post_office', 'pub', 'biergarten', 'recycling', 'restaurant', 'food_court',
                                                   'fast_food', 'telephone', 'taxi', 'theatre', 'toilets', 'drinking_water', 'internet_cafe', 'public_bookcase',
                                                   'prison', 'hunting_stand', 'nightclub', 'veterinary', 'social_facility', 'vehicle_inspection',
                                                   'charging_station', 'arts_centre', 'ferry_terminal', 'marketplace', 'waste_disposal', 'shower', 'bbq',
                                                   'nursing_home', 'childcare', 'driving_school', 'casino', 'boat_rental', 'bicycle_repair_station') THEN amenity ELSE NULL END,
+              'amenity_' || CASE WHEN amenity IN ('parking') AND (tags->'parking' NOT IN ('underground') OR (tags->'parking') IS NULL) THEN amenity ELSE NULL END,
+              'amenity_' || CASE WHEN amenity IN ('vending_machine') AND tags->'vending' IN ('excrement_bags', 'parking_tickets', 'public_transport_tickets') THEN amenity ELSE NULL END,
+              'healthcare_' || CASE WHEN tags->'healthcare' IN ('alternative', 'audiologist', 'birthing_center', 'blood_bank', 'blood_donation', 'centre', 'clinic',
+                                      'dentist', 'dialysis', 'doctor', 'hospital', 'laboratory', 'midwife', 'occupational_therapist', 'optometrist',
+                                      'physiotherapist', 'podiatrist', 'psychotherapist', 'rehabilitation', 'speech_therapist', 'yes') THEN tags->'healthcare' ELSE NULL END,
               'advertising_' || CASE WHEN tags->'advertising' in ('column') THEN tags->'advertising' else NULL END,
               'shop' || CASE WHEN shop IN ('no', 'vacant', 'closed', 'disused', 'empty') OR shop IS NULL THEN NULL ELSE '' END,
               'office' || CASE WHEN tags->'office' IN ('no', 'vacant', 'closed', 'disused', 'empty') OR (tags->'office') IS NULL THEN NULL ELSE '' END,
@@ -1811,7 +1832,7 @@ Layer:
                 END
               ELSE NULL
             END AS height,
-            tags->'power_source' as power_source,
+            tags->'location' as location,
             tags->'icao' as icao,
             tags->'iata' as iata,
             tags->'office' as office,
@@ -1836,6 +1857,7 @@ Layer:
             tags->'information' as information,
             tags->'memorial' as memorial,
             tags->'artwork_type' as artwork_type,
+            tags->'vending' as vending,
             CASE WHEN shop IN ('supermarket', 'bag', 'bakery', 'beauty', 'bed', 'bookmaker', 'books', 'butcher', 'clothes', 'computer',
                                'confectionery', 'fashion', 'convenience', 'department_store', 'doityourself', 'hardware', 'fishmonger', 'florist',
                                'garden_centre', 'hairdresser', 'hifi', 'ice_cream', 'car', 'car_repair', 'bicycle', 'mall', 'pet',
@@ -1866,7 +1888,7 @@ Layer:
             OR historic IN ('memorial', 'monument', 'archaeological_site', 'fort', 'castle', 'manor', 'city_gate')
             OR military IN ('bunker')
             OR highway IN ('bus_stop', 'elevator', 'traffic_signals')
-            OR (power = 'generator' AND (tags @> '"generator:source"=>wind' OR tags @> 'power_source=>wind'))
+            OR (power = 'generator' AND tags @> '"generator:source"=>wind')
           ORDER BY way_area desc
         ) AS amenity_points_poly
     properties:
@@ -1911,7 +1933,7 @@ Layer:
                                                   'hotel', 'motel', 'information', 'museum', 'picnic_site', 'gallery') THEN tourism ELSE NULL END,
               'amenity_' || CASE WHEN amenity IN ('shelter', 'atm', 'bank', 'bar', 'bbq', 'bicycle_rental', 'bureau_de_change', 'bus_station', 'cafe', 'public_bath',
                                                   'car_rental', 'car_wash', 'cinema', 'clinic', 'community_centre', 'fire_station', 'fountain',
-                                                  'fuel', 'hospital', 'ice_cream', 'embassy', 'library', 'courthouse', 'townhall', 'parking',
+                                                  'fuel', 'hospital', 'ice_cream', 'embassy', 'library', 'courthouse', 'townhall',
                                                   'bicycle_parking', 'motorcycle_parking', 'pharmacy', 'doctors', 'dentist', 'place_of_worship',
                                                   'police', 'post_box', 'post_office', 'pub', 'biergarten', 'recycling', 'restaurant', 'food_court',
                                                   'fast_food', 'telephone', 'taxi', 'theatre', 'toilets', 'drinking_water', 'internet_cafe', 'public_bookcase',
@@ -1919,6 +1941,11 @@ Layer:
                                                   'charging_station', 'arts_centre', 'ferry_terminal', 'marketplace', 'shower', 'bbq',
                                                   'nursing_home', 'childcare', 'driving_school', 'casino', 'boat_rental', 'bicycle_repair_station') THEN amenity ELSE NULL END,
               'amenity_' || CASE WHEN amenity IN ('parking_entrance') AND tags->'parking' IN ('underground') AND (access IS NULL OR access NOT IN ('private', 'no')) THEN amenity ELSE NULL END,
+              'amenity_' || CASE WHEN amenity IN ('parking') AND (tags->'parking' NOT IN ('underground') OR (tags->'parking') IS NULL) THEN amenity ELSE NULL END,
+              'amenity_' || CASE WHEN amenity IN ('vending_machine') AND tags->'vending' IN ('excrement_bags', 'parking_tickets', 'public_transport_tickets') THEN amenity ELSE NULL END,
+              'healthcare_' || CASE WHEN tags->'healthcare' IN ('alternative', 'audiologist', 'birthing_center', 'blood_bank', 'blood_donation', 'centre', 'clinic',                     
+                                               'dentist', 'dialysis', 'doctor', 'hospital', 'laboratory', 'midwife', 'occupational_therapist', 'optometrist',
+                                               'physiotherapist', 'podiatrist', 'psychotherapist', 'rehabilitation', 'speech_therapist', 'yes') THEN tags->'healthcare' ELSE NULL END,
               'advertising_' || CASE WHEN tags->'advertising' in ('column') THEN tags->'advertising' else NULL END,
               'emergency_' || CASE WHEN tags->'emergency' IN ('phone') THEN tags->'emergency' ELSE NULL END,
               'shop' || CASE WHEN shop IN ('no', 'vacant', 'closed', 'disused', 'empty') OR shop IS NULL THEN NULL ELSE '' END,
@@ -1967,7 +1994,7 @@ Layer:
                 END
               ELSE NULL
             END AS height,
-            tags->'power_source' as power_source,
+            tags->'location' as location,
             tags->'icao' as icao,
             tags->'iata' as iata,
             tags->'office' as office,
@@ -1992,6 +2019,7 @@ Layer:
             tags->'tower:type' as "tower:type",
             tags->'memorial' as memorial,
             tags->'artwork_type' as artwork_type,
+            tags->'vending' as vending,
             CASE WHEN shop IN ('supermarket', 'bag', 'bakery', 'beauty', 'bed', 'bookmaker', 'books', 'butcher', 'clothes', 'computer',
                                'confectionery', 'fashion', 'convenience', 'department_store', 'doityourself', 'hardware', 'fishmonger', 'florist',
                                'garden_centre', 'hairdresser', 'hifi', 'ice_cream', 'car', 'car_repair', 'bicycle', 'mall', 'pet',
@@ -2027,7 +2055,7 @@ Layer:
             OR tags @> 'emergency=>phone'
             OR highway IN ('bus_stop', 'elevator', 'traffic_signals')
             OR tags @> 'ford=>yes' OR tags @> 'ford=>stepping_stones'
-            OR (power = 'generator' AND (tags @> '"generator:source"=>wind' OR tags @> 'power_source=>wind'))
+            OR (power = 'generator' AND tags @> '"generator:source"=>wind')
           ORDER BY score DESC NULLS LAST
           ) AS amenity_points
     properties:
@@ -2355,7 +2383,9 @@ Layer:
               'natural_' || CASE WHEN "natural" IN ('wood', 'glacier', 'sand', 'scree', 'shingle', 'bare_rock',
                                                     'water', 'bay', 'strait') THEN "natural" ELSE NULL END,
               'place_' || CASE WHEN place IN ('island') THEN place ELSE NULL END,
-              'boundary_' || CASE WHEN boundary IN ('national_park') THEN boundary ELSE NULL END,
+              'boundary_' || CASE WHEN boundary IN ('national_park')
+                                       OR (boundary = 'protected_area' AND tags->'protect_class' IN ('1','1a','1b','2','3','4','5','6','7','97','98','99'))
+                                       THEN boundary ELSE NULL END,
               'leisure_' || CASE WHEN leisure IN ('nature_reserve') THEN leisure ELSE NULL END
             ) AS feature,
             localized_name_without_brackets as name,
@@ -2365,7 +2395,7 @@ Layer:
               OR military IN ('danger_area')
               OR "natural" IN ('wood', 'glacier', 'sand', 'scree', 'shingle', 'bare_rock', 'water', 'bay', 'strait')
               OR "place" IN ('island')
-              OR boundary IN ('national_park')
+              OR (boundary = 'protected_area' AND tags->'protect_class' IN ('1','1a','1b','2','3','4','5','6','7','97','98','99'))
               OR leisure IN ('nature_reserve'))
             AND building IS NULL
             AND name IS NOT NULL
@@ -2391,7 +2421,7 @@ Layer:
               'tourism_' || CASE WHEN tourism IN ('artwork', 'alpine_hut', 'hotel', 'motel', 'hostel', 'chalet', 'wilderness_hut', 'guest_house', 'apartment', 'camp_site', 'caravan_site',
                                                   'theme_park', 'museum', 'zoo', 'information', 'picnic_site', 'gallery') THEN tourism ELSE NULL END,
               'amenity_' || CASE WHEN amenity IN ('pub', 'restaurant', 'food_court', 'cafe', 'fast_food', 'biergarten', 'bar', 'library', 'public_bath',
-                                                  'theatre', 'courthouse', 'townhall', 'cinema', 'clinic', 'community_centre', 'parking',
+                                                  'theatre', 'courthouse', 'townhall', 'cinema', 'clinic', 'community_centre',
                                                   'bicycle_parking', 'motorcycle_parking', 'police', 'fire_station', 'fountain', 'place_of_worship',
                                                   'grave_yard', 'shelter', 'bank', 'embassy', 'fuel', 'bus_station', 'prison', 'university',
                                                   'school', 'college', 'kindergarten', 'hospital', 'ice_cream', 'pharmacy', 'doctors', 'dentist',
@@ -2400,7 +2430,12 @@ Layer:
                                                   'nightclub', 'veterinary', 'social_facility', 'vehicle_inspection', 'charging_station', 'arts_centre',
                                                   'ferry_terminal', 'marketplace', 'shower', 'bbq', 'nursing_home', 'childcare', 'driving_school',
                                                   'casino', 'boat_rental', 'bicycle_repair_station') THEN amenity ELSE NULL END,
-              'advertising_' || CASE WHEN tags->'advertising' in ('column') THEN tags->'advertising' else NULL END,
+              'amenity_' || CASE WHEN amenity IN ('parking') AND (tags->'parking' NOT IN ('underground') OR (tags->'parking') IS NULL) THEN amenity ELSE NULL END,
+              'amenity_' || CASE WHEN amenity IN ('vending_machine') AND tags->'vending' IN ('excrement_bags', 'parking_tickets', 'public_transport_tickets') THEN amenity ELSE NULL END,
+              'healthcare_' || CASE WHEN tags->'healthcare' IN ('alternative', 'audiologist', 'birthing_center', 'blood_bank', 'blood_donation', 'centre', 'clinic',
+                                               'dentist', 'dialysis', 'doctor', 'hospital', 'laboratory', 'midwife', 'occupational_therapist', 'optometrist',
+                                               'physiotherapist', 'podiatrist', 'psychotherapist', 'rehabilitation', 'speech_therapist', 'yes') THEN tags->'healthcare' ELSE NULL END,
+              'advertising_' || CASE WHEN tags->'advertising' in ('column') THEN tags->'advertising' else NULL END,              
               'shop_' || CASE WHEN shop IN ('supermarket', 'bag', 'bakery', 'beauty', 'bed', 'bookmaker', 'books', 'butcher', 'clothes', 'computer', 'confectionery',
                                             'fashion', 'convenience', 'department_store', 'doityourself', 'hardware', 'fishmonger', 'florist', 'garden_centre',
                                             'hairdresser', 'hifi', 'ice_cream', 'car', 'car_repair', 'bicycle', 'mall', 'pet', 'photo', 'photo_studio',
@@ -2431,7 +2466,9 @@ Layer:
               'historic_' || CASE WHEN historic IN ('memorial', 'monument', 'archaeological_site', 'fort', 'castle', 'manor', 'city_gate')
                              THEN historic ELSE NULL END,
               'highway_' || CASE WHEN highway IN ('services', 'rest_area', 'bus_stop', 'elevator') THEN highway ELSE NULL END,
-              'boundary_' || CASE WHEN boundary IN ('national_park') THEN boundary ELSE NULL END,
+              'boundary_' || CASE WHEN boundary IN ('national_park')
+                                       OR (boundary = 'protected_area' AND tags->'protect_class' IN ('1','1a','1b','2','3','4','5','6','7','97','98','99'))
+                                       THEN boundary ELSE NULL END,
               'waterway_' || CASE WHEN waterway IN ('dam', 'dock') THEN waterway ELSE NULL END,
               'tourism_' || CASE WHEN tourism IN ('viewpoint', 'attraction') THEN tourism ELSE NULL END
             ) AS feature,
@@ -2455,6 +2492,8 @@ Layer:
               ELSE NULL
             END AS height,
             tags->'operator' as operator,
+            tags->'generator:source' as "generator:source",
+            tags->'location' as location,
             tags->'icao' as icao,
             tags->'iata' as iata,
             tags->'office' as office,
@@ -2476,6 +2515,7 @@ Layer:
             tags->'backcountry' as backcountry,
             tags->'memorial' as memorial,
             tags->'artwork_type' as artwork_type,
+            tags->'vending' as vending,
             ref,
             way_area,
             CASE WHEN access = 'private' OR iata IS NULL OR iata = 'none' THEN 'INT-minor'::text ELSE 'INT-major'::text END aeroway_class,
@@ -2568,10 +2608,13 @@ Layer:
             office,
             recycling_type,
             "telescope:type",
+            "generator:source",
+            location,
             castle_type,
             sport,
             information,
             memorial,
+            vending,
             caravans,
             tents,
             backcountry,
@@ -2587,7 +2630,7 @@ Layer:
                   'tourism_' || CASE WHEN tourism IN ('artwork', 'alpine_hut', 'hotel', 'motel', 'hostel', 'chalet', 'wilderness_hut', 'guest_house', 'apartment', 'camp_site', 'caravan_site',
                                                       'theme_park', 'museum', 'zoo', 'information', 'picnic_site', 'gallery') THEN tourism ELSE NULL END,
                   'amenity_' || CASE WHEN amenity IN ('pub', 'restaurant', 'food_court', 'cafe', 'fast_food', 'biergarten', 'bar', 'library', 'theatre',
-                                                      'courthouse', 'townhall', 'cinema', 'clinic', 'community_centre', 'parking', 'bicycle_parking', 'public_bath',
+                                                      'courthouse', 'townhall', 'cinema', 'clinic', 'community_centre', 'bicycle_parking', 'public_bath',
                                                       'motorcycle_parking', 'police', 'fire_station', 'fountain', 'place_of_worship', 'grave_yard', 'shelter', 'bank',
                                                       'embassy', 'fuel', 'bus_station', 'prison', 'university', 'school', 'college', 'kindergarten', 'hospital',
                                                       'ice_cream', 'pharmacy', 'doctors', 'dentist', 'atm', 'bicycle_rental', 'bureau_de_change','car_rental',
@@ -2596,6 +2639,11 @@ Layer:
                                                       'charging_station', 'arts_centre', 'ferry_terminal', 'marketplace', 'shower', 'bbq',
                                                       'nursing_home', 'childcare', 'driving_school', 'casino', 'boat_rental', 'bicycle_repair_station') THEN amenity ELSE NULL END,
                   'amenity_' || CASE WHEN amenity IN ('parking_entrance') AND tags->'parking' IN ('underground') AND (access IS NULL OR access NOT IN ('private', 'no')) THEN amenity ELSE NULL END,
+                  'amenity_' || CASE WHEN amenity IN ('parking') AND (tags->'parking' NOT IN ('underground') OR (tags->'parking') IS NULL) THEN amenity ELSE NULL END,
+                  'amenity_' || CASE WHEN amenity IN ('vending_machine') AND tags->'vending' IN ('public_transport_tickets') THEN amenity ELSE NULL END,
+                  'healthcare_' || CASE WHEN tags->'healthcare' IN ('alternative', 'audiologist', 'birthing_center', 'blood_bank', 'blood_donation', 'centre', 'clinic',
+                                               'dentist', 'dialysis', 'doctor', 'hospital', 'laboratory', 'midwife', 'occupational_therapist', 'optometrist',
+                                               'physiotherapist', 'podiatrist', 'psychotherapist', 'rehabilitation', 'speech_therapist', 'yes') THEN tags->'healthcare' ELSE NULL END,
                   'advertising_' || CASE WHEN tags->'advertising' in ('column') THEN tags->'advertising' else NULL END,
                   'shop_' || CASE WHEN shop IN ('supermarket', 'bag','bakery', 'beauty', 'bed', 'bookmaker', 'books', 'butcher', 'clothes', 'computer', 'confectionery', 'fashion',
                                                 'convenience', 'department_store', 'doityourself', 'hardware', 'fishmonger', 'florist', 'garden_centre', 'hairdresser',
@@ -2630,7 +2678,9 @@ Layer:
                   'historic_' || CASE WHEN historic IN ('memorial', 'monument', 'archaeological_site', 'fort', 'castle', 'manor', 'city_gate')
                                  THEN historic ELSE NULL END,
                   'highway_' || CASE WHEN highway IN ('services', 'rest_area', 'bus_stop', 'elevator') THEN highway ELSE NULL END,
-                  'boundary_' || CASE WHEN boundary IN ('national_park') THEN boundary ELSE NULL END,
+                  'boundary_' || CASE WHEN boundary IN ('national_park')
+                                           OR (boundary = 'protected_area' AND tags->'protect_class' IN ('1','1a','1b','2','3','4','5','6','7','97','98','99'))
+                                           THEN boundary ELSE NULL END,
                   'waterway_' || CASE WHEN waterway IN ('dam', 'weir', 'dock') THEN waterway ELSE NULL END,
                   'tourism_' || CASE WHEN tourism IN ('viewpoint', 'attraction') THEN tourism ELSE NULL END,
                   'man_made_' || CASE WHEN man_made IN ('cross') THEN man_made ELSE NULL END,
@@ -2659,6 +2709,8 @@ Layer:
                 "natural",
                 waterway,
                 tags->'operator' as operator,
+                tags->'location' as location,
+                tags->'generator:source' as "generator:source",
                 tags->'icao' as icao,
                 tags->'iata' as iata,
                 tags->'office' as office,
@@ -2669,6 +2721,7 @@ Layer:
                 tags->'information' as information,
                 tags->'memorial' as memorial,
                 tags->'artwork_type' as artwork_type,
+                tags->'vending' as vending,
                 tags->'tents' as tents,
                 tags->'caravans' as caravans,
                 tags->'backcountry' as backcountry,
@@ -2860,6 +2913,7 @@ Layer:
               'amenity_' || CASE WHEN amenity IN ('parking', 'bicycle_parking', 'motorcycle_parking', 'bench',
                             'waste_basket', 'waste_disposal') THEN amenity ELSE NULL END,
               'historic_' || CASE WHEN historic IN ('wayside_cross', 'wayside_shrine') THEN historic ELSE NULL END,
+              'tourism_' || CASE WHEN tourism IN ('viewpoint', 'attraction') THEN tourism ELSE NULL END,
               'man_made_' || CASE WHEN man_made IN ('cross') THEN man_made ELSE NULL END,
               'barrier_' || CASE WHEN barrier IN ('bollard', 'gate', 'lift_gate', 'swing_gate', 'block', 'log', 'cattle_grid', 'stile') THEN barrier ELSE NULL END
             )  AS feature,
@@ -2872,7 +2926,7 @@ Layer:
              OR amenity IN ('parking', 'bicycle_parking', 'motorcycle_parking', 'bench', 'waste_basket', 'waste_disposal')
              OR historic IN ('wayside_cross', 'wayside_shrine')
              OR man_made IN ('cross')
-             OR barrier IN ('bollard', 'gate', 'lift_gate', 'swing_gate', 'block', 'log', 'cattle_grid', 'stile')
+             OR barrier IN ('bollard', 'gate', 'lift_gate', 'swing_gate', 'block', 'log', 'cattle_grid', 'stile', 'motorcycle_barrier', 'cycle_barrier', 'full-height_turnstile', 'turnstile', 'kissing_gate')
           ORDER BY prio
           ) AS amenity_low_priority
     properties:
@@ -2888,13 +2942,14 @@ Layer:
             way,
             localized_name_second as name,
             COALESCE(
-              'amenity_' || CASE WHEN amenity IN ('parking', 'bicycle_parking', 'motorcycle_parking') THEN amenity ELSE NULL END,
-              'barrier_' || CASE WHEN barrier IN ('bollard', 'gate', 'lift_gate', 'swing_gate', 'block', 'log', 'cattle_grid', 'stile') THEN barrier ELSE NULL END
+              'amenity_' || CASE WHEN amenity IN ('bicycle_parking', 'motorcycle_parking') THEN amenity ELSE NULL END,
+              'amenity_' || CASE WHEN amenity IN ('parking') AND (tags->'parking' NOT IN ('underground') OR (tags->'parking') IS NULL) THEN amenity ELSE NULL END,
+              'barrier_' || CASE WHEN barrier IN ('bollard', 'gate', 'lift_gate', 'swing_gate', 'block', 'log', 'cattle_grid', 'stile', 'motorcycle_barrier', 'cycle_barrier', 'full-height_turnstile', 'turnstile', 'kissing_gate') THEN barrier ELSE NULL END
             )  AS feature,
             access
           FROM planet_osm_polygon p
           WHERE amenity IN ('parking', 'bicycle_parking', 'motorcycle_parking')
-             OR barrier IN ('bollard', 'gate', 'lift_gate', 'swing_gate', 'block', 'log', 'cattle_grid', 'stile')
+             OR barrier IN ('bollard', 'gate', 'lift_gate', 'swing_gate', 'block', 'log', 'cattle_grid', 'stile', 'motorcycle_barrier', 'cycle_barrier', 'full-height_turnstile', 'turnstile', 'kissing_gate')
           ) AS amenity_low_priority_poly
     properties:
       minzoom: 14
