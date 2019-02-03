@@ -127,6 +127,7 @@ Layer:
               OR amenity IN ('parking', 'bicycle_parking', 'motorcycle_parking', 'taxi', 'university', 'college', 'school', 'hospital', 'kindergarten',
                              'grave_yard', 'place_of_worship', 'prison', 'clinic', 'ferry_terminal', 'marketplace', 'community_centre', 'social_facility',
                              'arts_centre', 'parking_space', 'bus_station', 'fire_station', 'police')
+              OR tags->'healthcare' IN ('clinic', 'hospital')
               OR man_made IN ('works', 'wastewater_plant','water_works')
               OR "natural" IN ('beach', 'shoal', 'heath', 'mud', 'marsh', 'wetland', 'grassland', 'wood', 'sand', 'scree', 'shingle', 'bare_rock', 'scrub')
               OR power IN ('station', 'sub_station', 'substation', 'generator')
@@ -1855,6 +1856,7 @@ Layer:
             tags->'castle_type' as castle_type,
             tags->'sport' as sport,
             tags->'information' as information,
+            tags->'healthcare' as healthcare,
             tags->'memorial' as memorial,
             tags->'artwork_type' as artwork_type,
             tags->'vending' as vending,
@@ -1876,6 +1878,7 @@ Layer:
             OR tourism IN ('artwork', 'alpine_hut', 'camp_site', 'caravan_site', 'chalet', 'wilderness_hut', 'guest_house', 'apartment', 'hostel',
                            'hotel', 'motel', 'information', 'museum', 'viewpoint', 'picnic_site', 'gallery')
             OR amenity IS NOT NULL -- skip checking a huge list and use a null check
+            OR (tags->'healthcare') IS NOT NULL
             OR tags->'advertising' IN ('column')
             OR shop IS NOT NULL
             OR (tags->'office') IS NOT NULL
@@ -2011,6 +2014,7 @@ Layer:
             tags->'castle_type' as castle_type,
             tags->'sport' as sport,
             tags->'information' as information,
+            tags->'healthcare' as healthcare,
             tags->'tents' as tents,
             tags->'caravans' as caravans,
             tags->'backcountry' as backcountry,
@@ -2038,6 +2042,7 @@ Layer:
             OR tourism IN ('artwork', 'alpine_hut', 'camp_site', 'caravan_site', 'chalet', 'wilderness_hut', 'guest_house', 'apartment', 'hostel',
                            'hotel', 'motel', 'information', 'museum', 'viewpoint', 'picnic_site', 'gallery')
             OR amenity IS NOT NULL -- skip checking a huge list and use a null check
+            OR (tags->'healthcare') IS NOT NULL
             OR shop IS NOT NULL
             OR tags->'advertising' IN ('column')
             OR (tags->'office') IS NOT NULL
@@ -2510,6 +2515,7 @@ Layer:
             tags->'castle_type' as castle_type,
             tags->'sport' as sport,
             tags->'information' as information,
+            tags->'healthcare' as healthcare,
             tags->'tents' as tents,
             tags->'caravans' as caravans,
             tags->'backcountry' as backcountry,
@@ -2527,6 +2533,7 @@ Layer:
               OR tourism IN ('artwork', 'alpine_hut', 'hotel', 'motel', 'hostel', 'chalet', 'wilderness_hut', 'guest_house', 'apartment',
                              'camp_site', 'caravan_site', 'theme_park', 'museum', 'viewpoint', 'attraction', 'zoo', 'information', 'picnic_site', 'gallery')
               OR amenity IS NOT NULL -- skip checking a huge list and use a null check
+              OR (tags->'healthcare') IS NOT NULL
               OR tags->'advertising' IN ('column')
               OR shop IS NOT NULL
               OR (tags->'office') IS NOT NULL
@@ -2719,6 +2726,7 @@ Layer:
                 tags->'castle_type' as castle_type,
                 tags->'sport' as sport,
                 tags->'information' as information,
+                tags->'healthcare' as healthcare,
                 tags->'memorial' as memorial,
                 tags->'artwork_type' as artwork_type,
                 tags->'vending' as vending,
@@ -2734,6 +2742,7 @@ Layer:
                   OR tourism IN ('artwork', 'alpine_hut', 'hotel', 'motel', 'hostel', 'chalet', 'wilderness_hut', 'guest_house', 'apartment', 'camp_site', 'caravan_site', 'theme_park',
                                  'museum', 'viewpoint', 'attraction', 'zoo', 'information', 'picnic_site', 'gallery')
                   OR amenity IS NOT NULL -- skip checking a huge list and use a null check
+                  OR (tags->'healthcare') IS NOT NULL
                   OR tags->'advertising' IN ('column')
                   OR shop IS NOT NULL
                   OR (tags->'office') IS NOT NULL
