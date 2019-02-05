@@ -1,0 +1,11 @@
+  - id: ocean-z1
+    class: "ocean"
+    geometry: "polygon"
+    <<: *extents
+    Datasource:
+      file: "data/ocean-polygons-reduced-3857/ocean_reduced_z1.shp"
+      type: "shape"
+    properties:
+      minzoom: 1
+      maxzoom: 1
+    advanced: {}

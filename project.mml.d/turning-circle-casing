@@ -1,0 +1,28 @@
+  - id: turning-circle-casing
+    geometry: point
+    <<: *extents
+    Datasource:
+      <<: *osm2pgsql
+      table: |-
+        (SELECT DISTINCT ON (p.way)
+            p.way AS way, l.highway AS int_tc_type,
+            CASE WHEN l.service IN ('parking_aisle', 'drive-through', 'driveway')
+              THEN 'INT-minor'::text
+              ELSE 'INT-normal'::text
+            END AS int_tc_service
+          FROM planet_osm_point p
+            JOIN planet_osm_line l ON ST_DWithin(p.way, l.way, 0.1) -- Assumes Mercator
+            JOIN (VALUES
+              ('tertiary', 1),
+              ('unclassified', 2),
+              ('residential', 3),
+              ('living_street', 4),
+              ('service', 5)
+              ) AS v (highway, prio)
+              ON v.highway=l.highway
+          WHERE p.highway = 'turning_circle'
+            OR p.highway = 'turning_loop'
+          ORDER BY p.way, v.prio
+        ) AS turning_circle_casing
+    properties:
+      minzoom: 15

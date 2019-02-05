@@ -1,0 +1,15 @@
+  - id: water-barriers-line
+    geometry: linestring
+    <<: *extents
+    Datasource:
+      <<: *osm2pgsql
+      table: |-
+        (SELECT
+            way,
+            waterway,
+            localized_name_second as name
+          FROM planet_osm_line
+          WHERE waterway IN ('dam', 'weir', 'lock_gate')
+        ) AS water_barriers_line
+    properties:
+      minzoom: 13

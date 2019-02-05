@@ -1,0 +1,18 @@
+  - id: building-text
+    geometry: polygon
+    <<: *extents
+    Datasource:
+      <<: *osm2pgsql
+      table: |-
+        (SELECT
+            localized_name_second as name,
+            way,
+            way_area/NULLIF(POW(!scale_denominator!*0.001*0.28,2),0) AS way_pixels
+          FROM planet_osm_polygon
+          WHERE building IS NOT NULL
+            AND building NOT IN ('no')
+            AND name IS NOT NULL
+          ORDER BY way_area DESC
+        ) AS building_text
+    properties:
+      minzoom: 14

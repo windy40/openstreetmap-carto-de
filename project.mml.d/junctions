@@ -1,0 +1,29 @@
+  - id: junctions
+    geometry: point
+    <<: *extents
+    Datasource:
+      <<: *osm2pgsql
+      table: |-
+        (SELECT
+            way,
+            highway,
+            junction,
+            ref,
+            localized_streetname as name,
+            NULL AS way_pixels
+          FROM planet_osm_point
+          WHERE highway = 'motorway_junction' OR highway = 'traffic_signals' OR junction = 'yes'
+        UNION ALL
+          SELECT
+            way,
+            highway,
+            junction,
+            ref,
+            localized_streetname as name,
+            way_area/NULLIF(POW(!scale_denominator!*0.001*0.28,2),0) AS way_pixels
+          FROM planet_osm_polygon
+          WHERE junction = 'yes'
+          ORDER BY way_pixels DESC NULLS LAST
+        ) AS junctions
+    properties:
+      minzoom: 11

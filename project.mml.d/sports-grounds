@@ -1,0 +1,13 @@
+  - id: sports-grounds
+    geometry: "polygon"
+    <<: *extents
+    Datasource:
+      <<: *osm2pgsql
+      table: |-
+        (SELECT
+            way,leisure,
+            case when leisure='pitch' then 2 when leisure='track' then 1 else 0 end as prio
+          FROM planet_osm_polygon
+          WHERE leisure in ('sports_centre','stadium','pitch','track')
+          ORDER BY z_order,prio,way_area desc)
+        AS sports_grounds

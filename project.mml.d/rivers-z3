@@ -1,0 +1,11 @@
+  - id: rivers-z3
+    class: "rivers"
+    geometry: "polygon"
+    <<: *extents
+    Datasource:
+      file: "data/river-polygons-reduced-3857/river_reduced_z3.shp"
+      type: "shape"
+    properties:
+      minzoom: 3
+      maxzoom: 3
+    advanced: {}

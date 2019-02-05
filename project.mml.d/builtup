@@ -1,0 +1,11 @@
+  - id: builtup
+    geometry: polygon
+    extent: *world
+    srs-name: mercator
+    srs: "+proj=merc +datum=WGS84 +over"
+    Datasource:
+      file: data/world_boundaries/builtup_area.shp
+      type: shape
+    properties:
+      minzoom: 8
+      maxzoom: 9

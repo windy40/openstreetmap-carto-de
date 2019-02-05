@@ -1,0 +1,13 @@
+  - id: power-poles
+    geometry: point
+    <<: *extents
+    Datasource:
+      <<: *osm2pgsql
+      table: |-
+        (SELECT
+            way
+          FROM planet_osm_point
+          WHERE power = 'pole'
+        ) AS power_poles
+    properties:
+      minzoom: 16

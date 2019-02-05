@@ -1,0 +1,22 @@
+  - id: capital-names
+    geometry: point
+    <<: *extents
+    Datasource:
+      <<: *osm2pgsql
+      table: |-
+        (SELECT
+            way,
+            localized_name_first as name,
+            CASE
+              WHEN (tags->'population' ~ '^[0-9]{1,8}$') THEN (tags->'population')::INTEGER ELSE 0
+            END as population,
+            round(ascii(md5(osm_id::text)) / 55) AS dir -- base direction factor on geometry to be consistent across metatiles
+          FROM planet_osm_point
+          WHERE place IN ('city', 'town', 'village', 'hamlet')
+            AND name IS NOT NULL
+            AND tags @> 'capital=>yes'
+          ORDER BY population DESC
+        ) AS capital_names
+    properties:
+      minzoom: 3
+      maxzoom: 15

@@ -1,0 +1,21 @@
+  - id: state-names
+    class: state
+    geometry: point
+    <<: *extents
+    Datasource:
+      <<: *osm2pgsql
+      table: |-
+        (SELECT
+            way,
+            way_area/NULLIF(POW(!scale_denominator!*0.001*0.28,2),0) AS way_pixels,
+            localized_name_first as name,
+            ref
+          FROM planet_osm_polygon
+          WHERE boundary = 'administrative'
+            AND admin_level = '4'
+            AND name IS NOT NULL
+            AND way_area > 100*!pixel_width!::real*!pixel_height!::real
+          ORDER BY way_area DESC
+        ) AS state_names
+    properties:
+      minzoom: 4

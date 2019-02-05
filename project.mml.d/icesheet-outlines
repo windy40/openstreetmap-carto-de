@@ -1,0 +1,8 @@
+  - id: icesheet-outlines
+    geometry: linestring
+    <<: *extents
+    Datasource:
+      file: data/antarctica-icesheet-outlines-3857/icesheet_outlines.shp
+      type: shape
+    properties:
+      minzoom: 5

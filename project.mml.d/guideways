@@ -1,0 +1,13 @@
+  - id: guideways
+    geometry: linestring
+    <<: *extents
+    Datasource:
+      <<: *osm2pgsql
+      table: |-
+        (SELECT
+            way
+          FROM planet_osm_line
+          WHERE highway = 'bus_guideway'
+        ) AS guideways
+    properties:
+      minzoom: 11

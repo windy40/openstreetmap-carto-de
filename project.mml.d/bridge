@@ -1,0 +1,16 @@
+  - id: bridge
+    geometry: polygon
+    <<: *extents
+    Datasource:
+      <<: *osm2pgsql
+      table: |-
+        (SELECT
+            way,
+            way_area/NULLIF(POW(!scale_denominator!*0.001*0.28,2),0) AS way_pixels,
+            man_made,
+            localized_name_second as name
+          FROM planet_osm_polygon
+          WHERE man_made = 'bridge'
+        ) AS bridge
+    properties:
+      minzoom: 12

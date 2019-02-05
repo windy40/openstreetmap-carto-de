@@ -1,0 +1,11 @@
+  - id: lakes-z2
+    class: "lakes"
+    geometry: "polygon"
+    <<: *extents
+    Datasource:
+      file: "data/lakes-polygons-reduced-3857/lakes_reduced_z2.shp"
+      type: "shape"
+    properties:
+      minzoom: 2
+      maxzoom: 2
+    advanced: {}

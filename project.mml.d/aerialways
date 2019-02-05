@@ -1,0 +1,15 @@
+  - id: aerialways
+    geometry: linestring
+    <<: *extents
+    Datasource:
+      <<: *osm2pgsql
+      table: |-
+        (SELECT
+            way,
+            aerialway,
+            localized_name_second as name
+          FROM planet_osm_line
+          WHERE aerialway IS NOT NULL
+        ) AS aerialways
+    properties:
+      minzoom: 12
