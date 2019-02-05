@@ -1,0 +1,13 @@
+  - id: cliffs
+    geometry: linestring
+    <<: *extents
+    Datasource:
+      <<: *osm2pgsql
+      table: |-
+        (SELECT
+            way, "natural", man_made
+          FROM planet_osm_line
+          WHERE "natural" = 'cliff' OR man_made = 'embankment'
+        ) AS cliffs
+    properties:
+      minzoom: 13

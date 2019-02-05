@@ -1,0 +1,13 @@
+  - id: power-towers
+    geometry: point
+    <<: *extents
+    Datasource:
+      <<: *osm2pgsql
+      table: |-
+        (SELECT
+            way
+          FROM planet_osm_point
+          WHERE power = 'tower'
+        ) AS power_towers
+    properties:
+      minzoom: 14

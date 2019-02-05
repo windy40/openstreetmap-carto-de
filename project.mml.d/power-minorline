@@ -1,0 +1,13 @@
+  - id: power-minorline
+    geometry: linestring
+    <<: *extents
+    Datasource:
+      <<: *osm2pgsql
+      table: |-
+        (SELECT
+            way
+          FROM planet_osm_line
+          WHERE power = 'minor_line'
+        ) AS power_minorline
+    properties:
+      minzoom: 16

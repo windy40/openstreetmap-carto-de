@@ -1,0 +1,13 @@
+  - id: piers-poly
+    geometry: polygon
+    <<: *extents
+    Datasource:
+      <<: *osm2pgsql
+      table: |-
+        (SELECT
+            way, man_made
+          FROM planet_osm_polygon
+          WHERE man_made IN ('pier', 'breakwater', 'groyne')
+        ) AS piers_poly
+    properties:
+      minzoom: 12
