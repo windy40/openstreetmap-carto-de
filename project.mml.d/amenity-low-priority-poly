@@ -1,0 +1,22 @@
+  - id: amenity-low-priority-poly
+    class: amenity-low-priority
+    geometry: polygon
+    <<: *extents
+    Datasource:
+      <<: *osm2pgsql
+      table: |-
+        (SELECT
+            way,
+            localized_name_second as name,
+            COALESCE(
+              'amenity_' || CASE WHEN amenity IN ('bicycle_parking', 'motorcycle_parking') THEN amenity ELSE NULL END,
+              'amenity_' || CASE WHEN amenity IN ('parking') AND (tags->'parking' NOT IN ('underground') OR (tags->'parking') IS NULL) THEN amenity ELSE NULL END,
+              'barrier_' || CASE WHEN barrier IN ('bollard', 'gate', 'lift_gate', 'swing_gate', 'block', 'log', 'cattle_grid', 'stile', 'motorcycle_barrier', 'cycle_barrier', 'full-height_turnstile', 'turnstile', 'kissing_gate') THEN barrier ELSE NULL END
+            )  AS feature,
+            access
+          FROM planet_osm_polygon p
+          WHERE amenity IN ('parking', 'bicycle_parking', 'motorcycle_parking')
+             OR barrier IN ('bollard', 'gate', 'lift_gate', 'swing_gate', 'block', 'log', 'cattle_grid', 'stile', 'motorcycle_barrier', 'cycle_barrier', 'full-height_turnstile', 'turnstile', 'kissing_gate')
+          ) AS amenity_low_priority_poly
+    properties:
+      minzoom: 14

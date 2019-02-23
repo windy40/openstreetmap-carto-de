@@ -1,0 +1,21 @@
+  - id: buildings
+    geometry: polygon
+    <<: *extents
+    Datasource:
+      <<: *osm2pgsql
+      table: |-
+        (SELECT
+            way,
+            building,
+            amenity,
+            aeroway,
+            aerialway,
+            tags->'public_transport' as public_transport
+          FROM planet_osm_polygon
+          WHERE building IS NOT NULL
+            AND building != 'no'
+            AND way_area > 1*!pixel_width!::real*!pixel_height!::real
+          ORDER BY COALESCE(layer,0), way_area DESC
+        ) AS buildings
+    properties:
+      minzoom: 14

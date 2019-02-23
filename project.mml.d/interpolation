@@ -1,0 +1,13 @@
+  - id: interpolation
+    geometry: linestring
+    <<: *extents
+    Datasource:
+      <<: *osm2pgsql
+      table: |-
+        (SELECT
+            way
+          FROM planet_osm_line
+          WHERE "addr:interpolation" IS NOT NULL
+        ) AS interpolation
+    properties:
+      minzoom: 17

@@ -1,0 +1,8 @@
+  - id: coast-poly
+    geometry: polygon
+    <<: *extents
+    Datasource:
+      file: data/land-polygons-split-3857/land_polygons.shp
+      type: shape
+    properties:
+      minzoom: 10

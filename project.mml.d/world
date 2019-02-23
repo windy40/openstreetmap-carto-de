@@ -1,0 +1,8 @@
+  - id: world
+    geometry: polygon
+    <<: *extents
+    Datasource:
+      file: data/simplified-land-polygons-complete-3857/simplified_land_polygons.shp
+      type: shape
+    properties:
+      maxzoom: 9

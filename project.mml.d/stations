@@ -1,0 +1,27 @@
+  - id: stations
+    class: stations
+    geometry: point
+    <<: *extents
+    Datasource:
+      <<: *osm2pgsql
+      table: |-
+        (SELECT
+            way,
+            localized_name_without_brackets as name,
+            ref,
+            railway,
+            aerialway,
+            tags->'station' as "station",
+            CASE railway
+              WHEN 'station' THEN 1
+              WHEN 'subway_entrance' THEN 3
+              ELSE 2
+            END
+              AS prio
+          FROM planet_osm_point
+          WHERE railway IN ('station', 'halt', 'tram_stop', 'subway_entrance')
+            OR aerialway = 'station'
+          ORDER BY prio
+        ) AS stations
+    properties:
+      minzoom: 12
