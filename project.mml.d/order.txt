@@ -46,7 +46,7 @@ admin-mid-zoom
 admin-high-zoom
 power-minorline
 power-line
-nature-reserve-boundaries
+protected-areas
 trees
 country-names
 capital-names
@@ -78,6 +78,6 @@ addresses
 water-lines-text
 ferry-routes-text
 admin-text
-nature-reserve-text
+protected-areas-text
 amenity-low-priority
 amenity-low-priority-poly
