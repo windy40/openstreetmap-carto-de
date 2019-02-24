@@ -35,7 +35,7 @@ test: test-z03.png test-z04.png test-z05.png test-z06.png test-z07.png test-z08.
 	test-castle4.png test-camp-caravan.png test-campsite.png test-backcountry.png test-kebab.png \
 	test-sport.png test-l10n1.png test-l10n2.png test-foot-cycle-path-track.png \
 	test-living-street.png test-proposed.png test-coast1.png test-coast2.png test-lake-ocean.png \
-	test-l10n1.png test-l10n2.png test-construction.png
+	test-l10n1.png test-l10n2.png test-construction.png test-iata.png
 
 test-z03.png: $(XMLSTYLE)
 	./scripts/render_single_tile.py -s $(XMLSTYLE) -o $@ -u /3/3/2.png
@@ -117,6 +117,9 @@ test-kebab.png:
 # sport pitches
 test-sport.png:
 	./scripts/render_single_tile.py -s $(XMLSTYLE) -o $@ -u /16/34311/22505.png
+# Airports incl. IATA code
+test-iata.png:
+	 ./scripts/render_single_tile.py -s $(XMLSTYLE) -o $@ -u /10/545/354.png
 # l10n (country-names)
 test-l10n1.png:
 	./scripts/render_single_tile.py -s $(XMLSTYLE) -o $@ -u /3/5/3.png

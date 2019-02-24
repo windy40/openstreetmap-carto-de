@@ -1,6 +1,6 @@
 // --- Parks, woods, other green things ---
 
-@grass: #cdebb0;        // Lch(90,32,128) also grassland, meadow, common, village_green, garden
+@grass: #cdebb0;        // Lch(90,32,128) also grassland, meadow, village_green, garden, allotments
 @scrub: #c8d7ab;        // Lch(84,24,122)
 @forest: #add19e;       // Lch(80,30,135)
 @forest-text: #46673b;  // Lch(40,30,135)
@@ -81,7 +81,18 @@
   ::mid-zoom[zoom >= 11][zoom < 12],
   ::upper-mid-zoom[zoom >= 12][zoom < 13],
   ::high-zoom[zoom >= 13] {
-
+  
+  ::first {
+    [feature = 'wetland_mud'],
+    [feature = 'wetland_tidalflat'] {
+      [zoom >= 5] {
+        polygon-fill: @mud;
+        [way_pixels >= 4]  { polygon-gamma: 0.75; }
+        [way_pixels >= 64] { polygon-gamma: 0.3;  }
+      }
+    }
+  }
+  
   [feature = 'leisure_swimming_pool'][zoom >= 14] {
     polygon-fill: @water-color;
     [zoom >= 17] {
@@ -348,8 +359,7 @@
   [feature = 'natural_grassland'][zoom >= 5],
   [feature = 'landuse_meadow'][zoom >= 5],
   [feature = 'landuse_grass'][zoom >= 10],
-  [feature = 'landuse_village_green'][zoom >= 10],
-  [feature = 'leisure_common'][zoom >= 10] {
+  [feature = 'landuse_village_green'][zoom >= 10] {
     polygon-fill: @grass;
     [way_pixels >= 4]  { polygon-gamma: 0.75; }
     [way_pixels >= 64] { polygon-gamma: 0.3;  }
@@ -708,16 +718,6 @@
 }
 
 #landcover-area-symbols {
-  ::first {
-    [natural = 'mud'],
-    [int_wetland = 'tidalflat'] {
-      [zoom >= 9] {
-        polygon-fill: @mud;
-        [way_pixels >= 4]  { polygon-gamma: 0.75; }
-        [way_pixels >= 64] { polygon-gamma: 0.3;  }
-      }
-    }
-  }
   [natural = 'sand'][zoom >= 5] {
     polygon-pattern-file: url('symbols/beach.png');
     polygon-pattern-alignment: global;

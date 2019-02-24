@@ -2413,7 +2413,6 @@
   [feature = 'leisure_recreation_ground'],
   [feature = 'landuse_recreation_ground'],
   [feature = 'landuse_village_green'],
-  [feature = 'leisure_common'],
   [feature = 'leisure_garden'],
   [feature = 'landuse_quarry'],
   [feature = 'landuse_vineyard'],
@@ -2492,7 +2491,6 @@
       [feature = 'leisure_recreation_ground'],
       [feature = 'landuse_recreation_ground'],
       [feature = 'landuse_village_green'],
-      [feature = 'leisure_common'],
       [feature = 'leisure_garden'] {
         text-fill: @leisure-green;
       }
@@ -3263,26 +3261,21 @@
     text-placement: interior;
   }
 
-  [feature = 'aeroway_aerodrome'][zoom < 14] {
-    [zoom >= 10][aeroway_class = 'INT-major'],
-    [zoom >= 13][aeroway_class = 'INT-minor'] {
-      text-name: "[name]";
-      text-size: @standard-font-size;
-      text-wrap-width: @standard-wrap-width;
-      text-line-spacing: @standard-line-spacing-size;
-      text-fill: darken(@airtransport, 15%);
-      text-dy: -10;
-      text-face-name: @oblique-fonts;
-      text-halo-radius: @standard-halo-radius;
-      text-halo-fill: @standard-halo-fill;
-      text-placement: interior;
-      text-wrap-width: @standard-wrap-width;
-      [aeroway_class = 'INT-major'] {
-        text-name: "[name_and_iata]";
-      }
-    }
+  [feature = 'aeroway_aerodrome']['access' != 'private']['icao' != null]['iata' != null][zoom >= 10][zoom < 14],
+  [feature = 'aeroway_aerodrome'][zoom >= 11][zoom < 14],
+  [feature = 'amenity_ferry_terminal'][zoom >= 15] {
+    text-name: "[name_and_iata]";
+    text-size: @standard-font-size;
+    text-wrap-width: @standard-wrap-width;
+    text-line-spacing: @standard-line-spacing-size;
+    text-fill: darken(@airtransport, 15%);
+    text-dy: 10;
+    text-face-name: @oblique-fonts;
+    text-halo-radius: @standard-halo-radius;
+    text-halo-fill: @standard-halo-fill;
+    text-placement: interior;
   }
-
+  
   [feature = 'amenity_hunting_stand'][zoom >= 17] {
     text-name: "[name]";
     text-size: @standard-font-size;

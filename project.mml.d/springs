@@ -1,4 +1,4 @@
-  - id: springs 
+  - id: springs
     geometry: point
     <<: *extents
     Datasource:

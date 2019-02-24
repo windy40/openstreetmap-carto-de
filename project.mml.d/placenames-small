@@ -7,14 +7,15 @@
         (SELECT
             way,
             place,
+            leisure,
             localized_name_second as name
           FROM planet_osm_point
-          WHERE place IN ('suburb', 'village', 'hamlet', 'neighbourhood', 'locality', 'isolated_dwelling', 'farm')
-            AND name IS NOT NULL
+          WHERE place IN ('village', 'hamlet')
+             AND name IS NOT NULL
              AND NOT tags @> 'capital=>yes'
              OR (place IN ('suburb', 'quarter', 'neighbourhood', 'locality', 'isolated_dwelling', 'farm')
                  OR (place IN ('square')
-                     AND (leisure is NULL OR NOT leisure IN ('park', 'common', 'recreation_ground', 'garden')))
+                     AND (leisure is NULL OR NOT leisure IN ('park', 'recreation_ground', 'garden')))
              ) AND name IS NOT NULL
           ORDER BY CASE
               WHEN place = 'suburb' THEN 3

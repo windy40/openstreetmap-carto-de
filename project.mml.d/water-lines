@@ -6,8 +6,8 @@
       <<: *osm2pgsql
       table: |-
         (SELECT
-            way,
-            waterway,
+            way, 
+            waterway, 
             localized_name_second as name,
             CASE WHEN tags->'intermittent' IN ('yes')
               OR tags->'seasonal' IN ('yes', 'spring', 'summer', 'autumn', 'winter', 'wet_season', 'dry_season')
