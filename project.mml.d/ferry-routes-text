@@ -9,6 +9,7 @@
             localized_name_second as name
           FROM planet_osm_line
           WHERE route = 'ferry'
+            AND osm_id > 0
             AND name IS NOT NULL
         ) AS ferry_routes_text
     properties:
