@@ -1,6 +1,6 @@
   - id: ocean
-    class: "ocean"
     geometry: polygon
+    class: ocean
     <<: *extents
     Datasource:
       file: data/water-polygons-split-3857/water_polygons.shp

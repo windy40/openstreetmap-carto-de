@@ -3,6 +3,7 @@ landcover-low-zoom
 landcover
 builtup
 landcover-line
+icesheet-poly
 water-lines-casing
 water-lines-low-zoom
 springs
@@ -78,8 +79,6 @@ state-names
 placenames-medium
 placenames-small
 stations
-stations-poly
-amenity-points-poly
 amenity-line
 amenity-points
 power-towers
@@ -93,7 +92,6 @@ roads-text-name
 paths-text-name
 railways-text-name
 text-poly-low-zoom
-text-poly
 text-line
 text-point
 building-text
