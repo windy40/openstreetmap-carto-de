@@ -1,11 +1,6 @@
 /* For the main linear features, such as roads and railways. */
 
 /* road colors for german style are hardcoded rather than generated with scripts/generate_road_colors.py */
-@motorway-fill: #eb7d54;
-@trunk-fill: #e27272;
-@primary-fill: #e27272;
-@secondary-fill: #f6e856;
-@tertiary-fill: #ffffb3;
 @residential-fill: #ffffff;
 @unclassified-fill:#ffffff;
 @service-fill: @residential-fill;
@@ -32,17 +27,7 @@
 @motorway-overlay:#f6e856;
 @trunk-overlay:#f6f6f6;
 
-@motorway-low-zoom: @motorway-fill;
-@trunk-low-zoom: @trunk-fill;
-@primary-low-zoom: @primary-fill;
-@secondary-low-zoom: @secondary-fill;
-
 @default-casing: white;
-@motorway-casing: #b95331;
-@trunk-casing: #b93131;
-@primary-casing: #8d4346;
-@secondary-casing: #a37b48;
-@tertiary-casing: #8f8f8f;
 @residential-casing: #bbb;
 @road-casing: @residential-casing;
 @service-casing: @residential-casing;
@@ -63,11 +48,6 @@
 @secondary-construction-fill:@secondary-fill;
 @tertiary-construction-fill:@tertiary-fill;
 @unimportant-construction-fill:@residential-fill;
-
-@motorway-low-zoom-casing: @motorway-fill;
-@trunk-low-zoom-casing: @trunk-fill;
-@primary-low-zoom-casing: @primary-casing;
-@secondary-low-zoom-casing: @secondary-casing;
 
 @unimportant-road: @residential-casing;
 
