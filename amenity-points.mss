@@ -686,8 +686,7 @@
   }
 
   [feature = 'amenity_hospital'][zoom >= 15] {
-    marker-file: url('symbols/amenity/hospital.svg');
-    marker-fill: @health-color;
+    marker-file: url('symbols-de/hospital.svg');
     marker-placement: interior;
     marker-clip: false;
   }

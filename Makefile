@@ -114,6 +114,9 @@ test-backcountry.png: $(XMLSTYLE)
 # Dönerbude
 test-kebab.png:
 	./scripts/render_single_tile.py -s $(XMLSTYLE) -o $@ -u /19/274475/180053.png
+# hospital
+test-hospital.png:
+	./scripts/render_single_tile.py -s $(XMLSTYLE) -o $@ -u /15/17146/11253.png
 # sport pitches
 test-sport.png:
 	./scripts/render_single_tile.py -s $(XMLSTYLE) -o $@ -u /16/34311/22505.png
