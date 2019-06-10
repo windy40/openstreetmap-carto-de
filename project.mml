@@ -434,7 +434,7 @@ Layer:
           ORDER BY COALESCE(layer,0), way_area DESC
         ) AS water_areas
     properties:
-      minzoom: 0
+      minzoom: 7
   - id: ocean-z0
     class: "ocean"
     geometry: "polygon"
@@ -2385,7 +2385,7 @@ Layer:
           ORDER BY way_area DESC
         ) AS text_poly_low_zoom
     properties:
-      minzoom: 0
+      minzoom: 4
       maxzoom: 9
   - id: text-line
     geometry: linestring
