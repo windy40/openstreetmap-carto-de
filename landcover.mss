@@ -67,6 +67,8 @@
 @track: @pitch;
 @stadium: @leisure; // also sports_centre
 @golf_course: #b5e3b5;
+@sport-surface-clay: lighten(#cc7e66, 20%);
+@sport-surface-grass: @pitch;
 
 #landcover-low-zoom[zoom < 10],
 #landcover[zoom >= 10] {
@@ -683,6 +685,15 @@
     [zoom >= 15] {
       line-width: 0.5;
       line-color: desaturate(darken(@pitch, 20%), 10%);
+      [surface='clay']::surface {
+        polygon-fill: @sport-surface-clay;
+        line-color: saturate(darken(@sport-surface-clay, 20%), 10%);
+      }
+      /* this is currently the same as the generic ccolor */
+      [surface='grass']::surface {
+        polygon-fill: @sport-surface-grass;
+        line-color: saturate(darken(@sport-surface-grass, 20%), 10%); 
+      }
     }
     [way_pixels >= 4]  { polygon-gamma: 0.75; }
     [way_pixels >= 64] { polygon-gamma: 0.3;  }
