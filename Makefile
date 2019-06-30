@@ -118,7 +118,7 @@ test-kebab.png:
 test-hospital.png:
 	./scripts/render_single_tile.py -t -s $(XMLSTYLE) -o $@ -u /15/17146/11253.png
 # sport pitches
-test-t -sport.png:
+test-sport.png:
 	./scripts/render_single_tile.py -t -s $(XMLSTYLE) -o $@ -u /16/34311/22505.png
 # Airports incl. IATA code
 test-iata.png:
