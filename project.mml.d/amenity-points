@@ -173,7 +173,7 @@
               UNION ALL
               SELECT
                   way,
-                  name,
+                  localized_name_without_brackets as name,
                   access,
                   aeroway,
                   amenity,
