@@ -357,6 +357,7 @@
   }
 
   [feature = 'landuse_retail'],
+  [feature = 'shop_mall'],
   [feature = 'amenity_marketplace'] {
     [zoom >= 8] {
       polygon-fill: @built-up-lowzoom;

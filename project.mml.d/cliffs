@@ -10,4 +10,5 @@
           WHERE "natural" = 'cliff' OR man_made = 'embankment'
         ) AS cliffs
     properties:
+      cache-features: true
       minzoom: 13

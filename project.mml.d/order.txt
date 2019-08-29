@@ -82,7 +82,6 @@ stations
 amenity-line
 amenity-points
 power-towers
-power-poles
 roads-text-ref-low-zoom
 junctions
 bridge-text

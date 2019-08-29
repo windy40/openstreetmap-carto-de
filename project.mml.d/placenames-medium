@@ -41,5 +41,6 @@
           ORDER BY score DESC, length(name) DESC, name
         ) AS placenames_medium
     properties:
+      cache-features: true
       minzoom: 4
       maxzoom: 15

@@ -95,5 +95,6 @@
             CASE WHEN int_surface IN ('unpaved') THEN 0 ELSE 2 END
         ) AS tunnels
     properties:
+      cache-features: true
       group-by: layernotnull
       minzoom: 10

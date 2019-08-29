@@ -29,4 +29,5 @@
           ORDER BY prio
           ) AS amenity_low_priority
     properties:
+      cache-features: true
       minzoom: 14

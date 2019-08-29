@@ -18,4 +18,5 @@
             AND way_area > 1*!pixel_width!::real*!pixel_height!::real
         ) AS protected_areas
     properties:
+      cache-features: true
       minzoom: 8
