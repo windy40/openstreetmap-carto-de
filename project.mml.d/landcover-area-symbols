@@ -7,7 +7,7 @@
         (SELECT
             way, surface,
             COALESCE(CASE WHEN landuse = 'forest' THEN 'wood' ELSE NULL END, "natural") AS "natural",
-            CASE WHEN "natural" IN ('marsh', 'mud')
+            CASE WHEN "natural" = 'mud'
                 THEN "natural"
                 ELSE CASE WHEN ("natural" = 'wetland' AND NOT tags ? 'wetland')
                   THEN 'wetland'
@@ -20,10 +20,11 @@
             tags->'leaf_type' AS leaf_type,
             way_area/NULLIF(POW(!scale_denominator!*0.001*0.28,2),0) AS way_pixels
           FROM planet_osm_polygon
-          WHERE ("natural" IN ('marsh', 'mud', 'wetland', 'wood', 'beach', 'shoal', 'reef', 'scrub', 'sand') OR landuse = 'forest')
+          WHERE ("natural" IN ('mud', 'wetland', 'wood', 'beach', 'shoal', 'reef', 'scrub', 'sand') OR landuse = 'forest')
             AND building IS NULL
             AND way_area > 1*!pixel_width!::real*!pixel_height!::real
           ORDER BY COALESCE(layer,0), way_area DESC
         ) AS landcover_area_symbols
     properties:
+      cache-features: true
       minzoom: 5

@@ -15,6 +15,7 @@
             AND admin_level = '4'
             AND name IS NOT NULL
             AND way_area > 100*!pixel_width!::real*!pixel_height!::real
+            AND osm_id < 0
           ORDER BY way_area DESC
         ) AS state_names
     properties:

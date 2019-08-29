@@ -52,4 +52,5 @@
             l.osm_id DESC -- Force an ordering for streets of the same name, e.g. dualized roads
         ) AS roads_text_name
     properties:
+      cache-features: true
       minzoom: 13

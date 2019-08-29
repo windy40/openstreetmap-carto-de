@@ -46,4 +46,5 @@
             way_area DESC NULLS LAST
         ) AS stations
     properties:
+      cache-features: true
       minzoom: 12

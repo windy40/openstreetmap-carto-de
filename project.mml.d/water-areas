@@ -25,4 +25,5 @@
           ORDER BY COALESCE(layer,0), way_area DESC
         ) AS water_areas
     properties:
+      cache-features: true
       minzoom: 0
