@@ -14,4 +14,5 @@
             CASE WHEN aeroway = 'runway' THEN 10 ELSE 0 END
         ) AS aeroways
     properties:
+      cache-features: true
       minzoom: 11

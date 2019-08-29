@@ -15,4 +15,5 @@
           WHERE "natural" = 'tree_row'
         ) AS trees
     properties:
+      cache-features: true
       minzoom: 16

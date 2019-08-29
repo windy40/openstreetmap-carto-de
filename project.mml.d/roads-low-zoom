@@ -28,5 +28,6 @@
             z_order
         ) AS roads_low_zoom
     properties:
+      cache-features: true
       minzoom: 6
       maxzoom: 9
