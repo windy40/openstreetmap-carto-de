@@ -23,6 +23,7 @@ echo "using database: $1"
 echo "using language: $lang"
 
 pushd $(dirname "$0") >/dev/null
+psql -f $1 ../osm_tag2num.sql
 
 for view in view-*.sql; do
   sed -e "s/'de'/'$lang'/g" $view >/tmp/$view
