@@ -1,5 +1,4 @@
-DROP VIEW IF EXISTS planet_osm_polygon;
-CREATE VIEW planet_osm_polygon AS
+CREATE OR REPLACE VIEW planet_osm_polygon AS
 SELECT
 osm_id,
 tags->'access' as "access",

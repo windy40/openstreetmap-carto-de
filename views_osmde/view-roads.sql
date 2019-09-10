@@ -1,5 +1,4 @@
-DROP VIEW IF EXISTS planet_osm_roads;
-CREATE VIEW planet_osm_roads AS
+CREATE OR REPLACE VIEW planet_osm_roads AS
 SELECT
 osm_id,
 tags->'admin_level' as "admin_level",

@@ -1,5 +1,4 @@
-DROP VIEW IF EXISTS planet_osm_point;
-CREATE VIEW planet_osm_point AS
+CREATE OR REPLACE VIEW planet_osm_point AS
 SELECT
 osm_id,
 tags->'access' as "access",
