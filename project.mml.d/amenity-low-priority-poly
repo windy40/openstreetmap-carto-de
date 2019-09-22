@@ -18,4 +18,5 @@
              OR barrier IN ('bollard', 'gate', 'lift_gate', 'swing_gate', 'block', 'log', 'cattle_grid', 'stile', 'motorcycle_barrier', 'cycle_barrier', 'full-height_turnstile', 'turnstile', 'kissing_gate')
           ) AS amenity_low_priority_poly
     properties:
+      cache-features: true
       minzoom: 14

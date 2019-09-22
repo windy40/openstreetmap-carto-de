@@ -23,4 +23,5 @@
               OR junction IN ('roundabout'))
         ) AS paths_text_name
     properties:
+      cache-features: true
       minzoom: 15

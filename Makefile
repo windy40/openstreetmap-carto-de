@@ -46,7 +46,7 @@ test-z09.png: $(XMLSTYLE)
 	./scripts/render_single_tile.py -s $(XMLSTYLE) -o $@ -u /9/267/175.png
 
 test-z10.png: $(XMLSTYLE)
-	./scripts/render_single_tile.py -s $(XMLSTYLE) -o $@ -u /10/792/483.png
+	./scripts/render_single_tile.py -s $(XMLSTYLE) -o $@ -u /10/612/416.png
 
 test-z11.png: $(XMLSTYLE)
 	./scripts/render_single_tile.py -s $(XMLSTYLE) -o $@ -u /11/1071/703.png
