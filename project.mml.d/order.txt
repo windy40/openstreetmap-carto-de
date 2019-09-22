@@ -65,6 +65,7 @@ roads-area-text-name
 roads-text-name
 paths-text-name
 railways-text-name
+roads-text-ref-minor
 text-poly-low-zoom
 text-line
 text-point
@@ -76,4 +77,4 @@ ferry-routes-text
 admin-text
 protected-areas-text
 amenity-low-priority
-amenity-low-priority-poly
+text-low-priority
