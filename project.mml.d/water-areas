@@ -7,6 +7,7 @@
         (SELECT
             way,
             "natural",
+            water,
             waterway,
             landuse,
             localized_name_second as name,

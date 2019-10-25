@@ -54,12 +54,12 @@ state-names
 placenames-medium
 placenames-small
 stations
+junctions
+bridge-text
 amenity-points
 amenity-line
 power-towers
 roads-text-ref-low-zoom
-junctions
-bridge-text
 roads-text-ref
 roads-area-text-name
 roads-text-name

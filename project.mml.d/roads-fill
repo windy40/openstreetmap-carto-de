@@ -1,5 +1,4 @@
   - id: roads-fill
-    class: access
     geometry: linestring
     <<: *extents
     Datasource:

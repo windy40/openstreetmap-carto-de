@@ -1,5 +1,4 @@
   - id: waterway-bridges
-    class: water-lines
     geometry: linestring
     <<: *extents
     Datasource:
@@ -15,7 +14,7 @@
             CASE WHEN tunnel IN ('yes', 'culvert') THEN 'yes' ELSE 'no' END AS int_tunnel,
             'yes' AS bridge
           FROM planet_osm_line
-          WHERE waterway IN ('river', 'canal', 'stream', 'drain', 'ditch', 'wadi')
+          WHERE waterway IN ('river', 'canal', 'stream', 'drain', 'ditch')
             AND bridge IN ('yes', 'aqueduct')
           ORDER BY COALESCE(layer,0)
         ) AS waterway_bridges

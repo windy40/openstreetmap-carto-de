@@ -1,5 +1,4 @@
   - id: bridges
-    class: access
     geometry: linestring
     <<: *extents
     Datasource:

@@ -1,5 +1,4 @@
   - id: tunnels
-    class: access
     geometry: linestring
     <<: *extents
     Datasource:
