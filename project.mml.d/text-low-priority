@@ -7,4 +7,4 @@
       # see https://github.com/gravitystorm/openstreetmap-carto/pull/1349#issuecomment-77805678
       table: *amenity_low_priority_sql
     properties:
-      minzoom: 10
+      minzoom: 17

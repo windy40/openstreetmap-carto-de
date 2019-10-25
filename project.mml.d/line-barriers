@@ -1,5 +1,4 @@
   - id: line-barriers
-    class: barriers
     geometry: linestring
     <<: *extents
     Datasource:
@@ -15,7 +14,7 @@
             WHERE barrier IN ('chain', 'city_wall', 'embankment', 'ditch', 'fence', 'guard_rail',
                   'handrail', 'hedge', 'kerb', 'retaining_wall', 'wall')
               OR historic = 'citywalls'
-              AND (waterway IS NULL OR waterway NOT IN ('river', 'canal', 'stream', 'drain', 'ditch', 'wadi'))
+              AND (waterway IS NULL OR waterway NOT IN ('river', 'canal', 'stream', 'drain', 'ditch'))
           ) AS features
         ) AS line_barriers
     properties:

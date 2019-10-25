@@ -1,5 +1,4 @@
   - id: paths-text-name
-    class: directions
     geometry: linestring
     <<: *extents
     Datasource:
