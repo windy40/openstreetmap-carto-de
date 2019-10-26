@@ -1,5 +1,4 @@
   - id: lakes-z1
-    class: "lakes"
     geometry: "polygon"
     <<: *extents
     Datasource:

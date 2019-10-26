@@ -11,15 +11,34 @@
   }
 }
 
-.ocean {
+#ocean-lz,
+#ocean,
+#ocean-z0,
+#ocean-z1,
+#ocean-z2,
+#ocean-z3,
+#ocean-z4,
+#ocean-z5,
+#ocean-z6 {
   polygon-fill: @ocean-color;
 }
 
-.lakes {
+#lakes-z0,
+#lakes-z1,
+#lakes-z2,
+#lakes-z3,
+#lakes-z4,
+#lakes-z5,
+#lakes-z6 {
   polygon-fill: @water-color;
 }
 
-.rivers {
+#rivers-z0,
+#rivers-z2,
+#rivers-z3,
+#rivers-z4,
+#rivers-z5,
+#rivers-z6 {
   polygon-fill: @river-color;
 }
 

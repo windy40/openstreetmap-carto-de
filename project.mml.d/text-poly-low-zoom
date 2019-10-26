@@ -1,5 +1,4 @@
   - id: text-poly-low-zoom
-    class: text-low-zoom
     geometry: polygon
     <<: *extents
     Datasource:

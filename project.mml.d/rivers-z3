@@ -1,5 +1,4 @@
   - id: rivers-z3
-    class: "rivers"
     geometry: "polygon"
     <<: *extents
     Datasource:

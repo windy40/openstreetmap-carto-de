@@ -7,8 +7,8 @@
         (SELECT
             way,
             "natural",
-            waterway,
             water,
+            waterway,
             landuse,
             localized_name_second as name,
             way_area/NULLIF(POW(!scale_denominator!*0.001*0.28,2),0) AS way_pixels,

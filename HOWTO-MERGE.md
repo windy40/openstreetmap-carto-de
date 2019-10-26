@@ -24,6 +24,13 @@ To merge upstream changes I currently do the following
 	git merge vX.Y.Z-split
 ```
 
+If merge has conflicts in project.mml check layer order and call:
+```
+	scripts/concat-split-project.mml.py >project.mml
+	git commit --amend
+```
+
+
 4. Tag as `vX.Y.Z-l10n0`
 
 ```
@@ -35,6 +42,13 @@ To merge upstream changes I currently do the following
         git checkout master
         git merge vX.Y.Z-l10n0
 ```
+
+Again, if merge has conflicts in project.mml check layer order and call:
+```
+        scripts/concat-split-project.mml.py >project.mml
+        git commit --amend
+```
+
 
 6. Finally tag master branch as `vX.Y.Z-de0`:
 ```

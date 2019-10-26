@@ -1,5 +1,4 @@
   - id: ocean-z2
-    class: "ocean"
     geometry: "polygon"
     <<: *extents
     Datasource:

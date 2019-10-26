@@ -1,5 +1,4 @@
   - id: area-barriers
-    class: barriers
     geometry: polygon
     <<: *extents
     Datasource:
