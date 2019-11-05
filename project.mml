@@ -1341,7 +1341,7 @@ Layer:
           FROM
           (SELECT
               ST_PointOnSurface(way) AS way,
-              localized_name_without_brackets as name,
+              localized_name_second as name,
               ref,
               railway,
               aerialway,
@@ -1352,7 +1352,7 @@ Layer:
           UNION ALL
           SELECT
               way,
-              name,
+              localized_name_second as name,
               ref,
               railway,
               aerialway,
