@@ -112,38 +112,42 @@ test-campsite.png: $(XMLSTYLE)
 test-backcountry.png: $(XMLSTYLE)
 	./scripts/render_single_tile.py -t -s $(XMLSTYLE) -o $@ -u /19/274268/181238.png
 # Dönerbude
-test-kebab.png:
+test-kebab.png: $(XMLSTYLE)
 	./scripts/render_single_tile.py -t -s $(XMLSTYLE) -o $@ -u /19/274475/180053.png
 # hospital
-test-hospital.png:
+test-hospital.png: $(XMLSTYLE)
 	./scripts/render_single_tile.py -t -s $(XMLSTYLE) -o $@ -u /15/17146/11253.png
 # sport pitches
-test-sport.png:
+test-sport.png: $(XMLSTYLE)
 	./scripts/render_single_tile.py -t -s $(XMLSTYLE) -o $@ -u /16/34311/22505.png
 # Airports incl. IATA code
-test-iata.png:
+test-iata.png: $(XMLSTYLE)
 	 ./scripts/render_single_tile.py -t -s $(XMLSTYLE) -o $@ -u /11/1072/694.png
 # l10n (country-names)
-test-l10n1.png:
+test-l10n1.png: $(XMLSTYLE)
 	./scripts/render_single_tile.py -t -s $(XMLSTYLE) -o $@ -u /3/5/3.png
 # l10n (latin + asian scripts)
-test-l10n2.png:
+test-l10n2.png: $(XMLSTYLE)
 	./scripts/render_single_tile.py -t -s $(XMLSTYLE) -o $@ -u /10/792/483.png
-test-foot-cycle-path-track.png:
+# l10n station (thai + latin)
+test-l10n3.png: $(XMLSTYLE)
+	./scripts/render_single_tile.py -t -s $(XMLSTYLE) -o $@ -u /14/12777/7562.png
+
+test-foot-cycle-path-track.png: $(XMLSTYLE)
 	./scripts/render_single_tile.py -t -s $(XMLSTYLE) -o $@ -u /17/68596/45003.png
-test-living-street.png:
+test-living-street.png: $(XMLSTYLE)
 	./scripts/render_single_tile.py -t -s $(XMLSTYLE) -o $@ -u /17/68619/45014.png
-test-proposed.png:
+test-proposed.png: $(XMLSTYLE)
 	./scripts/render_single_tile.py -t -s $(XMLSTYLE) -o $@ -u /17/68615/45002.png
-test-construction.png:
+test-construction.png: $(XMLSTYLE)
 	./scripts/render_single_tile.py -t -s $(XMLSTYLE) -o $@ -u /15/17090/11446.png
 
 # coastline (using water polygons)
-test-coast1.png:
+test-coast1.png: $(XMLSTYLE)
 	./scripts/render_single_tile.py -t -s $(XMLSTYLE) -o $@ -u /14/8020/5446.png
-test-coast2.png:
+test-coast2.png: $(XMLSTYLE)
 	./scripts/render_single_tile.py -t -s $(XMLSTYLE) -o $@ -u /13/4010/2723.png
-test-lake-ocean.png:
+test-lake-ocean.png: $(XMLSTYLE)
 	./scripts/render_single_tile.py -t -s $(XMLSTYLE) -o $@ -u /7/114/25.png
 
 clean:
