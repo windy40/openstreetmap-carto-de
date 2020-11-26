@@ -83,7 +83,6 @@ junctions
 bridge-text
 amenity-points
 amenity-line
-amenity-points
 power-towers
 roads-text-ref-low-zoom
 roads-text-ref
