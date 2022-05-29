@@ -39,6 +39,7 @@ guideways
 entrances
 aeroways
 golf-line
+sports
 necountries
 admin-low-zoom
 admin-mid-zoom

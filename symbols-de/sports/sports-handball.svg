@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   id="svg2"
+   viewBox="-1300 -2650 440 240"
+   height="240"
+   width="440">
+  <metadata
+     id="metadata110">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs4">
+    <clipPath
+       id="Feld">
+      <rect
+         y="-2000"
+         x="-1000"
+         height="4000"
+         width="2000"
+         id="Feldlinie" />
+    </clipPath>
+  </defs>
+  <path
+     id="path12-3"
+     d="m -880.74811,-2629.5012 v 199.0025 h -398.50369 v -199.0025 z"
+     style="fill:none;stroke:#fffffd;stroke-width:4;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  <path
+     id="path3908"
+     d="M -880.49873,-2629.7506"
+     style="fill:#ffffe0;stroke:#fffffd;stroke-width:4;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  <path
+     id="path12"
+     transform="translate(-1300,-2650)"
+     d="M 390.36328,219.50195 C 354.2693,207.0783 330.02273,173.13513 329.97461,134.96289 v -29.92578 c 0.0444,-38.165591 24.27932,-72.106747 60.36328,-84.539063"
+     style="fill:none;stroke:#fffffd;stroke-width:4;stroke-miterlimit:4;stroke-dasharray:8, 8;stroke-dashoffset:0;stroke-opacity:1" />
+  <path
+     id="Mittellinie"
+     d="m -1080,-2629.7506 m 0,0.2494 v 199.0025"
+     style="fill:none;stroke:#fffffd;stroke-width:4;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  <path
+     transform="matrix(0,0.09975062,-0.09975062,0,-1080,-2530)"
+     style="fill:none;stroke:#fffffd;stroke-width:40.10000138;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     clip-path="url(#Feld)"
+     d="m -750,-2000 m 2.5,0 a 597.5,597.5 0 0 0 597.5,597.5 H 150 A 597.5,597.5 0 0 0 747.5,-2000 m 0,2.5 H -750"
+     id="Torraum" />
+  <path
+     d="m -950.32417,-2534.9875 m 0.24938,0 v 9.975"
+     id="7mLinie"
+     style="fill:none;stroke:#fffffd;stroke-width:4;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  <path
+     transform="matrix(0,0.09975062,0.09975062,0,-1080,-2530)"
+     id="path3104"
+     d="m -750,-2000 m 2.5,0 a 597.5,597.5 0 0 0 597.5,597.5 H 150 A 597.5,597.5 0 0 0 747.5,-2000 m 0,2.5 H -750"
+     clip-path="url(#Feld)"
+     style="fill:none;stroke:#fffffd;stroke-width:40.10000138;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  <path
+     style="fill:none;stroke:#fffffd;stroke-width:4;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3116"
+     d="m -1209.6758,-2534.9875 m -0.2494,0 v 9.975" />
+  <path
+     id="path12-6"
+     d="m -1250.3379,-2629.502 c 36.084,12.4323 60.3189,46.3735 60.3633,84.5391 v 29.9258 c -0.048,38.1722 -24.2947,72.1154 -60.3887,84.539"
+     style="fill:none;stroke:#fffffd;stroke-width:4;stroke-miterlimit:4;stroke-dasharray:8, 8;stroke-dashoffset:0;stroke-opacity:1" />
+</svg>
