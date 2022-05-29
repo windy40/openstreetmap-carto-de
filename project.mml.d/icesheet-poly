@@ -1,0 +1,12 @@
+  - id: icesheet-poly
+    geometry: polygon
+    <<: *extents
+    Datasource:
+      <<: *osm2pgsql
+      table: |-
+        (SELECT
+            way
+          FROM icesheet_polygons
+        ) AS icesheet_polygons
+    properties:
+      minzoom: 5

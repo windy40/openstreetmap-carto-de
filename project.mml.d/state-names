@@ -1,0 +1,24 @@
+  - id: state-names
+    geometry: point
+    <<: *extents
+    Datasource:
+      <<: *osm2pgsql
+      table: |-
+        (SELECT
+            ST_PointOnSurface(way) AS way,
+            way_area/NULLIF(POW(!scale_denominator!*0.001*0.28,2),0) AS way_pixels,
+            name,
+            admin_level,
+            ref
+          FROM planet_osm_polygon
+          WHERE ST_PointOnSurface(way) && !bbox!
+            AND name IS NOT NULL
+            AND boundary = 'administrative'
+            AND admin_level = '4'
+            AND way_area > 3000*POW(!scale_denominator!*0.001*0.28,2)
+            AND way_area < 4000000*POW(!scale_denominator!*0.001*0.28,2)
+            AND osm_id < 0
+          ORDER BY way_area DESC
+        ) AS state_names
+    properties:
+      minzoom: 4

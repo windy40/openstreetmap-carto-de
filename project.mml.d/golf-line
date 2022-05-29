@@ -1,0 +1,13 @@
+  - id: golf-line
+    geometry: linestring
+    <<: *extents
+    Datasource:
+      <<: *osm2pgsql
+      table: |-
+        (SELECT
+            way, tags->'golf' AS golf
+          FROM planet_osm_line
+          WHERE tags @> 'golf=>hole'
+        ) AS golf_line
+    properties:
+      minzoom: 16

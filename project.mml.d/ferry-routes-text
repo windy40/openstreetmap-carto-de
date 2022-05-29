@@ -1,0 +1,16 @@
+  - id: ferry-routes-text
+    geometry: linestring
+    <<: *extents
+    Datasource:
+      <<: *osm2pgsql
+      table: |-
+        (SELECT
+            way,
+            name
+          FROM planet_osm_line
+          WHERE route = 'ferry'
+            AND osm_id > 0
+            AND name IS NOT NULL
+        ) AS ferry_routes_text
+    properties:
+      minzoom: 13

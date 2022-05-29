@@ -1,0 +1,19 @@
+  - id: power-towers
+    geometry: point
+    <<: *extents
+    Datasource:
+      <<: *osm2pgsql
+      table: |-
+        (SELECT
+            way,
+            power
+        FROM planet_osm_point
+        WHERE power IN ('tower', 'pole')
+        ORDER BY
+          CASE power
+            WHEN 'tower' THEN 2
+            WHEN 'pole' THEN 1
+          END DESC
+        ) AS power_towers
+    properties:
+      minzoom: 14

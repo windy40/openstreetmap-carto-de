@@ -1,0 +1,25 @@
+  - id: county-names
+    geometry: point
+    <<: *extents
+    Datasource:
+      <<: *osm2pgsql
+      table: |-
+        (SELECT
+            ST_PointOnSurface(way) AS way,
+            way_area/NULLIF(POW(!scale_denominator!*0.001*0.28,2),0) AS way_pixels,
+            name,
+            admin_level
+          FROM planet_osm_polygon
+          WHERE ST_PointOnSurface(way) && !bbox!
+            AND name IS NOT NULL
+            AND boundary = 'administrative'
+            AND admin_level IN ('5', '6')
+            AND way_area > 12000*POW(!scale_denominator!*0.001*0.28,2)
+            AND way_area < 196000*POW(!scale_denominator!*0.001*0.28,2)
+            AND osm_id < 0
+          ORDER BY
+            admin_level,
+            way_area DESC
+        ) AS county_names
+    properties:
+      minzoom: 8

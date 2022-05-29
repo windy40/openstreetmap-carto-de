@@ -1,0 +1,9 @@
+  - id: roads-fill
+    geometry: linestring
+    <<: *extents
+    Datasource:
+      <<: *osm2pgsql
+      table: *roads_sql
+    properties:
+      cache-features: true
+      minzoom: 10

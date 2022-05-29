@@ -1,0 +1,25 @@
+  - id: roads-area-text-name
+    geometry: point
+    <<: *extents
+    Datasource:
+      <<: *osm2pgsql
+      table: |-
+        (SELECT
+            ST_PointOnSurface(way) AS way,
+            way_area/NULLIF(POW(!scale_denominator!*0.001*0.28,2),0) AS way_pixels,
+            highway,
+            name
+          FROM planet_osm_polygon
+          WHERE ST_PointOnSurface(way) && !bbox!
+            AND name IS NOT NULL
+            AND (highway IN ('pedestrian', 'footway', 'service', 'living_street', 'platform')
+              OR (railway IN ('platform')
+                  AND (tags->'location' NOT IN ('underground') OR (tags->'location') IS NULL)
+                  AND (tunnel NOT IN ('yes', 'building_passage') OR tunnel IS NULL)
+                  AND (covered NOT IN ('yes') OR covered IS NULL)))
+            AND way_area > 3000*POW(!scale_denominator!*0.001*0.28,2)
+            AND way_area < 768000*POW(!scale_denominator!*0.001*0.28,2)
+          ORDER BY way_area DESC
+        ) AS roads_area_text_name
+    properties:
+      minzoom: 15

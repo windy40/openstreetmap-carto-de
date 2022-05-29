@@ -1,0 +1,8 @@
+  - id: turning-circle-fill
+    geometry: point
+    <<: *extents
+    Datasource:
+      <<: *osm2pgsql
+      table: *turning-circle_sql
+    properties:
+      minzoom: 15

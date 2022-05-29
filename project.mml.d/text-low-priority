@@ -1,0 +1,10 @@
+  - id: text-low-priority
+    geometry: point
+    <<: *extents
+    Datasource:
+      <<: *osm2pgsql
+      # Include values that are rendered as icon without label to prevent mismatch between icons and labels,
+      # see https://github.com/gravitystorm/openstreetmap-carto/pull/1349#issuecomment-77805678
+      table: *amenity_low_priority_sql
+    properties:
+      minzoom: 17

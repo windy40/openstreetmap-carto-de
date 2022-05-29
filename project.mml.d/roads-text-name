@@ -1,0 +1,33 @@
+  - id: roads-text-name
+    geometry: linestring
+    <<: *extents
+    Datasource:
+      <<: *osm2pgsql
+      table: |-
+        (SELECT
+            way,
+            CASE WHEN substr(highway, length(highway)-4, 5) = '_link' THEN substr(highway, 0, length(highway)-4) ELSE highway END,
+            CASE WHEN (tunnel = 'yes' OR tunnel = 'building_passage' OR covered = 'yes') THEN 'yes' ELSE 'no' END AS tunnel,
+            construction,
+            name,
+            CASE
+              WHEN oneway IN ('yes', '-1') THEN oneway
+              WHEN junction IN ('roundabout') AND (oneway IS NULL OR NOT oneway IN ('no', 'reversible')) THEN 'yes'
+            END AS oneway,
+            horse, bicycle
+          FROM planet_osm_line l
+          WHERE highway IN ('motorway', 'motorway_link', 'trunk', 'trunk_link', 'primary', 'primary_link', 'secondary', 'secondary_link', 'tertiary',
+                            'tertiary_link', 'residential', 'unclassified', 'road', 'service', 'pedestrian', 'raceway', 'living_street', 'construction')
+            AND (name IS NOT NULL
+              OR oneway IN ('yes', '-1')
+              OR junction IN ('roundabout'))
+          ORDER BY
+            z_order DESC, -- put important roads first
+            COALESCE(layer, 0), -- put top layered roads first
+            length(name) DESC, -- Try to fit big labels in first
+            name DESC, -- Force a consistent ordering between differently named streets
+            l.osm_id DESC -- Force an ordering for streets of the same name, e.g. dualized roads
+        ) AS roads_text_name
+    properties:
+      cache-features: true
+      minzoom: 13

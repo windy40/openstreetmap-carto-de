@@ -1,0 +1,13 @@
+  - id: marinas-area
+    geometry: polygon
+    <<: *extents
+    Datasource:
+      <<: *osm2pgsql
+      table: |-
+        (SELECT
+            way
+          FROM planet_osm_polygon
+          WHERE leisure = 'marina'
+        ) AS marinas_area
+    properties:
+      minzoom: 14

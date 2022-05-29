@@ -1,0 +1,12 @@
+  - id: ocean
+    geometry: polygon
+    <<: *extents
+    Datasource:
+      <<: *osm2pgsql
+      table: |-
+        (SELECT
+            way
+          FROM water_polygons
+        ) AS ocean
+    properties:
+      minzoom: 10

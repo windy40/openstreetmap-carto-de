@@ -1,0 +1,13 @@
+  - id: icesheet-outlines
+    geometry: linestring
+    <<: *extents
+    Datasource:
+      <<: *osm2pgsql
+      table: |-
+        (SELECT
+            way,
+            ice_edge
+          FROM icesheet_outlines
+        ) AS icesheet_outlines
+    properties:
+      minzoom: 5
