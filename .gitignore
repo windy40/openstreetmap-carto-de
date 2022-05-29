@@ -11,6 +11,14 @@ localconfig.js
 .env
 .DS_Store
 
+# german style additions
+project-hrb.mml
+project-mod.mml
+# output of rendering tests
+test*.png
+project.mml
+
 # Generated at runtime by Python.
 *.pyc
 **/*.pyc
+
