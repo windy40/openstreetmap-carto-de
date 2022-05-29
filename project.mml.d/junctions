@@ -9,7 +9,7 @@
             highway,
             junction,
             ref,
-            name,
+            localized_streetname AS name,
             NULL AS way_pixels
           FROM planet_osm_point
           WHERE way && !bbox!

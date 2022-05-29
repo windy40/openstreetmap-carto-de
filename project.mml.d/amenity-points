@@ -148,7 +148,7 @@
             FROM
               (SELECT
                   ST_PointOnSurface(way) AS way,
-                  name,
+                  localized_name AS name,
                   access,
                   aeroway,
                   amenity,
@@ -177,7 +177,7 @@
               UNION ALL
               SELECT
                   way,
-                  name,
+                  localized_name AS name,
                   access,
                   aeroway,
                   amenity,

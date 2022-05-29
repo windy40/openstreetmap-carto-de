@@ -8,7 +8,7 @@
             way,
             highway,
             construction,
-            name,
+            localized_streetname AS name,
             CASE
               WHEN oneway IN ('yes', '-1') THEN oneway
               WHEN junction IN ('roundabout') AND (oneway IS NULL OR NOT oneway IN ('no', 'reversible')) THEN 'yes'

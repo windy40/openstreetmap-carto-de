@@ -13,7 +13,7 @@
             tags->'highspeed' as highspeed,
             tags->'usage' as usage,
             construction,
-            name
+            localized_name_second AS name
           FROM planet_osm_line l
           WHERE railway IN ('rail', 'subway', 'narrow_gauge', 'light_rail', 'preserved', 'funicular',
                             'monorail', 'miniature', 'tram', 'disused', 'construction')
