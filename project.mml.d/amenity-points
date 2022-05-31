@@ -126,6 +126,7 @@
               tags->'castle_type' as castle_type,
               tags->'sport' as sport,
               tags->'information' as information,
+              tags->'cuisine' as cuisine,
               tags->'memorial' as memorial,
               tags->'artwork_type' as artwork_type,
               tags->'vending' as vending,

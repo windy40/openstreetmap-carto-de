@@ -4,10 +4,11 @@
 @shop-text: #939;
 @transportation-icon: #0092da;
 @transportation-text: #0066ff;
-@accommodation-icon: @transportation-icon;
-@accommodation-text: @transportation-text;
+@accommodation-icon: @amenity-brown;
+@accommodation-text: @amenity-brown;
 @airtransport: #8461C4; //also ferry_terminal
 @health-color: #BF0000;
+@pharmacy-color: #008000;
 @amenity-brown: #734a08;
 @gastronomy-icon: #C77400;
 @gastronomy-text: darken(@gastronomy-icon, 5%);
@@ -104,6 +105,10 @@
     }
     [feature = 'amenity_fast_food'][zoom >= 18] {
       marker-file: url('symbols/amenity/fast_food.svg');
+      [cuisine=~'.*kebab.*'],
+      [cuisine = 'turkish'] {
+        marker-file: url('symbols-de/kebab.svg');
+      }
     }
     [feature = 'amenity_food_court'][zoom >= 17],
     [feature = 'amenity_restaurant'][zoom >= 18] {
@@ -352,7 +357,7 @@
   }
 
   [feature = 'tourism_hostel'][zoom >= 17] {
-    marker-file: url('symbols/tourism/hostel.svg');
+    marker-file: url('symbols-de/hostel.svg');
     marker-clip: false;
     marker-fill: @accommodation-icon;
   }
@@ -587,14 +592,14 @@
   }
 
   [feature = 'amenity_hospital'][zoom >= 15] {
-    marker-file: url('symbols/amenity/hospital.svg');
+    marker-file: url('symbols-de/hospital.svg');
     marker-fill: @health-color;
     marker-clip: false;
   }
 
   [feature = 'amenity_pharmacy'][zoom >= 17] {
-    marker-file: url('symbols/amenity/pharmacy.svg');
-    marker-fill: @health-color;
+    marker-file: url('symbols-de/pharmacy.svg');
+    marker-fill: @pharmacy-color;
     marker-clip: false;
   }
 
@@ -876,7 +881,7 @@
     }
 
     [shop = 'bakery'][zoom >= 18] {
-      marker-file: url('symbols/shop/bakery.svg');
+      marker-file: url('symbols-de/bakery.svg');
     }
 
     [shop = 'beauty'][zoom >= 18] {
@@ -2547,6 +2552,9 @@
   [feature = 'healthcare_speech_therapist'],
   [feature = 'healthcare_yes'] {
     [zoom >= 17] {
+      [feature = 'amenity_pharmacy'] {
+        text-fill: @pharmacy-color;
+      }
       text-name: "[name]";
       text-size: @standard-font-size;
       text-wrap-width: @standard-wrap-width;
