@@ -8,6 +8,7 @@
             way,
             highway,
             construction,
+            CASE WHEN (tracktype = 'grade1' OR surface = 'paved') THEN 'paved' ELSE 'unpaved' END AS int_surface,
             localized_streetname AS name,
             CASE
               WHEN oneway IN ('yes', '-1') THEN oneway

@@ -39,7 +39,7 @@ test: test-z03.png test-z04.png test-z05.png test-z06.png test-z07.png test-z08.
 	test-z10.png test-z11.png test-z12.png test-z13.png test-z14.png test-z15.png test-z16.png \
 	test-z17.png test-z18.png test-z19.png test-castle1.png test-castle2.png test-castle3.png\
 	test-castle4.png test-camp-caravan.png test-campsite.png test-backcountry.png test-kebab.png \
-	test-sport.png test-l10n1.png test-l10n2.png test-foot-cycle-path-track.png \
+	test-sport.png test-l10n1.png test-l10n2.png test-l10n3.png test-foot-cycle-path-track.png \
 	test-living-street.png test-proposed.png test-coast1.png test-coast2.png test-lake-ocean.png \
 	test-l10n1.png test-l10n2.png test-construction.png test-iata.png
 

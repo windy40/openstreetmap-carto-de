@@ -16,12 +16,17 @@
             int_surface,
             access,
             construction,
+            proposed,
+            proposed_construction_minor,
             service,
             link,
             layernotnull
           FROM ( -- subselect that contains both roads and rail
             SELECT
-                way,
+                way, proposed,
+                case when proposed in ('residential','unclassified','road','living_street') or
+                          construction in ('residential','unclassified','road','living_street')
+                then 'yes' else 'no' end as proposed_construction_minor,
                 'highway_' || highway AS feature, --only motorway to tertiary links are accepted later on
                 horse,
                 foot,
@@ -51,7 +56,10 @@
                 AND highway IS NOT NULL -- end of road select
             UNION ALL
             SELECT
-                way,
+                way, proposed,
+                case when proposed in ('residential','unclassified','road','living_street') or
+                          construction in ('residential','unclassified','road','living_street')
+                then 'yes' else 'no' end as proposed_construction_minor,
                 'railway_' || (CASE WHEN railway = 'preserved' AND service IN ('spur', 'siding', 'yard') THEN 'INT-preserved-ssy'::text
                                  WHEN (railway = 'rail' AND service IN ('spur', 'siding', 'yard')) THEN 'INT-spur-siding-yard'
                                  WHEN (railway = 'tram' AND service IN ('spur', 'siding', 'yard')) THEN 'tram-service'
