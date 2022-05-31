@@ -225,6 +225,12 @@
     marker-file: url('symbols/tourism/camping.svg');
     marker-fill: @accommodation-icon;
     marker-clip: false;
+    [tents = 'yes'][caravans = 'yes'] {
+      marker-file: url('symbols-de/camping/camping-caravaning.svg');
+    }
+    [backcountry = 'yes'] {
+      marker-file: url('symbols-de/camping/backcountry.svg');
+    }
   }
 
   // Ford tagging on points - ford on lines is defined later
