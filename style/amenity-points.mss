@@ -2899,7 +2899,7 @@
   [feature = 'aeroway_aerodrome']['iata' = null][zoom >= 13][zoom < 18] {
     [way_pixels <= 192000],
     [way_pixels = null] {
-      text-name: "[name]";
+      text-name: "[name_and_iata]";
       text-size: @standard-font-size;
       text-wrap-width: @standard-wrap-width;
       text-line-spacing: @standard-line-spacing-size;
@@ -2912,7 +2912,7 @@
   }
 
   [feature = 'amenity_ferry_terminal'][zoom >= 15] {
-    text-name: "[name]";
+    text-name: "[name_and_iata]";
     text-size: @standard-font-size;
     text-wrap-width: @standard-wrap-width;
     text-line-spacing: @standard-line-spacing-size;

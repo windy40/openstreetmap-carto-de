@@ -1599,6 +1599,7 @@ Layer:
                 'place_' || CASE WHEN place IN ('locality') AND way_area IS NULL THEN place END,
                 'golf_' || CASE WHEN tags->'golf' IN ('hole', 'pin') THEN tags->'golf' END
               ) AS feature,
+              CASE WHEN iata = 'none' THEN name ELSE name || '('|| iata || ')' END as name_and_iata,
               access,
               tags->'ruins' as ruins,
               CASE
@@ -1686,6 +1687,7 @@ Layer:
                   tourism,
                   waterway,
                   tags,
+                  tags->'iata' as iata,
                   way_area
                 FROM planet_osm_polygon
                 WHERE way && !bbox! -- Not ST_PointOnSurface(way) because name might be NULL
@@ -1715,6 +1717,7 @@ Layer:
                   tourism,
                   waterway,
                   tags,
+                  tags->'iata' as iata,
                   NULL AS way_area
                 FROM planet_osm_point
                 WHERE way && !bbox!
