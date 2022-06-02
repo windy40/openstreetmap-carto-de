@@ -89,6 +89,7 @@
                 'golf_' || CASE WHEN tags->'golf' IN ('hole', 'pin') THEN tags->'golf' END
               ) AS feature,
               access,
+              tags->'ruins' as ruins,
               CASE
                 WHEN "natural" IN ('peak', 'volcano', 'saddle') THEN
                   CASE

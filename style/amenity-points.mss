@@ -841,12 +841,30 @@
     [castle_type = 'kremlin'] {
       marker-file: url('symbols/historic/fortress.svg');
     }
+    [ruins = 'yes'] {
+      marker-file: url('symbols-de/atkis/burgruine.svg');
+      // this will center the node point
+      marker-transform: translate(3.2963566, -3.06567507);
+    }
   }
 
   [feature = 'historic_archaeological_site'][zoom >= 16] {
     marker-file: url('symbols/historic/archaeological_site.svg');
     marker-fill: @culture;
     marker-clip: false;
+  }
+
+  /* old german style castle rendering */
+  [feature = 'historic_castle'][zoom >= 14][zoom < 16] {
+    marker-file: url('symbols-de/atkis/burg.svg');
+    marker-fill: @man-made-icon;
+    marker-placement: interior;
+    marker-clip: false;
+    marker-transform: translate(0.734793701, -3.9299549);
+    [ruins = 'yes'] {
+      marker-file: url('symbols-de/atkis/burgruine.svg');
+      marker-transform: translate(3.2963566, -3.06567507);
+    }
   }
 
   [feature = 'amenity_marketplace'][zoom >= 16][way_pixels > 3000],
