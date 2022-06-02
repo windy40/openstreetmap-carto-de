@@ -32,7 +32,6 @@ be created after the initial osm2pgsql data import using the provided SQL
 files as follows:
 
 ```
-psql -d osm -f views_osmde/osm_tag2num.sql
 psql -d osm -f views_osmde/view-line.sql
 psql -d osm -f views_osmde/view-point.sql
 psql -d osm -f views_osmde/view-polygon.sql

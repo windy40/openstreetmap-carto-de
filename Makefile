@@ -35,13 +35,13 @@ country_languages/country_languages.data:
 
 # This target will render one single tile in every zoomlevel
 # to ensure successful merges from upstream
-test: test-z03.png test-z04.png test-z05.png test-z06.png test-z07.png test-z08.png test-z09.png \
-	test-z10.png test-z11.png test-z12.png test-z13.png test-z14.png test-z15.png test-z16.png \
-	test-z17.png test-z18.png test-z19.png test-castle1.png test-castle2.png test-castle3.png\
-	test-castle4.png test-camp-caravan.png test-campsite.png test-backcountry.png test-kebab.png \
-	test-sport.png test-l10n1.png test-l10n2.png test-l10n3.png test-foot-cycle-path-track.png \
-	test-living-street.png test-proposed.png test-coast1.png test-coast2.png test-lake-ocean.png \
-	test-l10n1.png test-l10n2.png test-construction.png test-iata.png test-hospital.png test-hostel.png
+test: test-z03.png test-z04.png test-z05.png test-z06.png test-z07.png test-z08.png test-z09.png\
+      test-z10.png test-z11.png test-z12.png test-z13.png test-z14.png test-z15.png test-z16.png\
+      test-z17.png test-z18.png test-z19.png test-castle1.png test-castle2.png test-castle3.png\
+      test-castle4.png test-camp-caravan.png test-campsite.png test-backcountry.png test-kebab.png\
+      test-hostel.png test-hospital.png test-sport.png test-iata.png test-l10n1.png test-l10n2.png\
+      test-l10n3.png test-foot-cycle-path-track.png test-living-street.png\
+      test-proposed.png test-construction.png
 
 test-z03.png: $(XMLSTYLE)
 	./scripts/render_single_tile.py -t -s $(XMLSTYLE) -o $@ -u /3/3/2.png
@@ -150,14 +150,6 @@ test-proposed.png: $(XMLSTYLE)
 	./scripts/render_single_tile.py -t -s $(XMLSTYLE) -o $@ -u /17/68615/45002.png
 test-construction.png: $(XMLSTYLE)
 	./scripts/render_single_tile.py -t -s $(XMLSTYLE) -o $@ -u /15/17090/11446.png
-
-# coastline (using water polygons)
-test-coast1.png: $(XMLSTYLE)
-	./scripts/render_single_tile.py -t -s $(XMLSTYLE) -o $@ -u /14/8020/5446.png
-test-coast2.png: $(XMLSTYLE)
-	./scripts/render_single_tile.py -t -s $(XMLSTYLE) -o $@ -u /13/4010/2723.png
-test-lake-ocean.png: $(XMLSTYLE)
-	./scripts/render_single_tile.py -t -s $(XMLSTYLE) -o $@ -u /7/114/25.png
 
 clean:
 	rm -f project-de.* $(XMLSTYLE) test-*.png

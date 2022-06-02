@@ -12,7 +12,6 @@ fi
 echo "using database: $1"
 
 pushd $(dirname "$0") >/dev/null
-psql -f osm_tag2num.sql $1
 
 for view in view-*.sql; do
   psql -f $view $1
