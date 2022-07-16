@@ -3,7 +3,6 @@ landcover-low-zoom
 landcover
 landcover-line
 icesheet-poly
-water-lines-casing
 water-lines-low-zoom
 water-lines
 water-areas
