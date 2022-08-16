@@ -12,7 +12,7 @@ localization only changes to Openstreetmap Carto.
 Master branch will do localization and other visual German style changes.
 
 For database import the localization code from
-https://github.com/giggls/osml10n and the new Flex backend of osm2pgsql is
+https://github.com/giggls/osml10n and osm2pgsql 1.7.0 or higher is
 required.
 
 The import command looks like this:
