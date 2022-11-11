@@ -21,6 +21,8 @@ DATABASE layout.
 For Installation please read [INSTALL-de.md](INSTALL-de.md) first for differences of
 openstreetmap-carto-de.
 
+Using Docker in currently not supported using this fork of OSM-Carto!
+
 The rest of this README contains the original text from the international style.
 
 # OpenStreetMap Carto
