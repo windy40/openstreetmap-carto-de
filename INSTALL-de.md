@@ -3,13 +3,16 @@
 The database we use in German Carto style uses a slighty different
 table layout which is able to render localized maps.
 
+Thus if you want to create indexes you will also need to apply
+``indexes-hstore.sql`` instead of indexes.sql.
+
 To do the actual rendering we use views which will also allow for rendering
 the unmodified upstream OpenStreetMap Carto style.
 
 For this purpose we do also provide a branch called upstream+l10n which are
 localization only changes to Openstreetmap Carto.
 
-Master branch will do localization and other visual German style changes.
+Master branch will do localization **and** other visual German style changes.
 
 For database import, the localization code from
 https://github.com/giggls/osml10n and osm2pgsql 1.7.0 or higher are
