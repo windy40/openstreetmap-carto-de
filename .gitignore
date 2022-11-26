@@ -1,6 +1,7 @@
 .thumb.png
 layers/
 data/
+fonts/
 tmp/
 *.xml
 *.osm.pbf
@@ -10,6 +11,7 @@ localconfig.js
 .kosmtik-config.yml
 .env
 .DS_Store
+test-*.png
 
 # Generated at runtime by Python.
 *.pyc
