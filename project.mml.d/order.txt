@@ -20,7 +20,6 @@ bridge
 buildings
 tunnels
 landuse-overlay
-tourism-boundary
 barriers
 cliffs
 ferry-routes
@@ -44,6 +43,7 @@ admin-mid-zoom
 admin-high-zoom
 power-minorline
 power-line
+tourism-boundary
 protected-areas
 trees
 country-names
