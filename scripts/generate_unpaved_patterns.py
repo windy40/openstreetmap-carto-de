@@ -94,6 +94,7 @@ def main():
         'trunk-fill',
         'primary-fill',
         'secondary-fill',
+        'tertiary-fill',
         'platform-fill',
         'aeroway-fill',
         'road-fill',
@@ -106,9 +107,9 @@ def main():
     # List of names of mss files in which we search for color variables
     file_names = {
         'style/roads.mss',
-        'style/road-colors-generated.mss'
+        'style/road-colors-german.mss'
         }
-
+        
     # The value by which the original color is darkened for the pattern foreground
     # This value should always be negative.
     darken = -60

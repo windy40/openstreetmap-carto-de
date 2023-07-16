@@ -2147,7 +2147,7 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
           line-pattern-type: repeat;
           line-pattern-alignment: global;
           line-pattern-width: @tertiary-width-z12 - 2 * @casing-width-z12;
-          line-pattern-file: url("symbols/unpaved/unpaved_residential-fill.svg");          
+          line-pattern-file: url("symbols/unpaved/unpaved_tertiary-fill.svg");
           [zoom >= 13] { line-pattern-width: @tertiary-width-z13 - 2 * @casing-width-z13; }
           [zoom >= 14] { line-pattern-width: @tertiary-width-z14 - 2 * @casing-width-z14; }
           [zoom >= 15] { line-pattern-width: @tertiary-width-z15 - 2 * @casing-width-z15; }
