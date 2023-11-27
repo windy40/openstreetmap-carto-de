@@ -34,6 +34,8 @@ roads-low-zoom
 waterway-bridges
 bridges
 guideways
+roller-coaster-gap-fill
+roller-coaster
 entrances
 aeroways
 golf-line
