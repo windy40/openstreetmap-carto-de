@@ -1,10 +1,29 @@
-## [Unreleased](https://github.com/gravitystorm/openstreetmap-carto/compare/v5.6.2...master)
-### Changes
-- Unpaved roads are now indicated on the map
+## [Unreleased](https://github.com/gravitystorm/openstreetmap-carto/compare/v5.8.0...master)
 
-## [v5.6.1](https://github.com/gravitystorm/openstreetmap-carto/compare/v5.6.1...v5.6.2) - 2022-11-10
+## [v5.8.0](https://github.com/gravitystorm/openstreetmap-carto/compare/v5.7.0...v5.8.0) - 2023-11-26
 ### Changes
-- Locally installed fonts fixed
+- Changing color of leisure=pitch to be more distinct and less similar to the water color (#4480)
+- Fixing color of ref label for railway=subway_entrance (#4835)
+- Fixes for highway=mini_roundabout rendering on various road types (#4904)
+- Fixing merge error in previous change of rendering natural=bay/natural=strait (#4841)
+- Removing point symbol rendering for golf=hole (#4857)
+- Restoring rendering for railway=platform + covered=yes (#4797)
+- Adding rendering of roller_coaster=track (#4666)
+- Adding rendering of landuse=flowerbed (#4889)
+
+## [v5.7.0](https://github.com/gravitystorm/openstreetmap-carto/compare/v5.6.2...v5.7.0) - 2023-01-11
+### Changes
+- Unpaved roads are now indicated on the map (#3399)
+- Country label placement improved, particularly for countries in the north (#4616)
+- Added elevation to wilderness huts (#4648)
+- New index for low-zoom performance (#4617)
+- Added a script to switch between script variations for CJK languages (#4707)
+- Ordering fixes for piers (#4703)
+- Numerous CI improvements
+
+## [v5.6.2](https://github.com/gravitystorm/openstreetmap-carto/compare/v5.6.1...v5.6.2) - 2022-11-10
+### Changes
+- Locally installed fonts fixed (#4672)
 
 ## [v5.6.1](https://github.com/gravitystorm/openstreetmap-carto/compare/v5.6.0...v5.6.1) - 2022-08-12
 ### Changes

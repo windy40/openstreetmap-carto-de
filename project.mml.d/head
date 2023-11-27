@@ -54,5 +54,6 @@ Stylesheet:
   - style/admin.mss
   - style/addressing.mss
   - style/golf.mss
+  - style/tourism.mss
   - style/sport.mss
 Layer:
