@@ -59,5 +59,12 @@ Again, if merge has conflicts in project.mml check layer order and call:
         git tag ${VERSION}-de0
 ```
 
-Sven Geggus 2023-07-17
+7. Push to GitHUB
+```
+	git push
+        git tag  --list '*l10n*' '*de*' '*split*' |xargs git push origin
+```
+
+Sven Geggus 2023-11-30
+
 
