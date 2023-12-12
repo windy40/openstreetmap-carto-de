@@ -1682,7 +1682,7 @@ Layer:
             FROM
               (SELECT
                   ST_PointOnSurface(way) AS way,
-                  localized_name AS name,
+                  localized_name_second AS name,
                   access,
                   aeroway,
                   amenity,
@@ -1711,7 +1711,7 @@ Layer:
               UNION ALL
               SELECT
                   way,
-                  localized_name AS name,
+                  localized_name_second AS name,
                   access,
                   aeroway,
                   amenity,
@@ -2061,7 +2061,7 @@ Layer:
                                        THEN boundary END,
               'leisure_' || CASE WHEN leisure IN ('nature_reserve') THEN leisure END
             ) AS feature,
-            localized_name AS name,
+            localized_name_second AS name,
             CASE WHEN building = 'no' OR building IS NULL THEN 'no' ELSE 'yes' END AS is_building -- always no with the where conditions
           FROM planet_osm_polygon
           WHERE ST_PointOnSurface(way) && !bbox!
