@@ -26,6 +26,11 @@ osm2pgsql -G -O flex -d osm -S openstreetmap-carto-hstore-only-l10n.lua planet-l
 
 See osml10n installation instructions for details.
 
+If you want to change the target langugage from German to another language
+using latin script change the 'lang' variable in
+openstreetmap-carto-hstore-only-l10n.lua fron 'de' to your desired language
+('en', 'fr', 'es', ..).
+
 The database layout of the git master branch is aiming to be compatible witch
 openstreetmap-carto 5.x
 
@@ -55,7 +60,7 @@ osm2pgsql tables used in upstream Openstreetmap Carto style!
 Thus an unmodified version of the upstream style will also work fine using this
 slightly different database layout.
 
-The style is currently developed using Debian GNU/Linux 11.
+The style is currently developed using Debian GNU/Linux 12.
 
 To actually use this style you need to generate ```osm-de.xml``` from ```project.mml```.
 The easiest way to do this is using ```make```!
