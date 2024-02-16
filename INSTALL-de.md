@@ -21,7 +21,7 @@ required.
 The import command looks like this:
 
 ```
-osm2pgsql -G -O flex -d osm -S openstreetmap-carto-hstore-only-l10n.lua planet-latest.osm.pbf
+osm2pgsql -O flex -d osm -S openstreetmap-carto-hstore-only-l10n.lua planet-latest.osm.pbf
 ```
 
 See osml10n installation instructions for details.
