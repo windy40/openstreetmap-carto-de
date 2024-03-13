@@ -40,6 +40,7 @@ if __name__ == "__main__":
   parser.add_argument('-o', '--outputfile', help='output filename default=prefix-zval-xval-yval.png, "-" for stdout')
   parser.add_argument('-p', '--prefix', default='mapnik')
   parser.add_argument('-t', '--time', help='Output rendering time', default=False, action='store_true')
+  parser.add_argument('-f', '--custom-fonts-dir', help='custom font directory', default='/etc/mapnik-osm-data/fonts/')
   group = parser.add_mutually_exclusive_group(required=True)          
   group.add_argument('-c', '--lonlat', nargs=3, help='zoom lon lat Position of tile')
   group.add_argument('-m', '--zxy', nargs=3, help='z x y Name of Tile')                              
@@ -78,8 +79,7 @@ if __name__ == "__main__":
     start = time.time()
 
   import mapnik
-  custom_fonts_dir = '/etc/mapnik-osm-data/fonts/'
-  mapnik.register_fonts(custom_fonts_dir)
+  mapnik.register_fonts(args.custom_fonts_dir)
   m = mapnik.Map(256, 256)
   mapnik.load_map(m, mapfile)
   bba=TileToBBox(x,y,z)

@@ -40,7 +40,7 @@ test: test-z03.png test-z04.png test-z05.png test-z06.png test-z07.png test-z08.
       test-z17.png test-z18.png test-z19.png test-castle1.png test-castle2.png test-castle3.png\
       test-castle4.png test-camp-caravan.png test-campsite.png test-backcountry.png test-kebab.png\
       test-hostel.png test-hospital.png test-sport.png test-iata.png test-l10n1.png test-l10n2.png\
-      test-l10n3.png test-foot-cycle-path-track.png test-living-street.png\
+      test-l10n3.png test-l10n4.png test-foot-cycle-path-track.png test-living-street.png\
       test-proposed.png test-construction.png test-unpaved.png test-muhu.png test-hiiumaa.png
 
 test-z03.png: $(XMLSTYLE)
@@ -141,6 +141,9 @@ test-l10n2.png: $(XMLSTYLE)
 # l10n station (thai + latin)
 test-l10n3.png: $(XMLSTYLE)
 	./scripts/render_single_tile.py -t -s $(XMLSTYLE) -o $@ -u /14/12777/7562.png
+# l10n Seoul in Latin and korean script
+test-l10n4.png: $(XMLSTYLE)
+	./scripts/render_single_tile.py -t -s $(XMLSTYLE) -o $@ -u /10/873/396.png
 # test unpaved
 test-unpaved.png: $(XMLSTYLE)
 	./scripts/render_single_tile.py -t -s $(XMLSTYLE) -o $@ -u /19/297774/160376.png
