@@ -98,7 +98,7 @@ Layer:
             way, name, religion, way_pixels, is_building, surface,
             COALESCE(aeroway, amenity, wetland, power, landuse, leisure, man_made, "natural", shop, tourism, highway, railway) AS feature
           FROM (SELECT
-              way, localized_name_second AS name,
+              way, name_fr_oc AS name,
               surface,
               ('aeroway_' || (CASE WHEN aeroway IN ('apron', 'aerodrome') THEN aeroway ELSE NULL END)) AS aeroway,
               ('amenity_' || (CASE WHEN amenity IN ('bicycle_parking', 'motorcycle_parking', 'university', 'college', 'school', 'taxi',
@@ -249,7 +249,7 @@ Layer:
         (SELECT
             way, 
             waterway, 
-            localized_name_second as name,
+            name_fr_oc as name,
             CASE WHEN tags->'intermittent' IN ('yes')
               OR tags->'seasonal' IN ('yes', 'spring', 'summer', 'autumn', 'winter', 'wet_season', 'dry_season')
               THEN 'yes' ELSE 'no' END AS int_intermittent,
@@ -412,7 +412,7 @@ Layer:
             water,
             waterway,
             landuse,
-            localized_name_second as name,
+            name_fr_oc as name,
             way_area/NULLIF(POW(!scale_denominator!*0.001*0.28,2),0) AS way_pixels,
             CASE WHEN tags->'intermittent' IN ('yes')
               OR tags->'seasonal' IN ('yes', 'spring', 'summer', 'autumn', 'winter', 'wet_season', 'dry_season')
@@ -563,7 +563,7 @@ Layer:
         (SELECT
             way,
             waterway,
-            localized_name_second as name
+            name_fr_oc as name
           FROM planet_osm_line
           WHERE waterway IN ('dam', 'weir', 'lock_gate')
         ) AS water_barriers_line
@@ -578,7 +578,7 @@ Layer:
         (SELECT
             way,
             waterway,
-            localized_name_second as name
+            name_fr_oc as name
           FROM planet_osm_polygon
           WHERE waterway IN ('dam', 'weir', 'lock_gate')
         ) AS water_barriers_poly
@@ -646,7 +646,7 @@ Layer:
             way,
             way_area/NULLIF(POW(!scale_denominator!*0.001*0.28,2),0) AS way_pixels,
             man_made,
-            localized_name_second as name
+            name_fr_oc as name
           FROM planet_osm_polygon
           WHERE man_made = 'bridge'
         ) AS bridge
@@ -790,7 +790,7 @@ Layer:
     Datasource:
       <<: *osm2pgsql
       table: |-
-        (select way, geo, golf, ref, name, case when golf='rough' then 5 when golf='fairway' then 10  when golf='green' then 20  when golf='bunker' then 30 when golf in ('water_hazard','lateral_water_hazard') then 35 else 40 end as prio from (select way,tags->'golf' as golf, name, ref, way_area, 'polygon' as geo from planet_osm_polygon where tags ? 'golf' AND way && !bbox! UNION select p.way,p.tags->'golf' as golf, p.name, coalesce(p.ref,l.ref) as ref, 0 as way_area, 'point' as geo from planet_osm_point p LEFT JOIN planet_osm_line l ON (ST_Intersects(p.way, l.way) AND l.tags ? 'golf') where p.tags ? 'golf' AND p.way && !bbox! UNION select way,tags->'golf' as golf, localized_name_second as name, ref, 0 as way_area, 'line' as geo from planet_osm_line where tags ? 'golf' AND way && !bbox!) as golf order by prio) as golf
+        (select way, geo, golf, ref, name, case when golf='rough' then 5 when golf='fairway' then 10  when golf='green' then 20  when golf='bunker' then 30 when golf in ('water_hazard','lateral_water_hazard') then 35 else 40 end as prio from (select way,tags->'golf' as golf, name, ref, way_area, 'polygon' as geo from planet_osm_polygon where tags ? 'golf' AND way && !bbox! UNION select p.way,p.tags->'golf' as golf, p.name, coalesce(p.ref,l.ref) as ref, 0 as way_area, 'point' as geo from planet_osm_point p LEFT JOIN planet_osm_line l ON (ST_Intersects(p.way, l.way) AND l.tags ? 'golf') where p.tags ? 'golf' AND p.way && !bbox! UNION select way,tags->'golf' as golf, name_fr_oc as name, ref, 0 as way_area, 'line' as geo from planet_osm_line where tags ? 'golf' AND way && !bbox!) as golf order by prio) as golf
   - id: sports
     <<: *extents
     Datasource:
@@ -836,7 +836,7 @@ Layer:
         (SELECT
             way,
             way_area/NULLIF(POW(!scale_denominator!*0.001*0.28,2),0) AS way_pixels,
-            localized_name_second as name,
+            name_fr_oc as name,
             tourism
           FROM planet_osm_polygon
           WHERE tourism = 'theme_park'
@@ -1139,7 +1139,7 @@ Layer:
         (SELECT
             way,
             aerialway,
-            localized_name_second as name
+            name_fr_oc as name
           FROM planet_osm_line
           WHERE aerialway IS NOT NULL
         ) AS aerialways
@@ -1187,7 +1187,7 @@ Layer:
         (SELECT
             way,
             waterway,
-            localized_name_second as name,
+            name_fr_oc as name,
             CASE WHEN tags->'intermittent' IN ('yes')
               OR tags->'seasonal' IN ('yes', 'spring', 'summer', 'autumn', 'winter', 'wet_season', 'dry_season')
               THEN 'yes' ELSE 'no' END AS int_intermittent,
@@ -1449,7 +1449,7 @@ Layer:
       table: |-
         (SELECT
             way,
-            localized_name_second as name,
+            name_fr_oc as name,
             boundary,
             tags->'protect_class' AS protect_class,
             way_area/NULLIF(POW(!scale_denominator!*0.001*0.28,2),0) AS way_pixels
@@ -1513,7 +1513,7 @@ Layer:
       table: |-
         (SELECT
             way,
-            localized_name_first as name,
+            name_fr_oc as name,
             CASE
               WHEN (tags->'population' ~ '^[0-9]{1,8}$') THEN (tags->'population')::INTEGER ELSE 0
             END as population,
@@ -1536,7 +1536,7 @@ Layer:
         (SELECT
             ST_PointOnSurface(way) AS way,
             way_area/NULLIF(POW(!scale_denominator!*0.001*0.28,2),0) AS way_pixels,
-            localized_name_first as name,
+            name_fr_oc as name,
             ref
           FROM planet_osm_polygon
           WHERE way && !bbox!
@@ -1569,7 +1569,7 @@ Layer:
                 osm_id,
                 way,
                 place,
-                localized_name_second as name,
+                name_fr_oc as name,
                 capital,
                 (
                   (CASE
@@ -1605,7 +1605,7 @@ Layer:
             way,
             place,
             leisure,
-            localized_name_second as name
+            name_fr_oc as name
           FROM planet_osm_point
           WHERE place IN ('village', 'hamlet')
              AND name IS NOT NULL
@@ -1644,7 +1644,7 @@ Layer:
           FROM
           (SELECT
               ST_PointOnSurface(way) AS way,
-              localized_name_second as name,
+              name_fr_oc as name,
               ref,
               railway,
               aerialway,
@@ -1655,7 +1655,7 @@ Layer:
           UNION ALL
           SELECT
               way,
-              localized_name_second as name,
+              name_fr_oc as name,
               ref,
               railway,
               aerialway,
@@ -1689,7 +1689,7 @@ Layer:
             highway,
             junction,
             ref,
-            localized_streetname as name,
+            name_fr_oc as name,
             NULL AS way_pixels
           FROM planet_osm_point
           WHERE highway = 'motorway_junction' OR highway = 'traffic_signals' OR junction = 'yes'
@@ -1699,7 +1699,7 @@ Layer:
             highway,
             junction,
             ref,
-            localized_streetname as name,
+            name_fr_oc as name,
             way_area/NULLIF(POW(!scale_denominator!*0.001*0.28,2),0) AS way_pixels
           FROM planet_osm_polygon
           WHERE junction = 'yes'
@@ -1717,7 +1717,7 @@ Layer:
             way,
             way_area/NULLIF(POW(!scale_denominator!*0.001*0.28,2),0) AS way_pixels,
             man_made,
-            localized_streetname as name
+            name_fr_oc as name
           FROM planet_osm_polygon
           WHERE man_made = 'bridge'
           ORDER BY way_area DESC
@@ -1883,7 +1883,7 @@ Layer:
             FROM
               (SELECT
                   ST_PointOnSurface(way) AS way,
-                  localized_name_without_brackets as name,
+                  name_fr_oc as name,
                   access,
                   aeroway,
                   amenity,
@@ -1912,7 +1912,7 @@ Layer:
               UNION ALL
               SELECT
                   way,
-                  localized_name_without_brackets as name,
+                  name_fr_oc as name,
                   access,
                   aeroway,
                   amenity,
@@ -2130,7 +2130,7 @@ Layer:
             FROM
               (SELECT
                   ST_PointOnSurface(way) AS way,
-                  localized_name_without_brackets as name,
+                  name_fr_oc as name,
                   access,
                   aeroway,
                   amenity,
@@ -2159,7 +2159,7 @@ Layer:
               UNION ALL
               SELECT
                   way,
-                  localized_name_without_brackets as name,
+                  name_fr_oc as name,
                   access,
                   aeroway,
                   amenity,
@@ -2325,7 +2325,7 @@ Layer:
             highway,
             place,
             leisure,
-            localized_streetname as name
+            name_fr_oc as name
           FROM planet_osm_polygon
           WHERE highway IN ('residential', 'unclassified', 'pedestrian', 'service', 'footway', 'cycleway', 'living_street', 'track', 'path', 'platform')
             OR (railway IN ('platform')
@@ -2350,7 +2350,7 @@ Layer:
             CASE WHEN substr(highway, length(highway)-4, 5) = '_link' THEN substr(highway, 0, length(highway)-4) ELSE highway END,
             CASE WHEN (tunnel = 'yes' OR tunnel = 'building_passage' OR covered = 'yes') THEN 'yes' ELSE 'no' END AS tunnel,
             construction,
-            localized_streetname as name,
+            name_fr_oc as name,
             CASE
               WHEN oneway IN ('yes', '-1') THEN oneway
               WHEN junction IN ('roundabout') AND (oneway IS NULL OR NOT oneway IN ('no', 'reversible')) THEN 'yes'
@@ -2405,7 +2405,7 @@ Layer:
             highway,
             construction,
             CASE WHEN (tracktype = 'grade1' OR surface = 'paved') THEN 'paved' ELSE 'unpaved' END AS int_surface,
-            localized_streetname as name,
+            name_fr_oc as name,
             CASE
               WHEN oneway IN ('yes', '-1') THEN oneway
               WHEN junction IN ('roundabout') AND (oneway IS NULL OR NOT oneway IN ('no', 'reversible')) THEN 'yes'
@@ -2437,7 +2437,7 @@ Layer:
             tags->'highspeed' as highspeed,
             tags->'usage' as usage,
             construction,
-            localized_name_second as name
+            name_fr_oc as name
           FROM planet_osm_line l
           WHERE railway IN ('rail', 'subway', 'narrow_gauge', 'light_rail', 'preserved', 'funicular',
                             'monorail', 'miniature', 'tram', 'disused', 'construction')
@@ -2519,7 +2519,7 @@ Layer:
                                        THEN boundary ELSE NULL END,
               'leisure_' || CASE WHEN leisure IN ('nature_reserve') THEN leisure ELSE NULL END
             ) AS feature,
-            localized_name_without_brackets as name,
+            name_fr_oc as name,
             CASE WHEN building = 'no' OR building IS NULL THEN 'no' ELSE 'yes' END AS is_building -- always no with the where conditions
           FROM planet_osm_polygon
           WHERE (landuse IN ('forest', 'military', 'farmland')
@@ -2547,7 +2547,7 @@ Layer:
             NULL as way_pixels,
             COALESCE('man_made_' || man_made, 'waterway_' || waterway, 'natural_' || "natural") AS feature,
             access,
-            localized_name_without_brackets as name,
+            name_fr_oc as name,
             tags->'operator' as operator,
             ref,
             NULL AS way_area,
@@ -2577,7 +2577,7 @@ Layer:
       <<: *osm2pgsql
       table: |-
         (SELECT
-            localized_name_second as name,
+            name_fr_oc as name,
             ST_PointOnSurface(way) AS way,
             way_area/NULLIF(POW(!scale_denominator!*0.001*0.28,2),0) AS way_pixels
           FROM planet_osm_polygon
@@ -2640,7 +2640,7 @@ Layer:
             way,
             waterway,
             lock,
-            localized_name_second as name,
+            name_fr_oc as name,
             "natural",
             tags-> 'lock_name' AS lock_name,
             CASE WHEN tags->'intermittent' IN ('yes')
@@ -2664,7 +2664,7 @@ Layer:
       table: |-
         (SELECT
             way,
-            localized_name_second as name
+            name_fr_oc as name
           FROM planet_osm_line
           WHERE route = 'ferry'
             AND osm_id > 0
@@ -2680,7 +2680,7 @@ Layer:
       table: |-
         (SELECT
             way,
-            localized_name_first as name,
+            name_fr_oc as name,
             admin_level,
             way_area/NULLIF(POW(!scale_denominator!*0.001*0.28,2),0) AS way_pixels
           FROM planet_osm_polygon
@@ -2700,7 +2700,7 @@ Layer:
       table: |-
         (SELECT
             way,
-            localized_name_second as name,
+            name_fr_oc as name,
             boundary,
             tags->'protect_class' AS protect_class,
             way_area/NULLIF(POW(!scale_denominator!*0.001*0.28,2),0) AS way_pixels

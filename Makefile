@@ -1,19 +1,19 @@
 DBSCHEME = "de"
 
-MAPNIK_API = $(shell mapnik-config -v)
+MAPNIK_API = 3.0.32
 
 TEMPFILE := $(shell mktemp -u)
 
 XMLSTYLE := osm-de.xml
 
-all: $(XMLSTYLE) osm-hrb.xml
+all: $(XMLSTYLE) osm-hrb.xml osm-oc.xml
 
 $(XMLSTYLE): *.mss project.mml
 ifeq ($(DBSCHEME),upstream)
 	cd contrib/use-upstream-database/; ./replace-tablenames.sh
-	carto -a $(MAPNIK_API) project-mod.mml > $(TEMPFILE)
+	carto -q -a $(MAPNIK_API) project-mod.mml > $(TEMPFILE)
 else
-	carto -a $(MAPNIK_API) project.mml > $(TEMPFILE)
+	carto -q -a $(MAPNIK_API) project.mml > $(TEMPFILE)
 endif
 	mv $(TEMPFILE) $@
 
@@ -21,7 +21,14 @@ project-hrb.mml: project.mml
 	sed -e 's/localized_[a-z_]\+/name_hrb/g' project.mml >project-hrb.mml
 
 osm-hrb.xml: *.mss project-hrb.mml
-	carto -a $(MAPNIK_API) project-hrb.mml > $(TEMPFILE)
+	carto -q -a $(MAPNIK_API) project-hrb.mml > $(TEMPFILE)
+	mv $(TEMPFILE) $@
+
+project-oc.mml: project.mml
+	sed -e 's/localized_[a-z_]\+/name_fr_oc/g' project.mml >project-oc.mml
+
+osm-oc.xml: *.mss project-oc.mml
+	carto -q -a $(MAPNIK_API) project-oc.mml > $(TEMPFILE)
 	mv $(TEMPFILE) $@
 
 preview-de.png: $(XMLSTYLE)
