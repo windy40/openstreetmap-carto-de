@@ -6,7 +6,7 @@ TEMPFILE := $(shell mktemp -u)
 
 XMLSTYLE := osm-de.xml
 
-all: $(XMLSTYLE) osm-hrb.xml osm-oc.xml
+all: osm-oc.xml # $(XMLSTYLE) osm-hrb.xml
 
 $(XMLSTYLE): *.mss project.mml
 ifeq ($(DBSCHEME),upstream)
