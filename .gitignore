@@ -14,11 +14,13 @@ localconfig.js
 # german style additions
 project-hrb.mml
 project-mod.mml
+project-oc.mml
 localconfig.js
 data
 tmp
 **kosmtik
 test*.png
+project.mml
 
 # Generated at runtime by Python.
 *.pyc   
